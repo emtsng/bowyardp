@@ -7903,6 +7903,10 @@ header.header--sticky.sticky .nav-area ul li.main-nav {
   background-image: url(../images/banner/hassanabg.png);
 }
 
+.rts-banner-area-two.nine {
+  background-image: url(../images/banner/lagos.jpg);
+}
+
 .banner-inner-two-content {
   text-align: left;
   max-width: 80%;
