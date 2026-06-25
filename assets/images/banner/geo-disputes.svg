@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice">
+  <!-- Converging perspective lines — tension, resolution, precision -->
+
+  <!-- All lines converge to vanishing point (1380, 350) -->
+  <line x1="1380" y1="350" x2="0" y2="-50"  stroke="#B8962E" stroke-width="0.7"  opacity="0.12"/>
+  <line x1="1380" y1="350" x2="0" y2="80"   stroke="#B8962E" stroke-width="0.8"  opacity="0.18"/>
+  <line x1="1380" y1="350" x2="0" y2="180"  stroke="#B8962E" stroke-width="0.9"  opacity="0.25"/>
+  <line x1="1380" y1="350" x2="0" y2="270"  stroke="#B8962E" stroke-width="1"    opacity="0.35"/>
+  <line x1="1380" y1="350" x2="0" y2="350"  stroke="#B8962E" stroke-width="1.2"  opacity="0.44"/>
+  <line x1="1380" y1="350" x2="0" y2="430"  stroke="#B8962E" stroke-width="1"    opacity="0.35"/>
+  <line x1="1380" y1="350" x2="0" y2="520"  stroke="#B8962E" stroke-width="0.9"  opacity="0.25"/>
+  <line x1="1380" y1="350" x2="0" y2="620"  stroke="#B8962E" stroke-width="0.8"  opacity="0.18"/>
+  <line x1="1380" y1="350" x2="0" y2="750"  stroke="#B8962E" stroke-width="0.7"  opacity="0.12"/>
+
+  <!-- Two overlapping angular triangular shapes at mid-distance -->
+  <polygon points="1380,350 780,90  680,350"  fill="none" stroke="#B8962E" stroke-width="1"   opacity="0.2"/>
+  <polygon points="1380,350 780,350 680,610"  fill="none" stroke="#B8962E" stroke-width="1"   opacity="0.2"/>
+  <!-- Tighter inner pair -->
+  <polygon points="1380,350 940,160 860,350"  fill="none" stroke="#B8962E" stroke-width="1.4" opacity="0.36"/>
+  <polygon points="1380,350 940,350 860,540"  fill="none" stroke="#B8962E" stroke-width="1.4" opacity="0.36"/>
+  <!-- Innermost pair, brightest -->
+  <polygon points="1380,350 1100,230 1060,350" fill="none" stroke="#B8962E" stroke-width="2"  opacity="0.6"/>
+  <polygon points="1380,350 1100,350 1060,470" fill="none" stroke="#B8962E" stroke-width="2"  opacity="0.6"/>
+
+  <!-- Vanishing point marker -->
+  <circle cx="1380" cy="350" r="4" fill="#B8962E" opacity="1"/>
+  <circle cx="1380" cy="350" r="10" fill="none" stroke="#B8962E" stroke-width="1.2" opacity="0.55"/>
+  <circle cx="1380" cy="350" r="18" fill="none" stroke="#B8962E" stroke-width="0.8" opacity="0.3"/>
+</svg>

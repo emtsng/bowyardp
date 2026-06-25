@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice">
+  <!-- Concentric nested diamonds — precision / target motif -->
+  <defs>
+    <pattern id="diag" width="60" height="60" patternUnits="userSpaceOnUse" patternTransform="rotate(45 720 350)">
+      <line x1="0" y1="0" x2="0" y2="60" stroke="#B8962E" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <!-- Subtle diagonal line texture across right half -->
+  <rect x="600" y="0" width="840" height="700" fill="url(#diag)" opacity="0.07"/>
+
+  <!-- Crosshairs through focal point (1200, 350) -->
+  <line x1="680" y1="350" x2="1440" y2="350" stroke="#B8962E" stroke-width="0.8" opacity="0.28"/>
+  <line x1="1200" y1="0" x2="1200" y2="700" stroke="#B8962E" stroke-width="0.8" opacity="0.28"/>
+
+  <!-- Tick marks at crosshair ends -->
+  <line x1="1194" y1="0" x2="1194" y2="14" stroke="#B8962E" stroke-width="1.4" opacity="0.5"/>
+  <line x1="1206" y1="0" x2="1206" y2="14" stroke="#B8962E" stroke-width="1.4" opacity="0.5"/>
+  <line x1="1194" y1="700" x2="1194" y2="686" stroke="#B8962E" stroke-width="1.4" opacity="0.5"/>
+  <line x1="1206" y1="700" x2="1206" y2="686" stroke="#B8962E" stroke-width="1.4" opacity="0.5"/>
+  <line x1="680" y1="344" x2="696" y2="344" stroke="#B8962E" stroke-width="1.4" opacity="0.5"/>
+  <line x1="680" y1="356" x2="696" y2="356" stroke="#B8962E" stroke-width="1.4" opacity="0.5"/>
+
+  <!-- Nested diamonds: center (1200, 350), half-widths 380 → 18 -->
+  <polygon points="1200,-30 1580,350 1200,730 820,350"    fill="none" stroke="#B8962E" stroke-width="0.7" opacity="0.11"/>
+  <polygon points="1200,40  1510,350 1200,660 890,350"    fill="none" stroke="#B8962E" stroke-width="0.85" opacity="0.17"/>
+  <polygon points="1200,110 1440,350 1200,590 960,350"    fill="none" stroke="#B8962E" stroke-width="1"   opacity="0.26"/>
+  <polygon points="1200,180 1370,350 1200,520 1030,350"   fill="none" stroke="#B8962E" stroke-width="1.2" opacity="0.38"/>
+  <polygon points="1200,250 1300,350 1200,450 1100,350"   fill="none" stroke="#B8962E" stroke-width="1.5" opacity="0.55"/>
+  <polygon points="1200,300 1250,350 1200,400 1150,350"   fill="none" stroke="#B8962E" stroke-width="2"   opacity="0.74"/>
+  <polygon points="1200,332 1218,350 1200,368 1182,350"   fill="none" stroke="#B8962E" stroke-width="2.5" opacity="0.92"/>
+
+  <!-- Centre focal dot -->
+  <circle cx="1200" cy="350" r="3.5" fill="#B8962E" opacity="1"/>
+</svg>

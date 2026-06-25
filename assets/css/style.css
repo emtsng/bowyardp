@@ -10833,7 +10833,9 @@ header.header--sticky.sticky .nav-area ul li.main-nav {
 }
 
 .rts-breadcrumb-area {
-  height: 277px;
+  min-height: 277px;
+  height: auto;
+  padding: 60px 0;
   background: linear-gradient(180deg, rgba(32, 40, 45, 0.1) 0%, rgba(255, 255, 255, 0.1) 96.54%);
   display: flex;
   align-items: center;
@@ -10841,7 +10843,9 @@ header.header--sticky.sticky .nav-area ul li.main-nav {
 }
 @media only screen and (max-width: 575px) {
   .rts-breadcrumb-area {
-    height: 450px;
+    min-height: auto;
+    height: auto;
+    padding: 40px 0;
   }
 }
 .rts-breadcrumb-area.bg_primary {

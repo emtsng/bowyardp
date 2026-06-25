@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice">
+  <!-- Nested rightward chevrons — velocity, energy, direction, momentum -->
+  <defs>
+    <pattern id="ediag" width="55" height="55" patternUnits="userSpaceOnUse" patternTransform="rotate(55 720 350)">
+      <line x1="0" y1="0" x2="0" y2="55" stroke="#B8962E" stroke-width="0.45"/>
+    </pattern>
+  </defs>
+  <!-- Subtle angled texture -->
+  <rect x="620" y="0" width="820" height="700" fill="url(#ediag)" opacity="0.06"/>
+
+  <!-- Chevrons: each is two lines meeting at a right-pointing tip -->
+  <!-- Tip x, tip y=350, left arm endpoints: (lx, 350 ± spread) -->
+  <!-- Chevron 1 — largest -->
+  <polyline points="700,50  1400,350 700,650"  fill="none" stroke="#B8962E" stroke-width="0.7"  opacity="0.12"/>
+  <!-- Chevron 2 -->
+  <polyline points="760,100 1360,350 760,600"  fill="none" stroke="#B8962E" stroke-width="0.85" opacity="0.18"/>
+  <!-- Chevron 3 -->
+  <polyline points="840,155 1310,350 840,545"  fill="none" stroke="#B8962E" stroke-width="1"    opacity="0.26"/>
+  <!-- Chevron 4 -->
+  <polyline points="920,210 1255,350 920,490"  fill="none" stroke="#B8962E" stroke-width="1.2"  opacity="0.38"/>
+  <!-- Chevron 5 -->
+  <polyline points="1000,265 1205,350 1000,435" fill="none" stroke="#B8962E" stroke-width="1.5" opacity="0.54"/>
+  <!-- Chevron 6 -->
+  <polyline points="1065,305 1158,350 1065,395" fill="none" stroke="#B8962E" stroke-width="2"   opacity="0.72"/>
+  <!-- Chevron 7 — innermost, tightest -->
+  <polyline points="1105,328 1138,350 1105,372" fill="none" stroke="#B8962E" stroke-width="2.8" opacity="0.9"/>
+
+  <!-- Horizontal axis guideline -->
+  <line x1="620" y1="350" x2="1440" y2="350" stroke="#B8962E" stroke-width="0.6" opacity="0.14"/>
+
+  <!-- Tip focal dot at innermost chevron -->
+  <circle cx="1138" cy="350" r="3.5" fill="#B8962E" opacity="1"/>
+</svg>

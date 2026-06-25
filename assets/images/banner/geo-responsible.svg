@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice">
+  <!-- Three overlapping circles — sustainability, ESG, interconnected cycles -->
+
+  <!-- Outermost encompassing orbit -->
+  <circle cx="1145" cy="310" r="330" fill="none" stroke="#B8962E" stroke-width="0.6" opacity="0.13"/>
+  <circle cx="1145" cy="310" r="390" fill="none" stroke="#B8962E" stroke-width="0.45" opacity="0.08"/>
+
+  <!-- Three primary circles, triangle formation -->
+  <!-- Top-left circle -->
+  <circle cx="1040" cy="232" r="205" fill="none" stroke="#B8962E" stroke-width="1.1" opacity="0.48"/>
+  <!-- Top-right circle -->
+  <circle cx="1250" cy="232" r="205" fill="none" stroke="#B8962E" stroke-width="1.1" opacity="0.48"/>
+  <!-- Bottom-centre circle -->
+  <circle cx="1145" cy="408" r="205" fill="none" stroke="#B8962E" stroke-width="1.1" opacity="0.48"/>
+
+  <!-- Radial lines from the centroid to each circle centre -->
+  <line x1="1145" y1="310" x2="1040" y2="232" stroke="#B8962E" stroke-width="0.8" opacity="0.32"/>
+  <line x1="1145" y1="310" x2="1250" y2="232" stroke="#B8962E" stroke-width="0.8" opacity="0.32"/>
+  <line x1="1145" y1="310" x2="1145" y2="408" stroke="#B8962E" stroke-width="0.8" opacity="0.32"/>
+
+  <!-- Triangle connecting the three circle centres -->
+  <polygon points="1040,232 1250,232 1145,408" fill="none" stroke="#B8962E" stroke-width="0.9" opacity="0.28"/>
+
+  <!-- Inner overlap region — three smaller highlight circles -->
+  <circle cx="1145" cy="310" r="75" fill="none" stroke="#B8962E" stroke-width="1.5" opacity="0.62"/>
+  <circle cx="1145" cy="310" r="30" fill="none" stroke="#B8962E" stroke-width="2.2" opacity="0.84"/>
+
+  <!-- Centre dot -->
+  <circle cx="1145" cy="310" r="4.5" fill="#B8962E" opacity="1"/>
+
+  <!-- Small marker dots at each circle centre -->
+  <circle cx="1040" cy="232" r="3" fill="#B8962E" opacity="0.65"/>
+  <circle cx="1250" cy="232" r="3" fill="#B8962E" opacity="0.65"/>
+  <circle cx="1145" cy="408" r="3" fill="#B8962E" opacity="0.65"/>
+</svg>
