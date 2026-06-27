@@ -40,7 +40,9 @@
         </div>
       </li>
       <li class="bp-nav-item"><a href="team.html" class="bp-nav-link">People</a></li>
-      <li class="bp-nav-item"><a href="#" class="bp-nav-link">Insights</a></li>
+      <li class="bp-nav-item"><a href="insights.html" class="bp-nav-link">Insights <span class="ch">▾</span></a>
+        <div class="bp-subnav"><a href="insights-publications.html">Publications</a><a href="insights-announcements.html">Announcements &amp; Deals</a><a href="insights-events.html">Events</a></div>
+      </li>
     </ul>
     <a href="contact.html" class="bp-nav-cta">Contact Us</a>
     <button class="bp-hamburger" id="bp-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
@@ -65,7 +67,8 @@
     <a href="service.html">Financial Services</a>
   </div>
   <a href="team.html" class="m-link">People</a>
-  <a href="#" class="m-link">Insights</a>
+  <button class="m-toggle" onclick="toggleSub(this)">Insights</button>
+  <div class="m-sub"><a href="insights.html">All Insights</a><a href="insights-publications.html">Publications</a><a href="insights-announcements.html">Announcements</a><a href="insights-events.html">Events</a></div>
   <a href="contact.html" class="m-link">Contact Us</a>
 </div>
 
@@ -88,9 +91,7 @@
   <div class="bp-container">
     <div class="bp-intro-grid">
       <div class="bp-intro-quote">Practice with purpose.</div>
-      <div class="bp-intro-body">
-        At Bowyard Partners, responsible business is not a separate agenda. It is embedded in how we work — the standards we hold ourselves to, the clients we choose to represent, the professionals we develop and the communities in which we operate. We believe that a law firm operating at the highest levels of commercial practice has both the opportunity and the obligation to model what responsible enterprise looks like.
-      </div>
+      <div class="bp-intro-body">At Bowyard Partners, responsible business is not a separate agenda — it is embedded in how we work. From the standards we hold ourselves to, to the clients we represent, the professionals we develop and the communities in which we operate, responsibility shapes every decision. We believe that a commercially focused law firm operating at the highest levels of practice has both the opportunity and the obligation to model what principled enterprise looks like.</div>
     </div>
   </div>
 </section>
@@ -105,33 +106,33 @@
     <div class="bp-pillar-grid">
       <div class="bp-pillar">
         <div class="bp-pillar-icon"><i class="fa-regular fa-scale-balanced"></i></div>
-        <div class="bp-pillar-title">Ethics &amp; Professional Standards</div>
-        <p class="bp-pillar-text">We hold ourselves to the highest standards of legal and professional ethics. Our decisions — on client selection, matter conduct and advice — are governed by integrity, not just by what the law permits.</p>
-      </div>
-      <div class="bp-pillar">
-        <div class="bp-pillar-icon"><i class="fa-regular fa-users"></i></div>
-        <div class="bp-pillar-title">Inclusion &amp; Equal Opportunity</div>
-        <p class="bp-pillar-text">We are committed to building a team that reflects the diversity of the clients and communities we serve. Advancement at Bowyard is determined by capability and contribution — nothing else.</p>
+        <div class="bp-pillar-title">Integrity</div>
+        <p class="bp-pillar-text">Our advice, our conduct and our choices are governed by ethical principle. We hold ourselves to standards that go beyond regulatory compliance — because our clients deserve counsel they can trust absolutely.</p>
       </div>
       <div class="bp-pillar">
         <div class="bp-pillar-icon"><i class="fa-regular fa-seedling"></i></div>
-        <div class="bp-pillar-title">Environmental Responsibility</div>
-        <p class="bp-pillar-text">We are mindful of our environmental footprint in the way we operate our offices and the advice we give. Where relevant, we integrate environmental risk and opportunity into our commercial counsel.</p>
+        <div class="bp-pillar-title">Sustainability</div>
+        <p class="bp-pillar-text">We support initiatives that protect Nigeria's natural environment and advance long-term climate resilience — and we integrate environmental risk and opportunity into the commercial advice we give our clients.</p>
       </div>
       <div class="bp-pillar">
-        <div class="bp-pillar-icon"><i class="fa-regular fa-graduation-cap"></i></div>
-        <div class="bp-pillar-title">Professional Development</div>
-        <p class="bp-pillar-text">We invest in our people. Continuous learning, mentoring and professional growth are core to life at Bowyard. We believe the best professionals are also the most curious, and we build structures to support that.</p>
+        <div class="bp-pillar-icon"><i class="fa-regular fa-lightbulb"></i></div>
+        <div class="bp-pillar-title">Innovation</div>
+        <p class="bp-pillar-text">Digital-first workflows, secure cloud collaboration and paperless operations reduce our environmental footprint while improving efficiency and client experience. We invest in technology that makes legal service smarter.</p>
       </div>
       <div class="bp-pillar">
         <div class="bp-pillar-icon"><i class="fa-regular fa-handshake"></i></div>
-        <div class="bp-pillar-title">Access to Justice</div>
-        <p class="bp-pillar-text">We provide pro bono legal services to individuals and organisations who cannot afford representation on matters of genuine social importance. This commitment is embedded in our practice, not a footnote.</p>
+        <div class="bp-pillar-title">Community</div>
+        <p class="bp-pillar-text">We provide pro bono legal support to conservation initiatives, civil society organisations and individuals who cannot access premium legal counsel. Legal expertise should create social value, not only commercial value.</p>
+      </div>
+      <div class="bp-pillar">
+        <div class="bp-pillar-icon"><i class="fa-regular fa-graduation-cap"></i></div>
+        <div class="bp-pillar-title">People</div>
+        <p class="bp-pillar-text">Exceptional client service begins with exceptional lawyers. We invest in continuous learning, structured mentoring and exposure to complex, high-value work — building professionals who are technically outstanding and commercially aware.</p>
       </div>
       <div class="bp-pillar">
         <div class="bp-pillar-icon"><i class="fa-regular fa-building-columns"></i></div>
-        <div class="bp-pillar-title">Community Investment</div>
-        <p class="bp-pillar-text">We invest in the communities where we operate — through legal education, regulatory literacy programmes and support for emerging businesses that do not yet have the resources to access premium legal counsel.</p>
+        <div class="bp-pillar-title">Excellence</div>
+        <p class="bp-pillar-text">Responsible legal practice extends beyond technical advice. We help clients identify legal risk while promoting ethical governance, regulatory compliance, sustainable investment and long-term value creation.</p>
       </div>
     </div>
   </div>
@@ -146,32 +147,182 @@
   </div>
 </section>
 
-<!-- IN PRACTICE -->
+<!-- NMFP -->
 <section class="section offwhite">
+  <div class="bp-container">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;">
+      <div>
+        <div class="kicker">Environmental Partnership</div>
+        <h2>Nigerian Montane Forest Project</h2>
+        <p style="font-size:16px; line-height:1.8; color:var(--grey-dark); margin:24px 0;">Bowyard Partners proudly provides pro bono legal support to the Nigerian Montane Forest Project (NMFP) — a pioneering conservation initiative dedicated to protecting and restoring Nigeria's rare montane forests on the Mambilla Plateau in Taraba State.</p>
+        <p style="font-size:16px; line-height:1.8; color:var(--grey-dark); margin:0 0 36px;">Since its establishment in 2004, the NMFP has become one of Africa's leading models for ecosystem restoration — combining scientific research, community-led conservation and long-term climate resilience. Working alongside local communities, the project has restored degraded forest landscapes, protected globally significant biodiversity, and empowered villagers to become skilled botanists contributing to internationally recognised scientific research.</p>
+        <div style="display:inline-flex; align-items:center; gap:10px; padding:12px 20px; border:1px solid var(--gold); background:var(--white);">
+          <i class="fa-solid fa-leaf" style="color:var(--gold); font-size:13px;"></i>
+          <span style="font-family:var(--font-head); font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--navy);">Pro Bono Conservation Partner</span>
+        </div>
+      </div>
+      <div>
+        <div style="background:var(--navy); padding:48px 40px;">
+          <div class="kicker" style="color:var(--gold);">Why It Matters</div>
+          <p style="font-size:15px; line-height:1.8; color:rgba(255,255,255,0.82); margin:16px 0 32px;">The montane forests of the Nigeria–Cameroon highlands represent one of West Africa's most important ecological assets — storing exceptionally high levels of carbon while supporting unique plant and animal species found nowhere else on earth.</p>
+          <div style="display:flex; flex-direction:column; gap:18px;">
+            <div style="display:flex; gap:16px; align-items:flex-start;">
+              <div style="width:6px; height:6px; border-radius:50%; background:var(--gold); flex-shrink:0; margin-top:7px;"></div>
+              <p style="font-size:14px; color:rgba(255,255,255,0.75); margin:0; line-height:1.7;">Ecosystem restoration of degraded forest landscapes on the Mambilla Plateau</p>
+            </div>
+            <div style="display:flex; gap:16px; align-items:flex-start;">
+              <div style="width:6px; height:6px; border-radius:50%; background:var(--gold); flex-shrink:0; margin-top:7px;"></div>
+              <p style="font-size:14px; color:rgba(255,255,255,0.75); margin:0; line-height:1.7;">Protection of globally significant biodiversity and climate-critical carbon stocks</p>
+            </div>
+            <div style="display:flex; gap:16px; align-items:flex-start;">
+              <div style="width:6px; height:6px; border-radius:50%; background:var(--gold); flex-shrink:0; margin-top:7px;"></div>
+              <p style="font-size:14px; color:rgba(255,255,255,0.75); margin:0; line-height:1.7;">Community empowerment — training local villagers as skilled botanists and conservation professionals</p>
+            </div>
+            <div style="display:flex; gap:16px; align-items:flex-start;">
+              <div style="width:6px; height:6px; border-radius:50%; background:var(--gold); flex-shrink:0; margin-top:7px;"></div>
+              <p style="font-size:14px; color:rgba(255,255,255,0.75); margin:0; line-height:1.7;">Strengthening environmental governance and sustainable development frameworks</p>
+            </div>
+          </div>
+        </div>
+        <div style="background:var(--white); border:1px solid var(--border); border-top:none; padding:28px 40px;">
+          <p style="font-size:14px; line-height:1.75; color:var(--grey-dark); margin:0; font-style:italic;">"Our partnership with the NMFP reflects our belief that legal expertise should help protect not only commercial interests, but also the natural systems and communities upon which future generations depend."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUSTAINABLE OPERATIONS -->
+<section class="section">
+  <div class="bp-container">
+    <div style="display:grid; grid-template-columns:1fr 1.4fr; gap:80px; align-items:start;">
+      <div>
+        <div class="kicker">Operations</div>
+        <h2>Sustainable by Design</h2>
+        <p style="font-size:16px; line-height:1.8; color:var(--grey-dark); margin-top:16px;">We believe environmental responsibility begins within our own firm. Our operations are structured around resource efficiency, digital innovation and responsible consumption — because the commitments we advocate for our clients should also apply to us.</p>
+        <div style="margin-top:40px; padding:32px; background:var(--offwhite); border-left:3px solid var(--gold);">
+          <div style="font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin-bottom:10px;">Digital by Design</div>
+          <p style="font-size:15px; line-height:1.75; color:var(--grey-dark); margin:0;">Wherever appropriate, our engagements are managed digitally — from client onboarding and document review to execution and knowledge management — reducing paper consumption while improving efficiency and client experience.</p>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border);">
+        <div style="padding:28px 24px; background:var(--white);">
+          <div style="width:32px; height:2px; background:var(--gold); margin-bottom:14px;"></div>
+          <p style="font-size:14px; color:var(--navy); font-weight:600; margin:0 0 6px;">Paperless Workflows</p>
+          <p style="font-size:13px; color:var(--grey-dark); margin:0; line-height:1.6;">Digital documents and electronic signing minimise our reliance on physical paper.</p>
+        </div>
+        <div style="padding:28px 24px; background:var(--white);">
+          <div style="width:32px; height:2px; background:var(--gold); margin-bottom:14px;"></div>
+          <p style="font-size:14px; color:var(--navy); font-weight:600; margin:0 0 6px;">Cloud Collaboration</p>
+          <p style="font-size:13px; color:var(--grey-dark); margin:0; line-height:1.6;">Secure cloud platforms enable client and team collaboration without physical infrastructure overhead.</p>
+        </div>
+        <div style="padding:28px 24px; background:var(--white);">
+          <div style="width:32px; height:2px; background:var(--gold); margin-bottom:14px;"></div>
+          <p style="font-size:14px; color:var(--navy); font-weight:600; margin:0 0 6px;">Energy Efficiency</p>
+          <p style="font-size:13px; color:var(--grey-dark); margin:0; line-height:1.6;">Energy-efficient office equipment and renewable energy sources reduce our consumption footprint.</p>
+        </div>
+        <div style="padding:28px 24px; background:var(--white);">
+          <div style="width:32px; height:2px; background:var(--gold); margin-bottom:14px;"></div>
+          <p style="font-size:14px; color:var(--navy); font-weight:600; margin:0 0 6px;">Responsible Procurement</p>
+          <p style="font-size:13px; color:var(--grey-dark); margin:0; line-height:1.6;">We work with suppliers and service providers who share our commitment to integrity and ethical business practice.</p>
+        </div>
+        <div style="padding:28px 24px; background:var(--white);">
+          <div style="width:32px; height:2px; background:var(--gold); margin-bottom:14px;"></div>
+          <p style="font-size:14px; color:var(--navy); font-weight:600; margin:0 0 6px;">Waste Reduction</p>
+          <p style="font-size:13px; color:var(--grey-dark); margin:0; line-height:1.6;">Recycling and responsible waste management are embedded in our day-to-day office operations.</p>
+        </div>
+        <div style="padding:28px 24px; background:var(--white);">
+          <div style="width:32px; height:2px; background:var(--gold); margin-bottom:14px;"></div>
+          <p style="font-size:14px; color:var(--navy); font-weight:600; margin:0 0 6px;">Electronic Execution</p>
+          <p style="font-size:13px; color:var(--grey-dark); margin:0; line-height:1.6;">Digital signatures and e-signing platforms reduce the need for physical document handling and courier logistics.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESPONSIBLE INFRASTRUCTURE -->
+<section class="section-sm offwhite">
+  <div class="bp-container">
+    <div style="display:grid; grid-template-columns:1fr 1.5fr; gap:80px; align-items:start;">
+      <div>
+        <div class="kicker">Sector Practice</div>
+        <h2>Responsible Infrastructure</h2>
+        <p style="font-size:16px; line-height:1.8; color:var(--grey-dark); margin-top:16px;">We believe infrastructure should be developed responsibly. Our lawyers support projects that balance commercial objectives with environmental stewardship, regulatory compliance, community interests and long-term sustainability.</p>
+        <p style="font-size:16px; line-height:1.8; color:var(--grey-dark); margin-top:16px;">From renewable energy and transport infrastructure to environmental remediation and public-private partnerships, we help clients deliver projects that create enduring value — for investors, communities and future generations alike.</p>
+      </div>
+      <div style="border:1px solid var(--border);">
+        <div style="padding:22px 28px; border-bottom:1px solid var(--border); display:grid; grid-template-columns:180px 1fr; gap:20px; align-items:start;">
+          <div style="font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); padding-top:2px;">Renewable Energy</div>
+          <p style="font-size:14px; color:var(--grey-dark); margin:0; line-height:1.65;">Legal support for solar, wind, off-grid and hybrid energy projects — advancing Nigeria's energy transition.</p>
+        </div>
+        <div style="padding:22px 28px; border-bottom:1px solid var(--border); display:grid; grid-template-columns:180px 1fr; gap:20px; align-items:start;">
+          <div style="font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); padding-top:2px;">Environmental Remediation</div>
+          <p style="font-size:14px; color:var(--grey-dark); margin:0; line-height:1.65;">Advising on environmental clean-up, contaminated land restoration and remediation compliance frameworks.</p>
+        </div>
+        <div style="padding:22px 28px; border-bottom:1px solid var(--border); display:grid; grid-template-columns:180px 1fr; gap:20px; align-items:start;">
+          <div style="font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); padding-top:2px;">PPP &amp; Public Interest</div>
+          <p style="font-size:14px; color:var(--grey-dark); margin:0; line-height:1.65;">Structuring public-private partnerships that deliver essential services while protecting community interests and public value.</p>
+        </div>
+        <div style="padding:22px 28px; display:grid; grid-template-columns:180px 1fr; gap:20px; align-items:start;">
+          <div style="font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); padding-top:2px;">ESG Integration</div>
+          <p style="font-size:14px; color:var(--grey-dark); margin:0; line-height:1.65;">Embedding environmental, social and governance principles into investment structuring, regulatory compliance and project delivery frameworks.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IN PRACTICE -->
+<section class="section">
   <div class="bp-container">
     <div style="display:grid; grid-template-columns:1fr 1.5fr; gap:80px; align-items:start;">
       <div>
         <div class="kicker">In Action</div>
         <h2>What This Looks Like in Practice</h2>
-        <p style="color:var(--grey-dark); margin-top:16px;">Responsible business is measured in decisions and actions — not declarations. These are some of the ways our commitments take shape.</p>
+        <p style="color:var(--grey-dark); margin-top:16px;">Responsible business is measured in decisions and actions — not declarations. These are some of the ways our commitments take shape every day.</p>
       </div>
       <div>
-        <div style="border-top:1px solid var(--border); padding:28px 0; display:grid; grid-template-columns:140px 1fr; gap:24px; align-items:start;">
+        <div style="border-top:1px solid var(--border); padding:28px 0; display:grid; grid-template-columns:160px 1fr; gap:24px; align-items:start;">
           <div style="font-family:var(--font-head); font-size:13px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); padding-top:2px;">Pro Bono</div>
-          <p style="font-size:15px; color:var(--grey-dark); margin:0; line-height:1.7;">Each year, Bowyard Partners dedicates a portion of partner and associate time to pro bono matters — including support for civil society organisations, small businesses and individuals facing access to justice barriers.</p>
+          <p style="font-size:15px; color:var(--grey-dark); margin:0; line-height:1.7;">Each year, Bowyard Partners dedicates partner and associate time to pro bono matters — including our legal support for the Nigerian Montane Forest Project and assistance to civil society organisations and individuals facing access to justice barriers.</p>
         </div>
-        <div style="border-top:1px solid var(--border); padding:28px 0; display:grid; grid-template-columns:140px 1fr; gap:24px; align-items:start;">
-          <div style="font-family:var(--font-head); font-size:13px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); padding-top:2px;">Legal Clinics</div>
-          <p style="font-size:15px; color:var(--grey-dark); margin:0; line-height:1.7;">We participate in legal education and regulatory literacy clinics for early-stage entrepreneurs and business owners — helping them understand their rights, obligations and options before problems arise.</p>
-        </div>
-        <div style="border-top:1px solid var(--border); padding:28px 0; display:grid; grid-template-columns:140px 1fr; gap:24px; align-items:start;">
+        <div style="border-top:1px solid var(--border); padding:28px 0; display:grid; grid-template-columns:160px 1fr; gap:24px; align-items:start;">
           <div style="font-family:var(--font-head); font-size:13px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); padding-top:2px;">Mentoring</div>
-          <p style="font-size:15px; color:var(--grey-dark); margin:0; line-height:1.7;">Our partners mentor young lawyers and law students — investing in the next generation of Nigerian legal professionals through structured programmes and informal guidance.</p>
+          <p style="font-size:15px; color:var(--grey-dark); margin:0; line-height:1.7;">Our partners mentor young lawyers and law students — investing in the next generation of Nigerian legal professionals through structured programmes, knowledge-sharing and informal guidance.</p>
         </div>
-        <div style="border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:28px 0; display:grid; grid-template-columns:140px 1fr; gap:24px; align-items:start;">
+        <div style="border-top:1px solid var(--border); padding:28px 0; display:grid; grid-template-columns:160px 1fr; gap:24px; align-items:start;">
+          <div style="font-family:var(--font-head); font-size:13px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); padding-top:2px;">Legal Education</div>
+          <p style="font-size:15px; color:var(--grey-dark); margin:0; line-height:1.7;">We participate in legal education and regulatory literacy programmes for early-stage entrepreneurs, business owners and university students — helping them understand their rights, obligations and options before problems arise.</p>
+        </div>
+        <div style="border-top:1px solid var(--border); padding:28px 0; display:grid; grid-template-columns:160px 1fr; gap:24px; align-items:start;">
           <div style="font-family:var(--font-head); font-size:13px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); padding-top:2px;">ESG Advisory</div>
-          <p style="font-size:15px; color:var(--grey-dark); margin:0; line-height:1.7;">We advise clients on embedding ESG principles into their governance and operations — because we believe that responsible business is also good business, and long-term value depends on it.</p>
+          <p style="font-size:15px; color:var(--grey-dark); margin:0; line-height:1.7;">We advise clients on embedding ESG principles into their governance structures and operations — because responsible business is also good business, and long-term value depends on it.</p>
         </div>
+        <div style="border-top:1px solid var(--border); padding:28px 0; display:grid; grid-template-columns:160px 1fr; gap:24px; align-items:start;">
+          <div style="font-family:var(--font-head); font-size:13px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); padding-top:2px;">Policy Reform</div>
+          <p style="font-size:15px; color:var(--grey-dark); margin:0; line-height:1.7;">We contribute legal expertise to regulatory reform discussions, legislative drafting and public procurement frameworks — supporting systems that strengthen governance and protect the public interest.</p>
+        </div>
+        <div style="border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:28px 0; display:grid; grid-template-columns:160px 1fr; gap:24px; align-items:start;">
+          <div style="font-family:var(--font-head); font-size:13px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); padding-top:2px;">Anti-Corruption</div>
+          <p style="font-size:15px; color:var(--grey-dark); margin:0; line-height:1.7;">We advise clients on anti-corruption compliance, responsible investment and transparent governance — contributing to the institutional integrity that sustainable economic development depends on.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOOKING FORWARD -->
+<section class="section-sm" style="background:var(--navy);">
+  <div class="bp-container">
+    <div style="display:grid; grid-template-columns:1fr 1.5fr; gap:80px; align-items:start;">
+      <div>
+        <div class="kicker" style="color:var(--gold);">Looking Forward</div>
+        <h2 style="color:var(--white);">A Journey of Continuous Improvement</h2>
+      </div>
+      <div>
+        <p style="font-size:17px; line-height:1.85; color:rgba(255,255,255,0.82); margin:0 0 24px;">Responsible business is not a destination — it is a commitment we renew every day. As Bowyard Partners grows, we will continue strengthening our environmental practices, deepening our conservation partnerships, expanding our community programmes and investing in our people.</p>
+        <p style="font-size:17px; line-height:1.85; color:rgba(255,255,255,0.82); margin:0;">We are committed to supporting projects and clients that contribute to sustainable economic development — not just across Nigeria, but across the continent. The ambition of the firms and individuals we advise should be matched by the ambition of the values we stand for.</p>
       </div>
     </div>
   </div>
@@ -182,7 +333,7 @@
   <div class="bp-container bp-cta-inner">
     <div class="kicker" style="justify-content:center;">Get Involved</div>
     <h2>Partner with a firm<br>that practises what it preaches.</h2>
-    <p>If you would like to know more about our responsible business commitments or explore a partnership, we would like to hear from you.</p>
+    <p>If you would like to know more about our responsible business commitments — or explore a collaboration — we would like to hear from you.</p>
     <div class="bp-cta-btns">
       <a href="contact.html" class="btn-gold">Contact Us</a>
       <a href="about.html" class="btn-outline-w">Our Firm</a>

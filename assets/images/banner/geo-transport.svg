@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice">
+  <!-- Compass rose, maritime waves, anchor — Transport, Maritime & Logistics -->
+  <defs>
+    <pattern id="trapdots" width="44" height="44" patternUnits="userSpaceOnUse">
+      <circle cx="22" cy="22" r="0.85" fill="#B8962E" opacity="0.6"/>
+    </pattern>
+  </defs>
+  <rect x="620" y="0" width="820" height="700" fill="url(#trapdots)" opacity="0.22"/>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- COMPASS ROSE  centred at (1080, 272)                           -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- Outer degree ring -->
+  <circle cx="1080" cy="272" r="170" fill="none" stroke="#B8962E" stroke-width="0.7" opacity="0.20"/>
+  <!-- Inner bezel ring -->
+  <circle cx="1080" cy="272" r="32"  fill="none" stroke="#B8962E" stroke-width="1.0" opacity="0.52"/>
+  <!-- Tiny centre dot -->
+  <circle cx="1080" cy="272" r="4.5" fill="#B8962E" opacity="1"/>
+
+  <!-- Cardinal arms — elongated diamonds (wider than v1) -->
+  <!-- NORTH: tip (1080,96), base on centre, widest ±32 px at mid -->
+  <polygon points="1080,272  1048,192  1080,96   1112,192"
+           fill="none" stroke="#B8962E" stroke-width="1.2" opacity="0.72"/>
+  <!-- SOUTH: tip (1080,448) -->
+  <polygon points="1080,272  1112,352  1080,448  1048,352"
+           fill="none" stroke="#B8962E" stroke-width="1.2" opacity="0.72"/>
+  <!-- EAST: tip (1256,272), widest ±28 at mid -->
+  <polygon points="1080,272  1160,244  1256,272  1160,300"
+           fill="none" stroke="#B8962E" stroke-width="1.2" opacity="0.72"/>
+  <!-- WEST: tip (904,272) -->
+  <polygon points="1080,272  1000,300  904,272   1000,244"
+           fill="none" stroke="#B8962E" stroke-width="1.2" opacity="0.72"/>
+
+  <!-- Inter-cardinal arms — shorter plain lines with tip accent -->
+  <!-- NE -->
+  <line x1="1080" y1="272" x2="1148" y2="204" stroke="#B8962E" stroke-width="0.9" opacity="0.46"/>
+  <circle cx="1148" cy="204" r="2.5" fill="#B8962E" opacity="0.55"/>
+  <!-- SE -->
+  <line x1="1080" y1="272" x2="1148" y2="340" stroke="#B8962E" stroke-width="0.9" opacity="0.46"/>
+  <circle cx="1148" cy="340" r="2.5" fill="#B8962E" opacity="0.55"/>
+  <!-- SW -->
+  <line x1="1080" y1="272" x2="1012" y2="340" stroke="#B8962E" stroke-width="0.9" opacity="0.46"/>
+  <circle cx="1012" cy="340" r="2.5" fill="#B8962E" opacity="0.55"/>
+  <!-- NW -->
+  <line x1="1080" y1="272" x2="1012" y2="204" stroke="#B8962E" stroke-width="0.9" opacity="0.46"/>
+  <circle cx="1012" cy="204" r="2.5" fill="#B8962E" opacity="0.55"/>
+
+  <!-- Outer tick marks at cardinal and inter-cardinal positions -->
+  <line x1="1080" y1="102" x2="1080" y2="86"  stroke="#B8962E" stroke-width="0.9" opacity="0.40"/>
+  <line x1="1080" y1="442" x2="1080" y2="458" stroke="#B8962E" stroke-width="0.9" opacity="0.40"/>
+  <line x1="1250" y1="272" x2="1266" y2="272" stroke="#B8962E" stroke-width="0.9" opacity="0.40"/>
+  <line x1="910"  y1="272" x2="894"  y2="272" stroke="#B8962E" stroke-width="0.9" opacity="0.40"/>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ANCHOR  centred x=1358, shank y=252→400                       -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- Ring at top -->
+  <circle cx="1358" cy="214" r="30" fill="none" stroke="#B8962E" stroke-width="1.3" opacity="0.60"/>
+  <!-- Shank (vertical shaft) -->
+  <line x1="1358" y1="244" x2="1358" y2="400" stroke="#B8962E" stroke-width="1.5" opacity="0.62"/>
+  <!-- Stock (horizontal crosspiece) -->
+  <line x1="1278" y1="268" x2="1440" y2="268" stroke="#B8962E" stroke-width="1.4" opacity="0.60"/>
+  <!-- Crown ring at bottom of shank -->
+  <circle cx="1358" cy="400" r="9" fill="none" stroke="#B8962E" stroke-width="1.1" opacity="0.55"/>
+  <!-- Left fluke arm -->
+  <line x1="1358" y1="400" x2="1306" y2="380" stroke="#B8962E" stroke-width="1.3" opacity="0.60"/>
+  <line x1="1306" y1="380" x2="1312" y2="356" stroke="#B8962E" stroke-width="1.3" opacity="0.60"/>
+  <line x1="1312" y1="356" x2="1330" y2="360" stroke="#B8962E" stroke-width="1.1" opacity="0.52"/>
+  <!-- Right fluke arm -->
+  <line x1="1358" y1="400" x2="1410" y2="380" stroke="#B8962E" stroke-width="1.3" opacity="0.60"/>
+  <line x1="1410" y1="380" x2="1404" y2="356" stroke="#B8962E" stroke-width="1.3" opacity="0.60"/>
+  <line x1="1404" y1="356" x2="1386" y2="360" stroke="#B8962E" stroke-width="1.1" opacity="0.52"/>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- MARITIME WAVES — four layered sinusoidal curves                -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- Wave 1 — farthest, finest -->
+  <path d="M 630,498 Q 698,474 766,498 Q 834,522 902,498 Q 970,474 1038,498
+           Q 1106,522 1174,498 Q 1242,474 1310,498 Q 1378,522 1440,506"
+        fill="none" stroke="#B8962E" stroke-width="0.65" opacity="0.24"/>
+  <!-- Wave 2 -->
+  <path d="M 630,542 Q 710,518 790,542 Q 870,566 950,542 Q 1030,518 1110,542
+           Q 1190,566 1270,542 Q 1350,518 1430,542"
+        fill="none" stroke="#B8962E" stroke-width="0.85" opacity="0.34"/>
+  <!-- Wave 3 -->
+  <path d="M 630,588 Q 698,566 766,588 Q 834,610 902,588 Q 970,566 1038,588
+           Q 1106,610 1174,588 Q 1242,566 1310,588 Q 1378,610 1440,592"
+        fill="none" stroke="#B8962E" stroke-width="1.05" opacity="0.46"/>
+  <!-- Wave 4 — closest, heaviest -->
+  <path d="M 630,634 Q 686,616 742,634 Q 798,652 854,634 Q 910,616 966,634
+           Q 1022,652 1078,634 Q 1134,616 1190,634 Q 1246,652 1302,634
+           Q 1358,616 1414,634 Q 1440,643 1440,643"
+        fill="none" stroke="#B8962E" stroke-width="1.3" opacity="0.58"/>
+
+  <!-- Focal dot and rings — compass centre -->
+  <circle cx="1080" cy="272" r="14" fill="none" stroke="#B8962E" stroke-width="1.1" opacity="0.52"/>
+  <circle cx="1080" cy="272" r="26" fill="none" stroke="#B8962E" stroke-width="0.65" opacity="0.26"/>
+</svg>

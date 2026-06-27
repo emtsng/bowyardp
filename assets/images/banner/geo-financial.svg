@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice">
+  <!-- Coordinate axes, smooth growth curve, candlestick chart — Financial Services & Banking -->
+  <defs>
+    <pattern id="chartgrid" width="55" height="55" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="55" y2="0" stroke="#B8962E" stroke-width="0.25"/>
+      <line x1="0" y1="0" x2="0" y2="55" stroke="#B8962E" stroke-width="0.25"/>
+    </pattern>
+  </defs>
+  <rect x="640" y="60" width="790" height="590" fill="url(#chartgrid)" opacity="0.055"/>
+
+  <!-- AXES -->
+  <!-- Y-axis -->
+  <line x1="682" y1="80"  x2="682" y2="632" stroke="#B8962E" stroke-width="0.9" opacity="0.38"/>
+  <!-- X-axis -->
+  <line x1="672" y1="622" x2="1420" y2="622" stroke="#B8962E" stroke-width="0.9" opacity="0.38"/>
+  <!-- Y-axis ticks -->
+  <line x1="676" y1="178" x2="688" y2="178" stroke="#B8962E" stroke-width="0.7" opacity="0.32"/>
+  <line x1="676" y1="288" x2="688" y2="288" stroke="#B8962E" stroke-width="0.7" opacity="0.32"/>
+  <line x1="676" y1="398" x2="688" y2="398" stroke="#B8962E" stroke-width="0.7" opacity="0.32"/>
+  <line x1="676" y1="508" x2="688" y2="508" stroke="#B8962E" stroke-width="0.7" opacity="0.32"/>
+  <!-- X-axis ticks -->
+  <line x1="810"  y1="617" x2="810"  y2="628" stroke="#B8962E" stroke-width="0.7" opacity="0.32"/>
+  <line x1="960"  y1="617" x2="960"  y2="628" stroke="#B8962E" stroke-width="0.7" opacity="0.32"/>
+  <line x1="1110" y1="617" x2="1110" y2="628" stroke="#B8962E" stroke-width="0.7" opacity="0.32"/>
+  <line x1="1260" y1="617" x2="1260" y2="628" stroke="#B8962E" stroke-width="0.7" opacity="0.32"/>
+  <line x1="1400" y1="617" x2="1400" y2="628" stroke="#B8962E" stroke-width="0.7" opacity="0.32"/>
+
+  <!-- SMOOTH EXPONENTIAL-STYLE GROWTH CURVE -->
+  <!-- Stays low left, then rises sharply to upper right -->
+  <path d="M 682,608 C 820,602 970,540 1100,420 C 1230,300 1320,165 1408,95"
+        fill="none" stroke="#B8962E" stroke-width="2.0" opacity="0.70"/>
+  <!-- Shadow echo (slightly offset for visual weight) -->
+  <path d="M 682,618 C 820,612 970,550 1100,430 C 1230,310 1320,175 1408,105"
+        fill="none" stroke="#B8962E" stroke-width="0.7" opacity="0.28"/>
+  <path d="M 682,598 C 820,592 970,530 1100,410 C 1230,290 1320,155 1408,85"
+        fill="none" stroke="#B8962E" stroke-width="0.7" opacity="0.28"/>
+
+  <!-- CANDLESTICK CHART — 7 ascending candles -->
+  <!-- Each: thin wick + rectangle body -->
+  <!-- CS1  x=740 -->
+  <line x1="740" y1="548" x2="740" y2="602" stroke="#B8962E" stroke-width="0.75" opacity="0.40"/>
+  <rect x="729" y="566" width="22" height="24" fill="none" stroke="#B8962E" stroke-width="1.05" opacity="0.52"/>
+  <!-- CS2  x=808 -->
+  <line x1="808" y1="524" x2="808" y2="582" stroke="#B8962E" stroke-width="0.75" opacity="0.44"/>
+  <rect x="797" y="541" width="22" height="23" fill="none" stroke="#B8962E" stroke-width="1.1" opacity="0.58"/>
+  <!-- CS3  x=876 -->
+  <line x1="876" y1="495" x2="876" y2="558" stroke="#B8962E" stroke-width="0.78" opacity="0.48"/>
+  <rect x="865" y="512" width="22" height="24" fill="none" stroke="#B8962E" stroke-width="1.1" opacity="0.62"/>
+  <!-- CS4  x=944 -->
+  <line x1="944" y1="466" x2="944" y2="532" stroke="#B8962E" stroke-width="0.8" opacity="0.52"/>
+  <rect x="933" y="482" width="22" height="24" fill="none" stroke="#B8962E" stroke-width="1.15" opacity="0.68"/>
+  <!-- CS5  x=1012 -->
+  <line x1="1012" y1="430" x2="1012" y2="500" stroke="#B8962E" stroke-width="0.82" opacity="0.56"/>
+  <rect x="1001" y="447" width="22" height="24" fill="none" stroke="#B8962E" stroke-width="1.2" opacity="0.72"/>
+  <!-- CS6  x=1080 -->
+  <line x1="1080" y1="390" x2="1080" y2="464" stroke="#B8962E" stroke-width="0.85" opacity="0.60"/>
+  <rect x="1069" y="408" width="22" height="24" fill="none" stroke="#B8962E" stroke-width="1.25" opacity="0.78"/>
+  <!-- CS7  x=1148 — tallest and brightest -->
+  <line x1="1148" y1="345" x2="1148" y2="424" stroke="#B8962E" stroke-width="0.9"  opacity="0.65"/>
+  <rect x="1137" y="364" width="22" height="24" fill="none" stroke="#B8962E" stroke-width="1.35" opacity="0.85"/>
+
+  <!-- LARGE COIN RING — capital / market cap symbol (right side) -->
+  <circle cx="1330" cy="390" r="128" fill="none" stroke="#B8962E" stroke-width="0.6" opacity="0.10"/>
+  <circle cx="1330" cy="390" r="100" fill="none" stroke="#B8962E" stroke-width="0.7" opacity="0.14"/>
+  <circle cx="1330" cy="390" r="72"  fill="none" stroke="#B8962E" stroke-width="0.8" opacity="0.20"/>
+  <circle cx="1330" cy="390" r="44"  fill="none" stroke="#B8962E" stroke-width="0.9" opacity="0.28"/>
+
+  <!-- Focal dot — tip of growth curve -->
+  <circle cx="1408" cy="95" r="5"  fill="#B8962E" opacity="1"/>
+  <circle cx="1408" cy="95" r="14" fill="none" stroke="#B8962E" stroke-width="1.2" opacity="0.55"/>
+  <circle cx="1408" cy="95" r="28" fill="none" stroke="#B8962E" stroke-width="0.7" opacity="0.28"/>
+</svg>

@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice">
+  <!-- Tower crane over building elevation — Construction & Real Estate -->
+  <defs>
+    <pattern id="blueprint" width="55" height="55" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="55" y2="0" stroke="#B8962E" stroke-width="0.28"/>
+      <line x1="0" y1="0" x2="0" y2="55" stroke="#B8962E" stroke-width="0.28"/>
+    </pattern>
+  </defs>
+  <rect x="610" y="0" width="830" height="700" fill="url(#blueprint)" opacity="0.065"/>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- BUILDING ELEVATION (drawn first; crane sits in front)          -->
+  <!-- x=1105–1385, floors y=108,215,322,429,536,643                 -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- Outer walls -->
+  <line x1="1105" y1="108" x2="1385" y2="108" stroke="#B8962E" stroke-width="0.85" opacity="0.32"/>
+  <line x1="1105" y1="108" x2="1105" y2="648" stroke="#B8962E" stroke-width="0.85" opacity="0.32"/>
+  <line x1="1385" y1="108" x2="1385" y2="648" stroke="#B8962E" stroke-width="0.85" opacity="0.32"/>
+  <line x1="1105" y1="648" x2="1385" y2="648" stroke="#B8962E" stroke-width="0.85" opacity="0.32"/>
+  <!-- Floor slabs -->
+  <line x1="1105" y1="215" x2="1385" y2="215" stroke="#B8962E" stroke-width="0.5" opacity="0.22"/>
+  <line x1="1105" y1="322" x2="1385" y2="322" stroke="#B8962E" stroke-width="0.5" opacity="0.22"/>
+  <line x1="1105" y1="429" x2="1385" y2="429" stroke="#B8962E" stroke-width="0.5" opacity="0.22"/>
+  <line x1="1105" y1="536" x2="1385" y2="536" stroke="#B8962E" stroke-width="0.5" opacity="0.22"/>
+  <!-- Column / bay lines -->
+  <line x1="1198" y1="108" x2="1198" y2="648" stroke="#B8962E" stroke-width="0.42" opacity="0.18"/>
+  <line x1="1292" y1="108" x2="1292" y2="648" stroke="#B8962E" stroke-width="0.42" opacity="0.18"/>
+  <!-- Window dots — sample grid (3 bays × 5 floors) -->
+  <g fill="#B8962E" opacity="0.22">
+    <!-- Bay 1 windows -->
+    <circle cx="1152" cy="162" r="3.5"/><circle cx="1152" cy="269" r="3.5"/>
+    <circle cx="1152" cy="376" r="3.5"/><circle cx="1152" cy="483" r="3.5"/>
+    <circle cx="1152" cy="590" r="3.5"/>
+    <!-- Bay 2 windows -->
+    <circle cx="1245" cy="162" r="3.5"/><circle cx="1245" cy="269" r="3.5"/>
+    <circle cx="1245" cy="376" r="3.5"/><circle cx="1245" cy="483" r="3.5"/>
+    <circle cx="1245" cy="590" r="3.5"/>
+    <!-- Bay 3 windows -->
+    <circle cx="1338" cy="162" r="3.5"/><circle cx="1338" cy="269" r="3.5"/>
+    <circle cx="1338" cy="376" r="3.5"/><circle cx="1338" cy="483" r="3.5"/>
+    <circle cx="1338" cy="590" r="3.5"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- TOWER CRANE  mast centre x=1052                                -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- Ground line -->
+  <line x1="840" y1="650" x2="1440" y2="650" stroke="#B8962E" stroke-width="0.55" opacity="0.22"/>
+
+  <!-- Mast — two parallel verticals 14 px apart -->
+  <line x1="1045" y1="55" x2="1045" y2="650" stroke="#B8962E" stroke-width="1.0" opacity="0.58"/>
+  <line x1="1059" y1="55" x2="1059" y2="650" stroke="#B8962E" stroke-width="1.0" opacity="0.58"/>
+  <!-- Mast cross-ticks every 90 px -->
+  <line x1="1039" y1="145" x2="1065" y2="145" stroke="#B8962E" stroke-width="0.65" opacity="0.42"/>
+  <line x1="1039" y1="235" x2="1065" y2="235" stroke="#B8962E" stroke-width="0.65" opacity="0.42"/>
+  <line x1="1039" y1="325" x2="1065" y2="325" stroke="#B8962E" stroke-width="0.65" opacity="0.42"/>
+  <line x1="1039" y1="415" x2="1065" y2="415" stroke="#B8962E" stroke-width="0.65" opacity="0.42"/>
+  <line x1="1039" y1="505" x2="1065" y2="505" stroke="#B8962E" stroke-width="0.65" opacity="0.42"/>
+  <line x1="1039" y1="595" x2="1065" y2="595" stroke="#B8962E" stroke-width="0.65" opacity="0.42"/>
+  <!-- Mast X-bracing (alternating panels) -->
+  <line x1="1045" y1="55"  x2="1059" y2="145" stroke="#B8962E" stroke-width="0.42" opacity="0.30"/>
+  <line x1="1059" y1="55"  x2="1045" y2="145" stroke="#B8962E" stroke-width="0.42" opacity="0.30"/>
+  <line x1="1045" y1="235" x2="1059" y2="325" stroke="#B8962E" stroke-width="0.42" opacity="0.30"/>
+  <line x1="1059" y1="235" x2="1045" y2="325" stroke="#B8962E" stroke-width="0.42" opacity="0.30"/>
+  <line x1="1045" y1="415" x2="1059" y2="505" stroke="#B8962E" stroke-width="0.42" opacity="0.30"/>
+  <line x1="1059" y1="415" x2="1045" y2="505" stroke="#B8962E" stroke-width="0.42" opacity="0.30"/>
+
+  <!-- Slewing platform at top of mast -->
+  <line x1="1032" y1="59" x2="1072" y2="59" stroke="#B8962E" stroke-width="1.3" opacity="0.62"/>
+
+  <!-- Apex mast tip -->
+  <line x1="1052" y1="59" x2="1052" y2="36" stroke="#B8962E" stroke-width="1.0" opacity="0.58"/>
+  <circle cx="1052" cy="34" r="3.2" fill="#B8962E" opacity="0.72"/>
+
+  <!-- MAIN JIB — right arm to x=1405 -->
+  <line x1="1052" y1="59" x2="1405" y2="59" stroke="#B8962E" stroke-width="1.3" opacity="0.68"/>
+  <!-- Secondary lower chord of jib truss -->
+  <line x1="1052" y1="70" x2="1405" y2="70" stroke="#B8962E" stroke-width="0.7" opacity="0.44"/>
+  <!-- Jib tie-lines from apex to chord (triangulate the truss) -->
+  <line x1="1052" y1="36" x2="1405" y2="59" stroke="#B8962E" stroke-width="1.0" opacity="0.55"/>
+  <line x1="1052" y1="36" x2="1210" y2="59" stroke="#B8962E" stroke-width="0.75" opacity="0.40"/>
+  <line x1="1052" y1="36" x2="1316" y2="59" stroke="#B8962E" stroke-width="0.75" opacity="0.40"/>
+  <!-- Jib vertical web members -->
+  <line x1="1150" y1="59" x2="1150" y2="70" stroke="#B8962E" stroke-width="0.5" opacity="0.30"/>
+  <line x1="1250" y1="59" x2="1250" y2="70" stroke="#B8962E" stroke-width="0.5" opacity="0.30"/>
+  <line x1="1350" y1="59" x2="1350" y2="70" stroke="#B8962E" stroke-width="0.5" opacity="0.30"/>
+
+  <!-- COUNTER-JIB — left arm to x=890 -->
+  <line x1="1052" y1="59" x2="890"  y2="59" stroke="#B8962E" stroke-width="1.1" opacity="0.58"/>
+  <line x1="1052" y1="36" x2="890"  y2="59" stroke="#B8962E" stroke-width="0.88" opacity="0.48"/>
+  <!-- Counter-weight block -->
+  <rect x="878" y="55" width="26" height="22" rx="2"
+        fill="none" stroke="#B8962E" stroke-width="1.2" opacity="0.52"/>
+
+  <!-- HOOK CABLE from tip of main jib -->
+  <line x1="1385" y1="70" x2="1385" y2="218" stroke="#B8962E" stroke-width="1.0" opacity="0.58"/>
+  <!-- HOOK — simple J-shape using two line segments -->
+  <line x1="1385" y1="218" x2="1385" y2="252" stroke="#B8962E" stroke-width="1.2" opacity="0.68"/>
+  <line x1="1385" y1="252" x2="1362" y2="252" stroke="#B8962E" stroke-width="1.2" opacity="0.68"/>
+  <line x1="1362" y1="252" x2="1362" y2="238" stroke="#B8962E" stroke-width="1.2" opacity="0.68"/>
+
+  <!-- SUSPENDED LOAD (concrete bucket / block) -->
+  <rect x="1368" y="255" width="28" height="22" rx="2"
+        fill="none" stroke="#B8962E" stroke-width="1.1" opacity="0.60"/>
+  <!-- Rigging lines from hook to load corners -->
+  <line x1="1362" y1="252" x2="1370" y2="255" stroke="#B8962E" stroke-width="0.7" opacity="0.42"/>
+  <line x1="1362" y1="252" x2="1394" y2="255" stroke="#B8962E" stroke-width="0.7" opacity="0.42"/>
+
+  <!-- Focal dot at the load (the lifted object) -->
+  <circle cx="1382" cy="266" r="4.5" fill="#B8962E" opacity="0.92"/>
+  <circle cx="1382" cy="266" r="12"  fill="none" stroke="#B8962E" stroke-width="1.0" opacity="0.50"/>
+  <circle cx="1382" cy="266" r="24"  fill="none" stroke="#B8962E" stroke-width="0.6" opacity="0.24"/>
+</svg>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Announcements and deals from Bowyard Partners — transactions, firm news and key developments.">
+  <link rel="shortcut icon" type="image/x-icon" href="assets/images/fav.png">
+  <title>Announcements &amp; Deals — Bowyard Partners</title>
+  <link rel="stylesheet" href="assets/css/plugins/fontawesome.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Inter:ital,opsz,wght@0,14..32,300..700;1,14..32,300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/bowyard.css">
+</head>
+<body>
+<nav class="bp-nav is-scrolled" id="bp-nav">
+  <div class="bp-nav-inner">
+    <a href="index.html" class="bp-nav-logo"><img src="assets/images/logo/bplogowhite.png" alt="Bowyard Partners"></a>
+    <ul class="bp-nav-links">
+      <li class="bp-nav-item"><a href="about.html" class="bp-nav-link">About Us <span class="ch">▾</span></a>
+        <div class="bp-subnav"><a href="about.html">Our Firm</a><a href="history.html">Our History</a><a href="responsible-business.html">Responsible Business</a></div>
+      </li>
+      <li class="bp-nav-item"><a href="service.html" class="bp-nav-link">Expertise <span class="ch">▾</span></a>
+        <div class="bp-subnav"><a href="practice-corporate.html">Corporate &amp; Commercial</a><a href="industry-energy.html">Energy &amp; Natural Resources</a><a href="practice-governance.html">Governance, Compliance &amp; Policy</a><a href="practice-advisory.html">Business Advisory</a><a href="industry-construction.html">Construction &amp; Real Estate</a><a href="practice-disputes.html">Disputes Resolution</a><a href="industry-financial.html">Financial Services</a><a href="industry-transport.html">Transport, Maritime &amp; Logistics</a></div>
+      </li>
+      <li class="bp-nav-item"><a href="team.html" class="bp-nav-link">People</a></li>
+      <li class="bp-nav-item"><a href="insights.html" class="bp-nav-link">Insights <span class="ch">▾</span></a>
+        <div class="bp-subnav"><a href="insights-publications.html">Publications</a><a href="insights-announcements.html">Announcements &amp; Deals</a><a href="insights-events.html">Events</a></div>
+      </li>
+    </ul>
+    <a href="contact.html" class="bp-nav-cta">Contact Us</a>
+    <button class="bp-hamburger" id="bp-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="bp-mobile-nav" id="bp-mobile-nav">
+  <a href="index.html" class="m-link">Home</a>
+  <button class="m-toggle" onclick="toggleSub(this)">About Us</button>
+  <div class="m-sub"><a href="about.html">Our Firm</a><a href="history.html">Our History</a><a href="responsible-business.html">Responsible Business</a></div>
+  <button class="m-toggle" onclick="toggleSub(this)">Expertise</button>
+  <div class="m-sub"><a href="service.html">All Practices &amp; Industries</a><a href="practice-corporate.html">Corporate &amp; Commercial</a><a href="practice-governance.html">Governance &amp; Compliance</a><a href="practice-disputes.html">Disputes Resolution</a><a href="industry-energy.html">Energy &amp; Natural Resources</a><a href="industry-infrastructure.html">Infrastructure &amp; PPP</a></div>
+  <a href="team.html" class="m-link">People</a>
+  <button class="m-toggle" onclick="toggleSub(this)">Insights</button>
+  <div class="m-sub"><a href="insights.html">All Insights</a><a href="insights-publications.html">Publications</a><a href="insights-announcements.html">Announcements</a><a href="insights-events.html">Events</a></div>
+  <a href="contact.html" class="m-link">Contact Us</a>
+</div>
+
+<section class="bp-page-hero">
+  <div class="bp-page-hero-bg"><img src="assets/images/banner/geo-insights.svg" alt="" style="opacity:0.42"></div>
+  <div class="bp-container bp-page-hero-inner">
+    <nav class="bp-breadcrumb"><a href="index.html">Home</a><span>/</span><a href="insights.html">Insights</a><span>/</span><span style="color:rgba(255,255,255,.7);">Announcements &amp; Deals</span></nav>
+    <div class="kicker">Transactions. News. Milestones.</div>
+    <h1>Announcements<br>&amp; Deals.</h1>
+    <p class="pg-sub">Significant transactions, firm developments and key milestones from Bowyard Partners.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="bp-container">
+    <div style="display:grid;grid-template-columns:1fr 2.8fr;gap:72px;align-items:start;">
+
+      <!-- Sidebar / filter -->
+      <div style="position:sticky;top:96px;">
+        <div style="margin-bottom:36px;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;">Filter by Type</div>
+          <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border);">
+            <button onclick="filterAnn('all',this)" class="ann-filter active" style="padding:13px 16px;text-align:left;border:none;border-bottom:1px solid var(--border);background:var(--navy);color:var(--white);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">All</button>
+            <button onclick="filterAnn('deals',this)" class="ann-filter" style="padding:13px 16px;text-align:left;border:none;border-bottom:1px solid var(--border);background:var(--white);color:var(--grey-dark);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">Deals</button>
+            <button onclick="filterAnn('firm-news',this)" class="ann-filter" style="padding:13px 16px;text-align:left;border:none;border-bottom:1px solid var(--border);background:var(--white);color:var(--grey-dark);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">Firm News</button>
+            <button onclick="filterAnn('responsible-business',this)" class="ann-filter" style="padding:13px 16px;text-align:left;border:none;background:var(--white);color:var(--grey-dark);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">Responsible Business</button>
+          </div>
+        </div>
+        <div style="border:1px solid var(--border);padding:24px;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">Want to know more?</div>
+          <p style="font-size:13px;color:var(--grey-dark);line-height:1.65;margin-bottom:16px;">For further details on any transaction or development, our team is happy to discuss.</p>
+          <a href="contact.html" class="link-arrow" style="font-size:12px;">Get in Touch</a>
+        </div>
+      </div>
+
+      <!-- Announcement list -->
+      <div>
+        <div class="bp-announce-list">
+
+          <!-- 01 Burutu Port -->
+          <a href="#" class="bp-announce-row" data-type="deals">
+            <div class="bp-announce-row-date">June 2025</div>
+            <div>
+              <div class="bp-ins-cat" style="margin-bottom:6px;">Deals</div>
+              <div class="bp-announce-row-title">Bowyard Partners Advises on the Burutu Port Concession and Green Energy Complex</div>
+              <div class="bp-announce-row-desc">We provided legal advisory services on the concession structuring, regulatory approvals and commercial arrangements for the development of a new port and adjacent green energy facility at Burutu, Delta State. The project involved complex multi-party arrangements between government, a private concessionaire and international development partners.</div>
+            </div>
+            <div class="bp-announce-tag">Deals</div>
+          </a>
+
+          <!-- 02 Emadeb Energy Group × Greenwave Energy -->
+          <a href="#" class="bp-announce-row" data-type="deals">
+            <div class="bp-announce-row-date">June 2025</div>
+            <div>
+              <div class="bp-ins-cat" style="margin-bottom:6px;">Deals</div>
+              <div class="bp-announce-row-title">Bowyard Partners Advises on Strategic Collaboration Between Emadeb Energy Group and Greenwave Energy</div>
+              <div class="bp-announce-row-desc">We are pleased to have advised on a strategic collaboration between Emadeb Energy Group and Greenwave Energy — a transaction that will leverage the complementary strengths of both companies to enhance their operations across the oil and gas industry value chain. The collaboration covers technical support for Emadeb Energy Group's exploration and production operations, midstream infrastructure, retail services and offshore assets, and extends to logistics optimisation, asset performance enhancement, and the development and implementation of operations and maintenance plans, production optimisation strategies and HSE plans. Bowyard Partners remains committed to partnering with businesses in the energy sector through strategic advisory that enables our clients to achieve their goals and enhance operational efficiencies.</div>
+            </div>
+            <div class="bp-announce-tag">Deals</div>
+          </a>
+
+          <!-- 03 YES! 2025 Speaking Engagement -->
+          <a href="insights-events.html" class="bp-announce-row" data-type="firm-news">
+            <div class="bp-announce-row-date">June 2025</div>
+            <div>
+              <div class="bp-ins-cat" style="margin-bottom:6px;">Firm News &nbsp;&middot;&nbsp; Speaking</div>
+              <div class="bp-announce-row-title">Atiku Jafar Speaks at Youth Energy Summit (YES! 2025), Cape Town</div>
+              <div class="bp-announce-row-desc">Managing Partner Atiku Jafar joined a panel on "Youth Innovation in Future Energy Technologies" at YES! 2025, convened by EnergyNet Ltd. and the Africa Energy Forum in Cape Town (18–20 June). Drawing on his concerns for energy poverty in Africa, he addressed the legal frameworks needed to accelerate youth-led clean energy solutions in sub-Saharan Africa: enabling licensing regimes, energy sandboxes, model PPAs, standardised contract templates and de-risking tools for early-stage ventures. Atiku was joined on the panel by Gloria Kuyoh, Osman Ayariga, Damilola Hamid Balogun, Abubakar Shuaibu and Banaiah Namuyu.</div>
+            </div>
+            <div class="bp-announce-tag">Speaking</div>
+          </a>
+
+          <!-- 03 YES! 2025 Speaker Announcement (pre-event) -->
+          <a href="insights-events.html" class="bp-announce-row" data-type="firm-news">
+            <div class="bp-announce-row-date">June 2025</div>
+            <div>
+              <div class="bp-ins-cat" style="margin-bottom:6px;">Firm News &nbsp;&middot;&nbsp; Speaking</div>
+              <div class="bp-announce-row-title">Atiku Jafar Selected as Speaker at YES! 2025 — Africa Energy Forum, Cape Town</div>
+              <div class="bp-announce-row-desc">Managing Partner Atiku Jafar was selected to speak at the Youth Energy Summit (YES! 2025) at CTICC 2, Cape Town, joining an international group of changemakers to explore how young innovators across Africa can shape the continent's energy future. His contribution focused on how policy, regulation and infrastructure can make or mar the transformation — and on the insight, drawn from his work at the intersection of law and infrastructure, that innovation needs the right legal and regulatory frameworks to scale from idea to lasting impact. YES! is convened by EnergyNet Ltd. and the Africa Energy Forum as the largest community of youth energy leaders, job creators and knowledge-sharers across the continent.</div>
+            </div>
+            <div class="bp-announce-tag">Speaking</div>
+          </a>
+
+          <!-- 04 Team -->
+          <a href="#" class="bp-announce-row" data-type="firm-news">
+            <div class="bp-announce-row-date">March 2025</div>
+            <div>
+              <div class="bp-ins-cat" style="margin-bottom:6px;">Firm News</div>
+              <div class="bp-announce-row-title">Bowyard Partners Strengthens Team with New Associates</div>
+              <div class="bp-announce-row-desc">We are pleased to welcome new associates to the Bowyard Partners team, expanding our capacity in corporate and commercial, energy and infrastructure, and financial services advisory. The new team members bring experience from a range of commercial and public sector environments.</div>
+            </div>
+            <div class="bp-announce-tag">Firm News</div>
+          </a>
+
+          <!-- 03 NMFP -->
+          <a href="responsible-business.html" class="bp-announce-row" data-type="responsible-business">
+            <div class="bp-announce-row-date">February 2025</div>
+            <div>
+              <div class="bp-ins-cat" style="margin-bottom:6px;">Responsible Business</div>
+              <div class="bp-announce-row-title">Bowyard Partners Provides Pro Bono Legal Support to the Nigerian Montane Forest Project</div>
+              <div class="bp-announce-row-desc">We are proud to confirm our pro bono legal partnership with the Nigerian Montane Forest Project (NMFP), a conservation initiative focused on protecting one of Nigeria's most threatened forest ecosystems in the Mambilla Plateau, Taraba State. Our support covers environmental regulatory advice, land access frameworks and policy advocacy.</div>
+            </div>
+            <div class="bp-announce-tag">Responsible</div>
+          </a>
+
+          <!-- 04 Rail -->
+          <a href="#" class="bp-announce-row" data-type="deals">
+            <div class="bp-announce-row-date">December 2024</div>
+            <div>
+              <div class="bp-ins-cat" style="margin-bottom:6px;">Deals</div>
+              <div class="bp-announce-row-title">Bowyard Partners Advises on EPC Arrangements for the Kano–Maradi Standard Gauge Rail Project</div>
+              <div class="bp-announce-row-desc">We advised on the engineering, procurement and construction (EPC) arrangements for the US$2bn Kano–Maradi standard gauge rail project, including diesel and gasoline facility agreements and fuel-supply contracts for operational infrastructure along the corridor.</div>
+            </div>
+            <div class="bp-announce-tag">Deals</div>
+          </a>
+
+          <!-- 05 Ogoniland -->
+          <a href="#" class="bp-announce-row" data-type="deals">
+            <div class="bp-announce-row-date">October 2024</div>
+            <div>
+              <div class="bp-ins-cat" style="margin-bottom:6px;">Deals</div>
+              <div class="bp-announce-row-title">Bowyard Partners Advises on the Ogoniland Shoreline Remediation Project</div>
+              <div class="bp-announce-row-desc">We provided legal advisory services on the regulatory framework, community engagement obligations and contractual arrangements for a major shoreline remediation project in Ogoniland. The engagement involved interfacing with NOSDRA, the National Oil Spill Detection and Response Agency, and community stakeholder groups.</div>
+            </div>
+            <div class="bp-announce-tag">Deals</div>
+          </a>
+
+          <!-- 06 Africa Gas Innovation Summit (AGIS) 2024 -->
+          <a href="insights-events.html" class="bp-announce-row" data-type="firm-news">
+            <div class="bp-announce-row-date">2024</div>
+            <div>
+              <div class="bp-ins-cat" style="margin-bottom:6px;">Firm News &nbsp;&middot;&nbsp; Event</div>
+              <div class="bp-announce-row-title">Bowyard Partners at the Africa Gas Innovation Summit (AGIS) 2024</div>
+              <div class="bp-announce-row-desc">Khalifa Musa and Atiku Jafar represented Bowyard Partners at the Africa Gas Innovation Summit (AGIS) 2024, themed "Igniting the Future: Driving Sustainability in Africa's Energy Landscape through Gas Technology and Innovation." The summit convened policy makers, industry leaders, academic institutions and financial institutions to address Africa's energy challenges — exploring the critical role of innovative technologies in achieving a sustainable energy future, industry-academia partnerships, and the transformative potential of gas as an energy transition fuel. Bowyard Partners remains committed to contributing its legal expertise to fostering a thriving environment for energy innovation and sustainable investment across the continent.</div>
+            </div>
+            <div class="bp-announce-tag">Forum</div>
+          </a>
+
+          <!-- 06b Africa Natural Resources and Energy Investment Summit (AFNIS) 2024 -->
+          <a href="insights-events.html" class="bp-announce-row" data-type="firm-news">
+            <div class="bp-announce-row-date">2024</div>
+            <div>
+              <div class="bp-ins-cat" style="margin-bottom:6px;">Firm News &nbsp;&middot;&nbsp; Event</div>
+              <div class="bp-announce-row-title">Bowyard Partners at the Africa Natural Resources and Energy Investment Summit (AFNIS) 2024</div>
+              <div class="bp-announce-row-desc">Khalifa Musa and Atiku Jafar attended the Africa Natural Resources and Energy Investment Summit (AFNIS) 2024, themed "Natural Resources for Economic Development." The summit brought together key stakeholders from the power, mining, oil &amp; gas, agriculture and finance sectors to explore investment opportunities, facilitate cross-sectoral collaboration, and discuss sustainable development strategies. Building on past discussions on energy access and the need for a just and equitable energy transition, the 2024 agenda underscored the pivotal role of Africa's abundant natural resources in fuelling economic prosperity and empowering marginalised communities.</div>
+            </div>
+            <div class="bp-announce-tag">Summit</div>
+          </a>
+
+          <!-- 06c 95th Power Dialogue — The Electricity Act 2023: One Year After -->
+          <a href="insights-events.html" class="bp-announce-row" data-type="firm-news">
+            <div class="bp-announce-row-date">June 2024</div>
+            <div>
+              <div class="bp-ins-cat" style="margin-bottom:6px;">Firm News &nbsp;&middot;&nbsp; Speaking</div>
+              <div class="bp-announce-row-title">Atiku Jafar Panelist at the 95th Power Dialogue: "The Electricity Act 2023 — One Year After"</div>
+              <div class="bp-announce-row-desc">Managing Partner Atiku Jafar joined the 95th Power Dialogue in Abuja on 26 June 2024, participating in a panel discussion on the progress made since the enactment of the Electricity Act 2023 and the government's initiatives to create an enabling environment for private sector actors, investors, development partners and state governments. He was joined by Dafe Akpeneye (Commissioner, Legal, Licensing &amp; Compliance, NERC), Osefan Anegbe (Associate, Energy &amp; Natural Resources, S.S. Kohn &amp; Co.) and Damilola Alada (Executive Associate, Bloomfield LP). The dialogue was held at The Ventures Park, 5 Kwaji Close, Maitama, Abuja.</div>
+            </div>
+            <div class="bp-announce-tag">Speaking</div>
+          </a>
+
+          <!-- 07 Energy Law Society Webinar — University of Uyo -->
+          <a href="insights-events.html" class="bp-announce-row" data-type="firm-news">
+            <div class="bp-announce-row-date">July 2023</div>
+            <div>
+              <div class="bp-ins-cat" style="margin-bottom:6px;">Firm News &nbsp;&middot;&nbsp; Speaking</div>
+              <div class="bp-announce-row-title">Atiku Jafar Featured Speaker at Energy Law Society Webinar, University of Uyo</div>
+              <div class="bp-announce-row-desc">Atiku Jafar was featured speaker at the Virtual Unveiling Webinar of the Energy Law Society, organised by Professor Enefiok Essein Chambers of Justice at the Faculty of Law, University of Uyo. The session — "The ABC of Energy Law Practice: Building a Sustainable Energy Industry in Nigeria" — was hosted by Dateng Best Obadiah, Head of the Energy Law Society, and explored the foundational principles of energy law practice and the legal and regulatory frameworks required to build a sustainable energy sector in Nigeria.</div>
+            </div>
+            <div class="bp-announce-tag">Speaking</div>
+          </a>
+
+          <!-- 07 "Meet the Hustlers" Panel — YES! / AEF 2023, Nairobi -->
+          <a href="insights-events.html" class="bp-announce-row" data-type="firm-news">
+            <div class="bp-announce-row-date">June 2023</div>
+            <div>
+              <div class="bp-ins-cat" style="margin-bottom:6px;">Firm News &nbsp;&middot;&nbsp; Speaking</div>
+              <div class="bp-announce-row-title">Atiku Jafar on "Meet the Hustlers: Inside the Mind of the Entrepreneur" Panel at YES! / AEF 2023, Nairobi</div>
+              <div class="bp-announce-row-desc">At the Youth Energy Summit and Africa Energy Forum 2023 in Nairobi, Atiku Jafar joined a panel of distinguished professionals at the Kenyatta International Convention Centre to explore what it takes to succeed in the energy sector and why entrepreneurship demands more than good ideas. The panel — featuring Kunle Alao Ph.D, Habiba Ali, Tracy Kimathi, Faith Aweko and Damilola Hamid Balogun — examined entrepreneurial mindset and execution, business idea validation, market research and customer engagement, iteration and adaptation, and the critical importance of identifying and managing legal risks affecting reputation, operations and business finance. Atiku emphasised the need for businesses to build brands around transformative visions and to develop the legal frameworks that allow innovation to scale.</div>
+            </div>
+            <div class="bp-announce-tag">Speaking</div>
+          </a>
+
+          <!-- 08 Power in Your Hands Award — YES! 2023, Nairobi -->
+
+          <a href="insights-events.html" class="bp-announce-row" data-type="firm-news">
+            <div class="bp-announce-row-date">June 2023</div>
+            <div>
+              <div class="bp-ins-cat" style="margin-bottom:6px;">Award &nbsp;&middot;&nbsp; Recognition</div>
+              <div class="bp-announce-row-title">Atiku Jafar Receives the "Power in Your Hands Award" at YES! 2023, Nairobi</div>
+              <div class="bp-announce-row-desc">Managing Partner Atiku Jafar was honoured with the Power in Your Hands Award at the Youth Energy Summit (YES! 2023) in Nairobi, Kenya — presented by President William Ruto on behalf of EnergyNet Ltd. and the YES! team. The award recognised Atiku's contributions as a YES! Ambassador and founding member of the YES Army, and his commitment to mobilising young people to drive positive change in Africa's energy sector. Atiku is also Pioneer Chair of the International Council of the African Law Students' Association (ALSA), which has partnered with YES! to upskill law students across the continent.</div>
+            </div>
+            <div class="bp-announce-tag">Award</div>
+          </a>
+
+          <!-- 09 ECOWAS Sustainable Energy Forum (ESEF) 2022 -->
+          <a href="insights-events.html" class="bp-announce-row" data-type="firm-news">
+            <div class="bp-announce-row-date">October 2022</div>
+            <div>
+              <div class="bp-ins-cat" style="margin-bottom:6px;">Firm News &nbsp;&middot;&nbsp; Event</div>
+              <div class="bp-announce-row-title">Bowyard Partners Attends ECOWAS Sustainable Energy Forum (ESEF) 2022</div>
+              <div class="bp-announce-row-desc">Bowyard Partners attended the ECOWAS Sustainable Energy Forum (ESEF) 2022 — West Africa's premier sustainable energy event, organised by the ECOWAS Centre for Renewable Energy and Energy Efficiency (ECREEE) from 31 October to 1 November. The forum brought together policy makers, regional and international private sector actors, and financial institutions to discuss and improve the policy and regulatory landscapes for private sector investment in sustainable energy across ECOWAS member states. For Bowyard Partners, participation reinforced our commitment to building the partnerships and collaborations needed to accelerate a viable market for sustainable energy solutions across the region.</div>
+            </div>
+            <div class="bp-announce-tag">Forum</div>
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="bp-cta">
+  <div class="bp-container bp-cta-inner">
+    <div class="kicker" style="justify-content:center;">Work With Us</div>
+    <h2>Transactions of every<br>scale and complexity.</h2>
+    <p>Whether you are structuring a concession, navigating a regulatory process or closing a deal, our team brings sector-specific knowledge and transactional experience to every engagement.</p>
+    <div class="bp-cta-btns">
+      <a href="contact.html" class="btn-gold">Contact a Partner</a>
+      <a href="insights-publications.html" class="btn-outline-w">Read Our Publications</a>
+    </div>
+  </div>
+</section>
+
+<footer class="bp-footer">
+  <div class="bp-container">
+    <div class="bp-footer-grid">
+      <div class="bp-footer-brand"><img src="assets/images/logo/bplogowhite.png" alt="Bowyard Partners"><p>A commercially focused law firm advising clients at the intersection of legal, regulatory and commercial complexity. Partner-led. Sector-focused. Built for ambition.</p></div>
+      <div class="bp-footer-col"><h6>Our Firm</h6><ul><li><a href="about.html">About Bowyard</a></li><li><a href="history.html">Our History</a></li><li><a href="team.html">Our People</a></li><li><a href="responsible-business.html">Responsible Business</a></li></ul></div>
+      <div class="bp-footer-col"><h6>Expertise</h6><ul><li><a href="practice-corporate.html">Corporate &amp; Commercial</a></li><li><a href="industry-energy.html">Energy &amp; Natural Resources</a></li><li><a href="practice-governance.html">Governance &amp; Compliance</a></li><li><a href="practice-disputes.html">Disputes Resolution</a></li><li><a href="service.html">View All</a></li></ul></div>
+      <div class="bp-footer-col"><h6>Connect</h6><ul><li><a href="contact.html">Contact Us</a></li><li><a href="https://www.linkedin.com/company/bowyardpartners" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="https://www.instagram.com/bowyardpartners" target="_blank" rel="noopener">Instagram</a></li><li><a href="mailto:enquiries@bowyardpartners.com">Email Us</a></li></ul></div>
+    </div>
+    <div class="bp-footer-offices" style="grid-template-columns:1fr;"><div class="bp-footer-office"><h6>Our Office</h6><address>6 Cairo Crescent, Wuse II<br>Abuja, Nigeria</address></div></div>
+    <div class="bp-footer-bottom"><span>© 2025 Bowyard Partners. All rights reserved.</span><div class="bp-footer-social"><a href="https://www.linkedin.com/company/bowyardpartners" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a><a href="https://www.instagram.com/bowyardpartners" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a><a href="https://x.com/bowyardpartners" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a><a href="https://www.facebook.com/bowyardpartners" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a></div></div>
+  </div>
+</footer>
+<script>
+  const nav=document.getElementById('bp-nav');
+  window.addEventListener('scroll',()=>{nav.classList.toggle('is-scrolled',window.scrollY>60);},{passive:true});
+  const ham=document.getElementById('bp-hamburger'),mob=document.getElementById('bp-mobile-nav');
+  ham.addEventListener('click',()=>{ham.classList.toggle('active');mob.classList.toggle('open');document.body.style.overflow=mob.classList.contains('open')?'hidden':'';});
+  function toggleSub(btn){const s=btn.nextElementSibling;if(s)s.classList.toggle('open');}
+
+  function filterAnn(type,btn){
+    document.querySelectorAll('.ann-filter').forEach(b=>{
+      b.style.background='var(--white)';b.style.color='var(--grey-dark)';
+    });
+    btn.style.background='var(--navy)';btn.style.color='var(--white)';
+    document.querySelectorAll('.bp-announce-row').forEach(row=>{
+      row.style.display=(type==='all'||row.dataset.type===type)?'grid':'none';
+    });
+  }
+</script>
+</body>
+</html>

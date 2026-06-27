@@ -1,33 +1,55 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice">
-  <!-- Nested rightward chevrons — velocity, energy, direction, momentum -->
+  <!-- Nested flame silhouettes + radiating energy rings — Energy & Natural Resources -->
   <defs>
-    <pattern id="ediag" width="55" height="55" patternUnits="userSpaceOnUse" patternTransform="rotate(55 720 350)">
-      <line x1="0" y1="0" x2="0" y2="55" stroke="#B8962E" stroke-width="0.45"/>
+    <pattern id="enwv" width="50" height="26" patternUnits="userSpaceOnUse">
+      <path d="M0,13 Q12,0 25,13 Q38,26 50,13" fill="none" stroke="#B8962E" stroke-width="0.38"/>
     </pattern>
   </defs>
-  <!-- Subtle angled texture -->
-  <rect x="620" y="0" width="820" height="700" fill="url(#ediag)" opacity="0.06"/>
+  <rect x="610" y="0" width="830" height="700" fill="url(#enwv)" opacity="0.07"/>
 
-  <!-- Chevrons: each is two lines meeting at a right-pointing tip -->
-  <!-- Tip x, tip y=350, left arm endpoints: (lx, 350 ± spread) -->
-  <!-- Chevron 1 — largest -->
-  <polyline points="700,50  1400,350 700,650"  fill="none" stroke="#B8962E" stroke-width="0.7"  opacity="0.12"/>
-  <!-- Chevron 2 -->
-  <polyline points="760,100 1360,350 760,600"  fill="none" stroke="#B8962E" stroke-width="0.85" opacity="0.18"/>
-  <!-- Chevron 3 -->
-  <polyline points="840,155 1310,350 840,545"  fill="none" stroke="#B8962E" stroke-width="1"    opacity="0.26"/>
-  <!-- Chevron 4 -->
-  <polyline points="920,210 1255,350 920,490"  fill="none" stroke="#B8962E" stroke-width="1.2"  opacity="0.38"/>
-  <!-- Chevron 5 -->
-  <polyline points="1000,265 1205,350 1000,435" fill="none" stroke="#B8962E" stroke-width="1.5" opacity="0.54"/>
-  <!-- Chevron 6 -->
-  <polyline points="1065,305 1158,350 1065,395" fill="none" stroke="#B8962E" stroke-width="2"   opacity="0.72"/>
-  <!-- Chevron 7 — innermost, tightest -->
-  <polyline points="1105,328 1138,350 1105,372" fill="none" stroke="#B8962E" stroke-width="2.8" opacity="0.9"/>
+  <!-- Concentric energy rings from core, centred at (1105,340) -->
+  <circle cx="1105" cy="340" r="55"  fill="none" stroke="#B8962E" stroke-width="0.5"  opacity="0.09"/>
+  <circle cx="1105" cy="340" r="108" fill="none" stroke="#B8962E" stroke-width="0.55" opacity="0.13"/>
+  <circle cx="1105" cy="340" r="168" fill="none" stroke="#B8962E" stroke-width="0.60" opacity="0.17"/>
+  <circle cx="1105" cy="340" r="235" fill="none" stroke="#B8962E" stroke-width="0.65" opacity="0.14"/>
+  <circle cx="1105" cy="340" r="308" fill="none" stroke="#B8962E" stroke-width="0.70" opacity="0.09"/>
 
-  <!-- Horizontal axis guideline -->
-  <line x1="620" y1="350" x2="1440" y2="350" stroke="#B8962E" stroke-width="0.6" opacity="0.14"/>
+  <!-- FLAME 1 — outermost, tallest (base 595, tip 84) -->
+  <!-- Left side: two cubic segments from base-centre up the left belly to tip -->
+  <!-- Right side: perfect mirror -->
+  <path d="M 1105,595
+           C  993,516  948,376 1008,258
+           C 1047,180 1084,128 1105,84
+           C 1126,128 1163,180 1202,258
+           C 1262,376 1217,516 1105,595 Z"
+        fill="none" stroke="#B8962E" stroke-width="1.4" opacity="0.44"/>
 
-  <!-- Tip focal dot at innermost chevron -->
-  <circle cx="1138" cy="350" r="3.5" fill="#B8962E" opacity="1"/>
+  <!-- FLAME 2 — middle (base 528, tip 120) -->
+  <path d="M 1105,528
+           C 1012,460  974,342 1028,242
+           C 1062,182 1091,148 1105,120
+           C 1119,148 1148,182 1182,242
+           C 1236,342 1198,460 1105,528 Z"
+        fill="none" stroke="#B8962E" stroke-width="1.5" opacity="0.60"/>
+
+  <!-- FLAME 3 — inner (base 460, tip 158) -->
+  <path d="M 1105,460
+           C 1044,408 1018,326 1055,252
+           C 1074,208 1094,176 1105,155
+           C 1116,176 1136,208 1155,252
+           C 1192,326 1166,408 1105,460 Z"
+        fill="none" stroke="#B8962E" stroke-width="1.8" opacity="0.78"/>
+
+  <!-- FLAME 4 — core, brightest (base 385, tip 205) -->
+  <path d="M 1105,385
+           C 1068,354 1054,305 1074,262
+           C 1085,236 1097,218 1105,202
+           C 1113,218 1125,236 1136,262
+           C 1156,305 1142,354 1105,385 Z"
+        fill="none" stroke="#B8962E" stroke-width="2.2" opacity="0.94"/>
+
+  <!-- Focal dot — hottest point of inner flame -->
+  <circle cx="1105" cy="268" r="5"  fill="#B8962E" opacity="1"/>
+  <circle cx="1105" cy="268" r="14" fill="none" stroke="#B8962E" stroke-width="1.2" opacity="0.54"/>
+  <circle cx="1105" cy="268" r="28" fill="none" stroke="#B8962E" stroke-width="0.7" opacity="0.28"/>
 </svg>

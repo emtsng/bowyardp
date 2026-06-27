@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice">
+  <!-- Stacked publication pages + magnifying lens — Insights -->
+  <defs>
+    <pattern id="rulelines" width="46" height="14" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="7" x2="46" y2="7" stroke="#B8962E" stroke-width="0.28"/>
+    </pattern>
+  </defs>
+  <rect x="620" y="0" width="820" height="700" fill="url(#rulelines)" opacity="0.048"/>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- DOCUMENT STACK: two offset rectangular frames                  -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- Back document (offset +32/+36) -->
+  <rect x="870" y="148" width="302" height="392"
+        fill="none" stroke="#B8962E" stroke-width="0.7" opacity="0.20"/>
+  <!-- Front document (main) -->
+  <rect x="838" y="112" width="302" height="392"
+        fill="none" stroke="#B8962E" stroke-width="1.2" opacity="0.50"/>
+
+  <!-- Headline band at top of front doc -->
+  <line x1="862" y1="148" x2="1116" y2="148" stroke="#B8962E" stroke-width="2.2" opacity="0.62"/>
+  <line x1="862" y1="168" x2="1060" y2="168" stroke="#B8962E" stroke-width="1.6" opacity="0.50"/>
+
+  <!-- Column gutter divider -->
+  <line x1="990" y1="190" x2="990" y2="472" stroke="#B8962E" stroke-width="0.45" opacity="0.18"/>
+
+  <!-- Left column text rules (paragraph 1) -->
+  <line x1="862" y1="198" x2="974" y2="198" stroke="#B8962E" stroke-width="0.5" opacity="0.28"/>
+  <line x1="862" y1="212" x2="974" y2="212" stroke="#B8962E" stroke-width="0.5" opacity="0.28"/>
+  <line x1="862" y1="226" x2="974" y2="226" stroke="#B8962E" stroke-width="0.5" opacity="0.28"/>
+  <line x1="862" y1="240" x2="974" y2="240" stroke="#B8962E" stroke-width="0.5" opacity="0.28"/>
+  <line x1="862" y1="254" x2="974" y2="254" stroke="#B8962E" stroke-width="0.5" opacity="0.28"/>
+  <line x1="862" y1="268" x2="940" y2="268" stroke="#B8962E" stroke-width="0.5" opacity="0.28"/>
+
+  <!-- Left column text rules (paragraph 2) -->
+  <line x1="862" y1="295" x2="974" y2="295" stroke="#B8962E" stroke-width="0.5" opacity="0.20"/>
+  <line x1="862" y1="309" x2="974" y2="309" stroke="#B8962E" stroke-width="0.5" opacity="0.20"/>
+  <line x1="862" y1="323" x2="974" y2="323" stroke="#B8962E" stroke-width="0.5" opacity="0.20"/>
+  <line x1="862" y1="337" x2="974" y2="337" stroke="#B8962E" stroke-width="0.5" opacity="0.20"/>
+  <line x1="862" y1="351" x2="950" y2="351" stroke="#B8962E" stroke-width="0.5" opacity="0.20"/>
+
+  <!-- Sub-headline left col lower -->
+  <line x1="862" y1="382" x2="974" y2="382" stroke="#B8962E" stroke-width="1.1" opacity="0.38"/>
+  <line x1="862" y1="398" x2="974" y2="398" stroke="#B8962E" stroke-width="0.5" opacity="0.22"/>
+  <line x1="862" y1="412" x2="974" y2="412" stroke="#B8962E" stroke-width="0.5" opacity="0.22"/>
+  <line x1="862" y1="426" x2="940" y2="426" stroke="#B8962E" stroke-width="0.5" opacity="0.22"/>
+
+  <!-- Right column text rules (paragraph 1) -->
+  <line x1="1006" y1="198" x2="1116" y2="198" stroke="#B8962E" stroke-width="0.5" opacity="0.28"/>
+  <line x1="1006" y1="212" x2="1116" y2="212" stroke="#B8962E" stroke-width="0.5" opacity="0.28"/>
+  <line x1="1006" y1="226" x2="1116" y2="226" stroke="#B8962E" stroke-width="0.5" opacity="0.28"/>
+  <line x1="1006" y1="240" x2="1116" y2="240" stroke="#B8962E" stroke-width="0.5" opacity="0.28"/>
+  <line x1="1006" y1="254" x2="1116" y2="254" stroke="#B8962E" stroke-width="0.5" opacity="0.28"/>
+  <line x1="1006" y1="268" x2="1080" y2="268" stroke="#B8962E" stroke-width="0.5" opacity="0.28"/>
+
+  <!-- Right column image placeholder box -->
+  <rect x="1006" y="295" width="110" height="88"
+        fill="none" stroke="#B8962E" stroke-width="0.45" opacity="0.18"/>
+  <line x1="1006" y1="295" x2="1116" y2="383" stroke="#B8962E" stroke-width="0.32" opacity="0.13"/>
+  <line x1="1116" y1="295" x2="1006" y2="383" stroke="#B8962E" stroke-width="0.32" opacity="0.13"/>
+
+  <!-- Right column text rules below image -->
+  <line x1="1006" y1="400" x2="1116" y2="400" stroke="#B8962E" stroke-width="0.5" opacity="0.20"/>
+  <line x1="1006" y1="414" x2="1116" y2="414" stroke="#B8962E" stroke-width="0.5" opacity="0.20"/>
+  <line x1="1006" y1="428" x2="1116" y2="428" stroke="#B8962E" stroke-width="0.5" opacity="0.20"/>
+  <line x1="1006" y1="442" x2="1086" y2="442" stroke="#B8962E" stroke-width="0.5" opacity="0.20"/>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- MAGNIFYING GLASS  centre (1316, 276), lens r=120              -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <circle cx="1316" cy="276" r="120" fill="none" stroke="#B8962E" stroke-width="1.7" opacity="0.52"/>
+  <circle cx="1316" cy="276" r="92"  fill="none" stroke="#B8962E" stroke-width="0.8" opacity="0.28"/>
+  <circle cx="1316" cy="276" r="62"  fill="none" stroke="#B8962E" stroke-width="0.45" opacity="0.16"/>
+  <!-- Crosshairs -->
+  <line x1="1316" y1="158" x2="1316" y2="394" stroke="#B8962E" stroke-width="0.5" opacity="0.22"/>
+  <line x1="1200" y1="276" x2="1432" y2="276" stroke="#B8962E" stroke-width="0.5" opacity="0.22"/>
+  <!-- Centre dot -->
+  <circle cx="1316" cy="276" r="4.5" fill="#B8962E" opacity="1"/>
+  <!-- Handle (lower-right diagonal, thick line) -->
+  <line x1="1405" y1="365" x2="1440" y2="400" stroke="#B8962E" stroke-width="2.8" opacity="0.55" stroke-linecap="round"/>
+  <!-- Content lines visible through lens -->
+  <line x1="1262" y1="250" x2="1370" y2="250" stroke="#B8962E" stroke-width="0.6" opacity="0.18"/>
+  <line x1="1262" y1="266" x2="1370" y2="266" stroke="#B8962E" stroke-width="0.6" opacity="0.18"/>
+  <line x1="1262" y1="282" x2="1370" y2="282" stroke="#B8962E" stroke-width="0.6" opacity="0.18"/>
+  <line x1="1262" y1="298" x2="1340" y2="298" stroke="#B8962E" stroke-width="0.6" opacity="0.18"/>
+  <!-- Focal accent rings -->
+  <circle cx="1316" cy="276" r="15" fill="none" stroke="#B8962E" stroke-width="1.1" opacity="0.52"/>
+  <circle cx="1316" cy="276" r="30" fill="none" stroke="#B8962E" stroke-width="0.65" opacity="0.26"/>
+</svg>
