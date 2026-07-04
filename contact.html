@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Bowyard Partners — speak to our team about your legal matter.">
+  <link rel="shortcut icon" type="image/x-icon" href="assets/images/fav.png">
+  <title>Contact Us — Bowyard Partners</title>
+  <link rel="stylesheet" href="assets/css/plugins/fontawesome.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Inter:ital,opsz,wght@0,14..32,300..700;1,14..32,300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/bowyard.css">
+  <style>
+    .bp-contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 80px;
+      align-items: start;
+    }
+    @media (max-width: 960px) {
+      .bp-contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+    .bp-contact-form-wrap { }
+    .bp-cf-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 600px) { .bp-cf-row { grid-template-columns: 1fr; } }
+    .bp-cf-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+    .bp-cf-group label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+    .bp-cf-group input,
+    .bp-cf-group select,
+    .bp-cf-group textarea {
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--navy);
+      background: var(--white);
+      border: 1.5px solid #D6D2C9;
+      border-radius: 2px;
+      padding: 12px 16px;
+      width: 100%;
+      box-sizing: border-box;
+      transition: border-color .2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .bp-cf-group input:focus,
+    .bp-cf-group select:focus,
+    .bp-cf-group textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    .bp-cf-group textarea { resize: vertical; min-height: 160px; }
+    .bp-cf-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23B8962E' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+    }
+    .bp-cf-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      cursor: pointer;
+      transition: background .2s;
+      margin-top: 8px;
+    }
+    .bp-cf-submit:hover { background: var(--gold-mid); }
+    .bp-cf-note {
+      font-size: 12px;
+      color: var(--grey-mid);
+      margin-top: 16px;
+      line-height: 1.6;
+    }
+    .bp-contact-sidebar { }
+    .bp-cs-block {
+      border-top: 1.5px solid #D6D2C9;
+      padding: 28px 0;
+    }
+    .bp-cs-block:first-child { border-top: none; padding-top: 0; }
+    .bp-cs-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .bp-cs-value {
+      font-size: 15px;
+      color: var(--navy);
+      line-height: 1.7;
+    }
+    .bp-cs-value a { color: var(--navy); text-decoration: none; }
+    .bp-cs-value a:hover { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+<nav class="bp-nav is-scrolled" id="bp-nav">
+  <div class="bp-nav-inner">
+    <a href="index.html" class="bp-nav-logo"><img src="assets/images/logo/bplogowhite.png" alt="Bowyard Partners"></a>
+    <ul class="bp-nav-links">
+      <li class="bp-nav-item">
+        <a href="about.html" class="bp-nav-link">About Us <span class="ch">▾</span></a>
+        <div class="bp-subnav">
+          <a href="about.html">Our Firm</a>
+          <a href="history.html">Our History</a>
+          <a href="responsible-business.html">Responsible Business</a>
+        </div>
+      </li>
+      <li class="bp-nav-item">
+        <a href="service.html" class="bp-nav-link">Expertise <span class="ch">▾</span></a>
+        <div class="bp-subnav">
+          <a href="service.html">Corporate &amp; Commercial</a>
+          <a href="service.html">Energy &amp; Infrastructure</a>
+          <a href="service.html">Governance, Compliance &amp; Policy</a>
+          <a href="service.html">Business Advisory</a>
+          <a href="service.html">Construction &amp; Real Estate</a>
+          <a href="service.html">Disputes Resolution</a>
+          <a href="service.html">Financial Services</a>
+          <a href="service.html">Transport, Maritime &amp; Logistics</a>
+        </div>
+      </li>
+      <li class="bp-nav-item"><a href="team.html" class="bp-nav-link">People</a></li>
+      <li class="bp-nav-item"><a href="insights.html" class="bp-nav-link">Insights <span class="ch">▾</span></a>
+        <div class="bp-subnav"><a href="insights-publications.html">Publications</a><a href="insights-announcements.html">Announcements &amp; Deals</a><a href="insights-events.html">Events</a></div>
+      </li>
+    </ul>
+    <a href="contact.html" class="bp-nav-cta">Contact Us</a>
+    <button class="bp-hamburger" id="bp-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="bp-mobile-nav" id="bp-mobile-nav">
+  <a href="index.html" class="m-link">Home</a>
+  <button class="m-toggle" onclick="toggleSub(this)">About Us</button>
+  <div class="m-sub">
+    <a href="about.html">Our Firm</a>
+    <a href="history.html">Our History</a>
+    <a href="responsible-business.html">Responsible Business</a>
+  </div>
+  <button class="m-toggle" onclick="toggleSub(this)">Expertise</button>
+  <div class="m-sub">
+    <a href="service.html">Corporate &amp; Commercial</a>
+    <a href="service.html">Energy &amp; Infrastructure</a>
+    <a href="service.html">Governance &amp; Compliance</a>
+    <a href="service.html">Business Advisory</a>
+    <a href="service.html">Construction &amp; Real Estate</a>
+    <a href="service.html">Disputes Resolution</a>
+    <a href="service.html">Financial Services</a>
+  </div>
+  <a href="team.html" class="m-link">People</a>
+  <button class="m-toggle" onclick="toggleSub(this)">Insights</button>
+  <div class="m-sub"><a href="insights.html">All Insights</a><a href="insights-publications.html">Publications</a><a href="insights-announcements.html">Announcements</a><a href="insights-events.html">Events</a></div>
+  <a href="contact.html" class="m-link">Contact Us</a>
+</div>
+
+<section class="bp-page-hero">
+  <div class="bp-page-hero-bg"><img src="assets/images/banner/geo-team.svg" alt="" style="opacity:0.42"></div>
+  <div class="bp-container bp-page-hero-inner">
+    <nav class="bp-breadcrumb">
+      <a href="index.html">Home</a><span>/</span>
+      <span style="color:rgba(255,255,255,.7);">Contact Us</span>
+    </nav>
+    <div class="kicker">Get In Touch</div>
+    <h1>Let's Start a<br>Conversation.</h1>
+    <p class="pg-sub">Tell us about your matter and we will be in touch promptly. All enquiries are handled in strict confidence.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="bp-container">
+    <div class="bp-contact-grid">
+
+      <!-- FORM -->
+      <div class="bp-contact-form-wrap">
+        <form id="bp-contact-form" novalidate>
+          <div class="bp-cf-row">
+            <div class="bp-cf-group">
+              <label for="cf-name">Full Name *</label>
+              <input type="text" id="cf-name" name="name" placeholder="Your name" required>
+            </div>
+            <div class="bp-cf-group">
+              <label for="cf-org">Organisation</label>
+              <input type="text" id="cf-org" name="organisation" placeholder="Company / firm">
+            </div>
+          </div>
+          <div class="bp-cf-row">
+            <div class="bp-cf-group">
+              <label for="cf-email">Email Address *</label>
+              <input type="email" id="cf-email" name="email" placeholder="you@example.com" required>
+            </div>
+            <div class="bp-cf-group">
+              <label for="cf-phone">Phone Number</label>
+              <input type="tel" id="cf-phone" name="phone" placeholder="+234 ...">
+            </div>
+          </div>
+          <div class="bp-cf-group">
+            <label for="cf-area">Area of Enquiry</label>
+            <select id="cf-area" name="area">
+              <option value="" disabled selected>Select a practice area</option>
+              <option>Corporate &amp; Commercial</option>
+              <option>Energy &amp; Infrastructure</option>
+              <option>Governance, Compliance &amp; Policy</option>
+              <option>Business Advisory</option>
+              <option>Construction &amp; Real Estate</option>
+              <option>Disputes Resolution</option>
+              <option>Financial Services</option>
+              <option>Transport, Maritime &amp; Logistics</option>
+              <option>General Enquiry</option>
+            </select>
+          </div>
+          <div class="bp-cf-group">
+            <label for="cf-message">Your Message *</label>
+            <textarea id="cf-message" name="message" placeholder="Please describe your matter briefly." required></textarea>
+          </div>
+          <button type="submit" class="bp-cf-submit">Send Enquiry &rarr;</button>
+          <p class="bp-cf-note">Your enquiry will be sent to <strong>info@bowyardpartners.com</strong> and handled in confidence. We aim to respond within one business day.</p>
+        </form>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="bp-contact-sidebar">
+        <div class="bp-cs-block">
+          <div class="bp-cs-label">Email</div>
+          <div class="bp-cs-value"><a href="mailto:info@bowyardpartners.com">info@bowyardpartners.com</a></div>
+        </div>
+        <div class="bp-cs-block">
+          <div class="bp-cs-label">Our Office</div>
+          <div class="bp-cs-value">
+            6 Cairo Crescent, Wuse II<br>
+            Abuja, Nigeria
+          </div>
+        </div>
+        <div class="bp-cs-block">
+          <div class="bp-cs-label">Connect</div>
+          <div class="bp-cs-value">
+            <a href="https://www.linkedin.com/company/bowyardpartners" target="_blank" rel="noopener">LinkedIn</a><br>
+            <a href="https://www.instagram.com/bowyardpartners" target="_blank" rel="noopener">Instagram</a><br>
+            <a href="https://x.com/bowyardpartners" target="_blank" rel="noopener">X (Twitter)</a>
+          </div>
+        </div>
+        <div class="bp-cs-block">
+          <div class="bp-cs-label">Confidentiality</div>
+          <div class="bp-cs-value" style="font-size:13px; color:var(--grey-mid);">All enquiries are treated in strict confidence. Contacting us does not create a solicitor–client relationship.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="bp-footer">
+  <div class="bp-container">
+    <div class="bp-footer-grid">
+      <div class="bp-footer-brand">
+        <img src="assets/images/logo/bplogowhite.png" alt="Bowyard Partners">
+        <p>A commercially focused law firm advising clients at the intersection of legal, regulatory and commercial complexity. Partner-led. Sector-focused. Built for ambition.</p>
+      </div>
+      <div class="bp-footer-col">
+        <h6>Our Firm</h6>
+        <ul>
+          <li><a href="about.html">About Bowyard</a></li>
+          <li><a href="history.html">Our History</a></li>
+          <li><a href="team.html">Our People</a></li>
+          <li><a href="responsible-business.html">Responsible Business</a></li>
+        </ul>
+      </div>
+      <div class="bp-footer-col">
+        <h6>Expertise</h6>
+        <ul>
+          <li><a href="service.html">Corporate &amp; Commercial</a></li>
+          <li><a href="service.html">Energy &amp; Infrastructure</a></li>
+          <li><a href="service.html">Governance &amp; Compliance</a></li>
+          <li><a href="service.html">Business Advisory</a></li>
+          <li><a href="service.html">Disputes Resolution</a></li>
+        </ul>
+      </div>
+      <div class="bp-footer-col">
+        <h6>Connect</h6>
+        <ul>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="https://www.linkedin.com/company/bowyardpartners" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://www.instagram.com/bowyardpartners" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="mailto:info@bowyardpartners.com">Email Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bp-footer-offices" style="grid-template-columns:1fr;">
+      <div class="bp-footer-office">
+        <h6>Our Office</h6>
+        <address>6 Cairo Crescent, Wuse II<br>Abuja, Nigeria</address>
+      </div>
+    </div>
+    <div class="bp-footer-bottom">
+      <span>© 2025 Bowyard Partners. All rights reserved.</span>
+      <div class="bp-footer-social">
+        <a href="https://www.linkedin.com/company/bowyardpartners" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://www.instagram.com/bowyardpartners" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://x.com/bowyardpartners" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://www.facebook.com/bowyardpartners" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('bp-nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('is-scrolled', window.scrollY > 60); }, { passive: true });
+  const ham = document.getElementById('bp-hamburger');
+  const mob = document.getElementById('bp-mobile-nav');
+  ham.addEventListener('click', () => {
+    ham.classList.toggle('active');
+    mob.classList.toggle('open');
+    document.body.style.overflow = mob.classList.contains('open') ? 'hidden' : '';
+  });
+  function toggleSub(btn) { const s = btn.nextElementSibling; if (s) s.classList.toggle('open'); }
+
+  document.getElementById('bp-contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name    = document.getElementById('cf-name').value.trim();
+    const org     = document.getElementById('cf-org').value.trim();
+    const email   = document.getElementById('cf-email').value.trim();
+    const phone   = document.getElementById('cf-phone').value.trim();
+    const area    = document.getElementById('cf-area').value;
+    const message = document.getElementById('cf-message').value.trim();
+
+    if (!name || !email || !message) {
+      alert('Please fill in your name, email address and message.');
+      return;
+    }
+
+    const subject = encodeURIComponent('Enquiry from ' + name + (area ? ' — ' + area : ''));
+    const body = encodeURIComponent(
+      'Name: ' + name + '\n' +
+      (org   ? 'Organisation: ' + org + '\n' : '') +
+      'Email: ' + email + '\n' +
+      (phone ? 'Phone: ' + phone + '\n' : '') +
+      (area  ? 'Area: ' + area + '\n'  : '') +
+      '\nMessage:\n' + message
+    );
+
+    window.location.href = 'mailto:info@bowyardpartners.com?subject=' + subject + '&body=' + body;
+  });
+</script>
+</body>
+</html>
