@@ -55,7 +55,7 @@
         <div class="p-step-panel active" id="step-0">
           <div class="p-section-title" style="margin-bottom:18px;">Company Information</div>
           <div class="p-form-row">
-            <div class="p-form-group"><label>Company Number *</label><input type="text" id="companyNo" placeholder="CAC registration number"></div>
+            <div class="p-form-group"><label>Company Number</label><input type="text" id="companyNo" placeholder="CAC registration number (if known)"></div>
             <div class="p-form-group"><label>Date of Resolution *</label><input type="date" id="resolutionDate"></div>
           </div>
           <div class="p-form-group"><label>Company Name *</label><input type="text" id="companyName" placeholder="Full registered company name"></div>
@@ -131,6 +131,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="../app.js"></script>
 <script>
@@ -170,6 +171,11 @@ function addPerson(containerId, type) {
       <div class="p-form-group"><label>Type of Shares</label>
         <select id="${type}-type-${i}"><option value="" disabled selected>Select</option><option>Ordinary</option><option>Preference</option><option>Redeemable</option></select>
       </div>
+      ${type === 'allottee' ? `
+      <div class="p-form-row" style="margin-top:8px;">
+        <div class="p-form-group"><label>ID Document Upload</label><input type="file" id="allottee-idfile-${i}" accept="image/*,.pdf" style="padding:4px 0;"><div class="p-form-hint">Photo or scan of allottee's ID</div></div>
+        <div class="p-form-group"><label>Specimen Signature</label><input type="file" id="allottee-sigfile-${i}" accept="image/*" style="padding:4px 0;"><div class="p-form-hint">Photo of allottee's signature</div></div>
+      </div>` : ''}
     </div>`);
   counters[type]++;
 }
@@ -197,7 +203,7 @@ function collectPersons(type) {
 }
 
 function nextStep(from) {
-  if (from === 0 && (!v('companyNo')||!v('resolutionDate')||!v('companyName'))) { alert('Please fill all required fields.'); return; }
+  if (from === 0 && (!v('resolutionDate')||!v('companyName'))) { alert('Please fill all required fields.'); return; }
   if (from === 2 && collectPersons('allottee').length === 0) { alert('Please add at least one allottee.'); return; }
   if (from === 3 && collectPersons('shareholder').length === 0) { alert('Please add at least one shareholder.'); return; }
   setStep(from + 1);
@@ -263,13 +269,44 @@ async function submitForm() {
   const btn = document.getElementById('submit-btn');
   const err = document.getElementById('submit-error'); const ok = document.getElementById('submit-success');
   err.classList.remove('show'); ok.style.display = 'none';
-  btn.disabled = true; btn.textContent = 'Submitting…';
+  btn.disabled = true; btn.textContent = 'Uploading files…';
   try {
+    const fd = collectData();
+    const uid = portalUser.uid;
+    const ts = Date.now();
+    const allotteeUploads = {};
+    for (let i = 0; i < counters.allottee; i++) {
+      const el = document.getElementById(`allottee-${i}`);
+      if (!el) continue;
+      const idFile = document.getElementById(`allottee-idfile-${i}`)?.files[0];
+      const sigFile = document.getElementById(`allottee-sigfile-${i}`)?.files[0];
+      const [idDocUrl, sigUrl] = await Promise.all([
+        uploadFile(idFile, `cac-uploads/${uid}/${ts}-cac2a-a${i}-id`),
+        uploadFile(sigFile, `cac-uploads/${uid}/${ts}-cac2a-a${i}-sig`)
+      ]);
+      if (idDocUrl || sigUrl) allotteeUploads[`allottee${i}`] = { idDocUrl, sigUrl };
+    }
+    btn.textContent = 'Submitting…';
     await db.collection('cac_submissions').add({
       formType: 'CAC 2A', status: 'submitted',
       clientId: portalUser.uid, clientName: portalUser.name,
-      data: collectData(),
+      data: { ...fd, allotteeUploads },
       submittedAt: firebase.firestore.FieldValue.serverTimestamp(), notes: ''
+    });
+    await db.collection('mail').add({
+      to: 'info@bowyardpartners.com',
+      message: {
+        subject: `New CAC 2A Submission — ${fd.companyName || portalUser.name}`,
+        html: `<p><strong>New CAC 2A (Return of Allotment) filing instruction submitted via the Bowyard Partners portal.</strong></p>
+               <p><strong>Client:</strong> ${portalUser.name}<br>
+               <strong>Email:</strong> ${portalUser.email || '—'}<br>
+               <strong>Company:</strong> ${fd.companyName || '—'} (RC: ${fd.companyNo || '—'})<br>
+               <strong>Resolution Date:</strong> ${fd.resolutionDate || '—'}<br>
+               <strong>Cash Shares:</strong> ${fd.cashShares || '0'} &nbsp;|&nbsp; <strong>Non-Cash Shares:</strong> ${fd.nonCashShares || '0'}<br>
+               <strong>Documents uploaded:</strong> ${Object.keys(allotteeUploads).length} allottee(s)<br>
+               <strong>Submitted:</strong> ${new Date().toLocaleString('en-GB')}</p>
+               <p>Log in to the <a href="https://bowyardpartners.com/portal/staff/">Staff Portal</a> to review the full submission.</p>`
+      }
     });
     ok.textContent = 'Submitted. Bowyard Partners will review and contact you shortly.';
     ok.style.display = 'block'; btn.textContent = 'Submitted';

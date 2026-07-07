@@ -161,6 +161,10 @@
                 </div>
                 <div class="p-form-group"><label>ID Number</label><input type="text" data-dir="0" data-field="idNo"></div>
               </div>
+              <div class="p-form-row" style="margin-top:8px;">
+                <div class="p-form-group"><label>ID Document Upload</label><input type="file" id="dir-0-idfile" accept="image/*,.pdf" style="padding:6px 0;"><div class="p-form-hint">Photo or scan of ID document</div></div>
+                <div class="p-form-group"><label>Specimen Signature</label><input type="file" id="dir-0-sigfile" accept="image/*" style="padding:6px 0;"><div class="p-form-hint">Photo of director's signature</div></div>
+              </div>
             </div>
           </div>
           <div id="directors-extra"></div>
@@ -195,6 +199,10 @@
             </div>
             <div class="p-form-group"><label>ID Number</label><input type="text" id="secIdNo"></div>
           </div>
+          <div class="p-form-row" id="sec-upload-row" style="margin-top:8px;">
+            <div class="p-form-group"><label>Secretary ID Document Upload</label><input type="file" id="secIdFile" accept="image/*,.pdf" style="padding:6px 0;"><div class="p-form-hint">Photo or scan of ID document</div></div>
+            <div class="p-form-group"><label>Secretary Specimen Signature</label><input type="file" id="secSigFile" accept="image/*" style="padding:6px 0;"><div class="p-form-hint">Photo of secretary's signature</div></div>
+          </div>
           <div class="p-form-row" id="sec-bn-row" style="display:none;">
             <div class="p-form-group"><label>BN/RC Number</label><input type="text" id="secBnRc"></div>
           </div>
@@ -226,6 +234,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="../app.js"></script>
 <script>
@@ -239,8 +248,10 @@ let dirCount = 1;
   setUserBlock(portalUser);
   initMobileSidebar();
   document.getElementById('secType').addEventListener('change', e => {
-    document.getElementById('sec-id-row').style.display = e.target.value === 'individual' ? 'grid' : 'none';
-    document.getElementById('sec-bn-row').style.display = e.target.value === 'firm' ? 'grid' : 'none';
+    const isIndividual = e.target.value === 'individual';
+    document.getElementById('sec-id-row').style.display = isIndividual ? 'grid' : 'none';
+    document.getElementById('sec-upload-row').style.display = isIndividual ? 'grid' : 'none';
+    document.getElementById('sec-bn-row').style.display = isIndividual ? 'none' : 'grid';
   });
 })();
 
@@ -319,6 +330,10 @@ function addDirector() {
         <div class="p-form-group"><label>ID Type</label><select data-dir="${i}" data-field="idType"><option value="" disabled selected>Select</option><option>International Passport</option><option>Driver's Licence</option><option>National ID</option><option>Voter's Card</option></select></div>
         <div class="p-form-group"><label>ID Number</label><input type="text" data-dir="${i}" data-field="idNo"></div>
       </div>
+      <div class="p-form-row" style="margin-top:8px;">
+        <div class="p-form-group"><label>ID Document Upload</label><input type="file" id="dir-${i}-idfile" accept="image/*,.pdf" style="padding:4px 0;"><div class="p-form-hint">Photo or scan of ID</div></div>
+        <div class="p-form-group"><label>Specimen Signature</label><input type="file" id="dir-${i}-sigfile" accept="image/*" style="padding:4px 0;"><div class="p-form-hint">Photo of signature</div></div>
+      </div>
     </div>`);
   dirCount++;
   if (dirCount >= 4) document.getElementById('add-dir-btn').disabled = true;
@@ -389,17 +404,57 @@ async function submitForm() {
   const err = document.getElementById('submit-error');
   const ok  = document.getElementById('submit-success');
   err.classList.remove('show'); ok.style.display = 'none';
-  btn.disabled = true; btn.textContent = 'Submitting…';
+  btn.disabled = true; btn.textContent = 'Uploading files…';
 
   try {
+    const fd = collectFormData();
+    const uid = portalUser.uid;
+    const ts = Date.now();
+
+    // Upload per-director files
+    const dirUploads = {};
+    for (let i = 0; i < dirCount; i++) {
+      const nameEl = document.querySelector(`[data-dir="${i}"][data-field="name"]`);
+      if (!nameEl || !nameEl.value.trim()) continue;
+      const [idDocUrl, sigUrl] = await Promise.all([
+        uploadFile(document.getElementById(`dir-${i}-idfile`)?.files[0], `cac-uploads/${uid}/${ts}-cac11-dir${i}-id`),
+        uploadFile(document.getElementById(`dir-${i}-sigfile`)?.files[0], `cac-uploads/${uid}/${ts}-cac11-dir${i}-sig`)
+      ]);
+      if (idDocUrl || sigUrl) dirUploads[`dir${i}`] = { idDocUrl, sigUrl };
+    }
+
+    // Upload secretary files (individual only)
+    const secIsIndividual = document.getElementById('secType').value === 'individual';
+    const [secIdDocUrl, secSigUrl] = secIsIndividual
+      ? await Promise.all([
+          uploadFile(document.getElementById('secIdFile')?.files[0], `cac-uploads/${uid}/${ts}-cac11-sec-id`),
+          uploadFile(document.getElementById('secSigFile')?.files[0], `cac-uploads/${uid}/${ts}-cac11-sec-sig`)
+        ])
+      : [null, null];
+
+    btn.textContent = 'Submitting…';
     await db.collection('cac_submissions').add({
       formType: 'CAC 1.1',
       status: 'submitted',
       clientId: portalUser.uid,
       clientName: portalUser.name,
-      data: collectFormData(),
+      data: { ...fd, uploads: { directors: dirUploads, secretary: { idDocUrl: secIdDocUrl, sigUrl: secSigUrl } } },
       submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
       notes: ''
+    });
+    await db.collection('mail').add({
+      to: 'info@bowyardpartners.com',
+      message: {
+        subject: `New CAC 1.1 Submission — ${fd.companyName || portalUser.name}`,
+        html: `<p><strong>New CAC 1.1 (Company Registration) filing instruction submitted via the Bowyard Partners portal.</strong></p>
+               <p><strong>Client:</strong> ${portalUser.name}<br>
+               <strong>Email:</strong> ${portalUser.email || '—'}<br>
+               <strong>Company Name:</strong> ${fd.companyName || '—'}<br>
+               <strong>Company Type:</strong> ${fd.companyType || '—'}<br>
+               <strong>Directors with documents uploaded:</strong> ${Object.keys(dirUploads).length}<br>
+               <strong>Submitted:</strong> ${new Date().toLocaleString('en-GB')}</p>
+               <p>Log in to the <a href="https://bowyardpartners.com/portal/staff/">Staff Portal</a> to review the full submission.</p>`
+      }
     });
     ok.textContent = 'Submitted successfully. The Bowyard team will review and contact you.';
     ok.style.display = 'block';

@@ -34,6 +34,21 @@
  *       allow create: if request.auth.uid != null;
  *       allow update: if isStaff();
  *     }
+ *     match /mail/{id} {
+ *       allow create: if request.auth.uid != null;
+ *     }
+ *   }
+ * }
+ *
+ * FIREBASE STORAGE RULES (paste in Storage > Rules):
+ * ─────────────────────────────────────────────────────
+ * rules_version = '2';
+ * service firebase.storage {
+ *   match /b/{bucket}/o {
+ *     match /cac-uploads/{userId}/{allPaths=**} {
+ *       allow write: if request.auth.uid == userId;
+ *       allow read: if request.auth.uid != null;
+ *     }
  *   }
  * }
  */
@@ -175,6 +190,13 @@ function loading(id, show) {
 }
 
 /* ── Reference generator ──────────────────────────────── */
+async function uploadFile(file, storagePath) {
+  if (!file || !file.size) return null;
+  const ref = firebase.storage().ref(storagePath);
+  await ref.put(file);
+  return ref.getDownloadURL();
+}
+
 function genRef() {
   const y = new Date().getFullYear();
   const n = Math.floor(Math.random() * 900) + 100;

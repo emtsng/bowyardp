@@ -55,7 +55,7 @@
         <div class="p-step-panel active" id="step-0">
           <div class="p-section-title" style="margin-bottom:18px;">Company Details</div>
           <div class="p-form-row">
-            <div class="p-form-group"><label>Company Registration Number *</label><input type="text" id="regNo" placeholder="RC or BN number"></div>
+            <div class="p-form-group"><label>Company Registration Number</label><input type="text" id="regNo" placeholder="RC or BN number (if already registered)"></div>
             <div class="p-form-group"><label>Company Name (Full) *</label><input type="text" id="companyNameFull" placeholder="Full registered name"></div>
           </div>
           <div class="p-form-group"><label>Date of Director's Appointment *</label><input type="date" id="appointmentDate"></div>
@@ -98,6 +98,18 @@
           <div class="p-form-row">
             <div class="p-form-group"><label>Date of Birth *</label><input type="date" id="dob"></div>
             <div class="p-form-group"><label>Business Occupation</label><input type="text" id="occupation" placeholder="e.g. Business Executive"></div>
+          </div>
+          <div class="p-form-row" style="margin-top:8px;">
+            <div class="p-form-group">
+              <label>ID Document Upload</label>
+              <input type="file" id="idDocFile" accept="image/*,.pdf" style="padding:6px 0;">
+              <div class="p-form-hint">Photo or scan of the ID document selected above</div>
+            </div>
+            <div class="p-form-group">
+              <label>Specimen Signature</label>
+              <input type="file" id="sigFile" accept="image/*" style="padding:6px 0;">
+              <div class="p-form-hint">Clear photo of the director's signature</div>
+            </div>
           </div>
           <div class="p-step-nav">
             <button class="p-btn p-btn-outline" onclick="prevStep(1)"><i class="fa-solid fa-arrow-left"></i> Back</button>
@@ -176,6 +188,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="../app.js"></script>
 <script>
@@ -190,7 +203,7 @@ function v(id) { return document.getElementById(id)?.value.trim() || ''; }
 
 function nextStep(from) {
   const required = {
-    0: ['regNo','companyNameFull','appointmentDate'],
+    0: ['companyNameFull','appointmentDate'],
     1: ['forenames','surname','gender','residenceCountry','dirPhone','nationality','dirEmail','idType','idNo','dob'],
     2: ['svcBuilding','svcStreet'],
     3: []
@@ -269,13 +282,37 @@ async function submitForm() {
   const btn = document.getElementById('submit-btn');
   const err = document.getElementById('submit-error'); const ok = document.getElementById('submit-success');
   err.classList.remove('show'); ok.style.display = 'none';
-  btn.disabled = true; btn.textContent = 'Submitting…';
+  btn.disabled = true; btn.textContent = 'Uploading files…';
   try {
+    const fd = collectData();
+    const uid = portalUser.uid;
+    const ts = Date.now();
+    const [idDocUrl, sigUrl] = await Promise.all([
+      uploadFile(document.getElementById('idDocFile').files[0], `cac-uploads/${uid}/${ts}-cac7-id`),
+      uploadFile(document.getElementById('sigFile').files[0], `cac-uploads/${uid}/${ts}-cac7-sig`)
+    ]);
+    btn.textContent = 'Submitting…';
     await db.collection('cac_submissions').add({
       formType: 'CAC 7', status: 'submitted',
       clientId: portalUser.uid, clientName: portalUser.name,
-      data: collectData(),
+      data: { ...fd, idDocUrl, sigUrl },
       submittedAt: firebase.firestore.FieldValue.serverTimestamp(), notes: ''
+    });
+    await db.collection('mail').add({
+      to: 'info@bowyardpartners.com',
+      message: {
+        subject: `New CAC 7 Submission — ${fd.companyNameFull || portalUser.name}`,
+        html: `<p><strong>New CAC 7 (Appointment of Director) filing instruction submitted via the Bowyard Partners portal.</strong></p>
+               <p><strong>Client:</strong> ${portalUser.name}<br>
+               <strong>Email:</strong> ${portalUser.email || '—'}<br>
+               <strong>Company:</strong> ${fd.companyNameFull || '—'} (RC: ${fd.regNo || '—'})<br>
+               <strong>New Director:</strong> ${fd.title || ''} ${fd.forenames || ''} ${fd.surname || ''}<br>
+               <strong>Date of Appointment:</strong> ${fd.appointmentDate || '—'}<br>
+               <strong>ID Document:</strong> ${idDocUrl ? '<a href="' + idDocUrl + '">View uploaded ID</a>' : 'Not uploaded'}<br>
+               <strong>Signature:</strong> ${sigUrl ? '<a href="' + sigUrl + '">View uploaded signature</a>' : 'Not uploaded'}<br>
+               <strong>Submitted:</strong> ${new Date().toLocaleString('en-GB')}</p>
+               <p>Log in to the <a href="https://bowyardpartners.com/portal/staff/">Staff Portal</a> to review the full submission.</p>`
+      }
     });
     ok.textContent = 'Submitted. The Bowyard team will review and be in touch.';
     ok.style.display = 'block'; btn.textContent = 'Submitted';
