@@ -282,16 +282,24 @@ async function submitForm() {
   const btn = document.getElementById('submit-btn');
   const err = document.getElementById('submit-error'); const ok = document.getElementById('submit-success');
   err.classList.remove('show'); ok.style.display = 'none';
-  btn.disabled = true; btn.textContent = 'Uploading files…';
+  btn.disabled = true; btn.textContent = 'Submitting…';
   try {
     const fd = collectData();
     const uid = portalUser.uid;
     const ts = Date.now();
-    const [idDocUrl, sigUrl] = await Promise.all([
-      uploadFile(document.getElementById('idDocFile').files[0], `cac-uploads/${uid}/${ts}-cac7-id`),
-      uploadFile(document.getElementById('sigFile').files[0], `cac-uploads/${uid}/${ts}-cac7-sig`)
-    ]);
-    btn.textContent = 'Submitting…';
+    let idDocUrl = null, sigUrl = null;
+    const idFile = document.getElementById('idDocFile').files[0];
+    const sigFile = document.getElementById('sigFile').files[0];
+    if (idFile || sigFile) {
+      btn.textContent = 'Uploading files…';
+      try {
+        [idDocUrl, sigUrl] = await Promise.all([
+          uploadFile(idFile, `cac-uploads/${uid}/${ts}-cac7-id`),
+          uploadFile(sigFile, `cac-uploads/${uid}/${ts}-cac7-sig`)
+        ]);
+      } catch (uploadErr) { console.warn('File upload skipped:', uploadErr.message); }
+      btn.textContent = 'Submitting…';
+    }
     await db.collection('cac_submissions').add({
       formType: 'CAC 7', status: 'submitted',
       clientId: portalUser.uid, clientName: portalUser.name,

@@ -14,7 +14,6 @@
 <body>
 <div class="portal-layout">
 
-  <!-- SIDEBAR -->
   <aside class="portal-sidebar">
     <div class="portal-logo">
       <img src="../../assets/images/logo/bplogowhite.png" alt="Bowyard Partners">
@@ -23,9 +22,9 @@
     <nav class="portal-nav">
       <div class="portal-nav-label">Work</div>
       <a href="index.html" class="portal-nav-link active"><i class="fa-solid fa-briefcase"></i> Matters</a>
-      <a href="index.html#causelist" class="portal-nav-link"><i class="fa-solid fa-gavel"></i> Cause List</a>
-      <a href="index.html#clients" class="portal-nav-link"><i class="fa-solid fa-users"></i> Clients</a>
-      <a href="index.html#cac" class="portal-nav-link"><i class="fa-solid fa-file-lines"></i> CAC Submissions</a>
+      <a href="index.html" class="portal-nav-link"><i class="fa-solid fa-gavel"></i> Cause List</a>
+      <a href="index.html" class="portal-nav-link"><i class="fa-solid fa-users"></i> Clients</a>
+      <a href="index.html" class="portal-nav-link"><i class="fa-solid fa-file-lines"></i> CAC Submissions</a>
     </nav>
     <div class="portal-sidebar-foot"><div id="user-block"></div></div>
   </aside>
@@ -35,9 +34,7 @@
     <header class="portal-topbar">
       <div style="display:flex;align-items:center;gap:12px;">
         <button class="p-mobile-toggle" id="mobile-toggle"><span></span><span></span><span></span></button>
-        <a href="index.html" style="color:var(--grey-mid);font-size:13px;text-decoration:none;">
-          <i class="fa-solid fa-arrow-left"></i> Matters
-        </a>
+        <a href="index.html" style="color:var(--grey-mid);font-size:13px;text-decoration:none;"><i class="fa-solid fa-arrow-left"></i> Matters</a>
         <div class="portal-page-title" id="matter-ref-title">Matter</div>
       </div>
       <div id="topbar-actions"></div>
@@ -45,49 +42,95 @@
 
     <div class="portal-content">
       <div id="matter-loading" class="p-loading" style="padding:60px 0;"><div class="p-spinner"></div></div>
-      <div id="matter-body" style="display:none;">
 
-        <!-- Matter header strip -->
+      <div id="matter-body" style="display:none;">
         <div class="matter-header" id="matter-header"></div>
 
-        <!-- Two-column layout -->
         <div class="p-layout-cols">
 
-          <!-- Left: Timeline + Court Dates -->
+          <!-- LEFT: Tabbed content -->
           <div class="p-col-main">
+            <div class="p-card" style="padding:0;overflow:visible;">
 
-            <!-- Timeline -->
-            <div class="p-card" style="margin-bottom:16px;">
-              <div class="p-card-head">
-                <div class="p-card-title">Timeline</div>
-                <button class="p-btn p-btn-gold p-btn-sm" onclick="showModal('modal-add-event')">
-                  <i class="fa-solid fa-plus"></i> Add Update
-                </button>
+              <!-- Tab nav -->
+              <div style="display:flex;border-bottom:2px solid #E8E4DE;padding:0 10px;overflow-x:auto;gap:0;">
+                <button class="matter-tab active" id="mtab-btn-timeline"   onclick="showMatterTab('timeline')"><i class="fa-solid fa-clock-rotate-left"></i> Timeline</button>
+                <button class="matter-tab"         id="mtab-btn-courtdates" onclick="showMatterTab('courtdates')"><i class="fa-solid fa-gavel"></i> Court Dates</button>
+                <button class="matter-tab"         id="mtab-btn-documents"  onclick="showMatterTab('documents')"><i class="fa-solid fa-folder-open"></i> Documents</button>
+                <button class="matter-tab"         id="mtab-btn-tasks"      onclick="showMatterTab('tasks')"><i class="fa-solid fa-list-check"></i> Tasks</button>
+                <button class="matter-tab"         id="mtab-btn-notes"      onclick="showMatterTab('notes')"><i class="fa-regular fa-note-sticky"></i> Notes</button>
+                <button class="matter-tab"         id="mtab-btn-billing"    onclick="showMatterTab('billing')"><i class="fa-solid fa-receipt"></i> Billing</button>
               </div>
-              <div id="timeline-wrap"></div>
-            </div>
 
-            <!-- Court dates for this matter -->
-            <div class="p-card">
-              <div class="p-card-head">
-                <div class="p-card-title">Court Dates</div>
-                <button class="p-btn p-btn-outline p-btn-sm" onclick="showModal('modal-add-date')">
-                  <i class="fa-solid fa-plus"></i> Add Date
-                </button>
+              <!-- Tab: Timeline -->
+              <div id="mtab-timeline" style="padding:16px;">
+                <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
+                  <button class="p-btn p-btn-gold p-btn-sm" onclick="showModal('modal-add-event')"><i class="fa-solid fa-plus"></i> Add Update</button>
+                </div>
+                <div id="timeline-wrap"></div>
               </div>
-              <div id="court-dates-wrap"></div>
-            </div>
 
+              <!-- Tab: Court Dates -->
+              <div id="mtab-courtdates" style="display:none;padding:16px;">
+                <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
+                  <button class="p-btn p-btn-outline p-btn-sm" onclick="showModal('modal-add-date')"><i class="fa-solid fa-plus"></i> Add Date</button>
+                </div>
+                <div id="court-dates-wrap"></div>
+              </div>
+
+              <!-- Tab: Documents -->
+              <div id="mtab-documents" style="display:none;padding:16px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+                  <div id="doc-count" style="font-size:12px;color:var(--grey-mid);"></div>
+                  <button class="p-btn p-btn-gold p-btn-sm" onclick="showModal('modal-upload-doc')"><i class="fa-solid fa-upload"></i> Upload File</button>
+                </div>
+                <div id="documents-wrap"></div>
+              </div>
+
+              <!-- Tab: Tasks -->
+              <div id="mtab-tasks" style="display:none;padding:16px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                  <div id="task-summary" style="font-size:12px;color:var(--grey-mid);"></div>
+                  <button class="p-btn p-btn-gold p-btn-sm" onclick="showModal('modal-add-task')"><i class="fa-solid fa-plus"></i> Add Task</button>
+                </div>
+                <div id="task-progress" style="margin-bottom:14px;"></div>
+                <div id="tasks-wrap"></div>
+              </div>
+
+              <!-- Tab: Notes (internal, staff-only) -->
+              <div id="mtab-notes" style="display:none;padding:16px;">
+                <div class="p-alert p-alert-info" style="margin-bottom:16px;">
+                  <i class="fa-solid fa-lock"></i> Internal notes — visible to staff only, not shared with clients.
+                </div>
+                <div style="margin-bottom:16px;">
+                  <textarea id="note-input" placeholder="Add an internal note…" style="width:100%;min-height:80px;font-family:inherit;font-size:13px;border:1.5px solid #D6D2C9;border-radius:2px;padding:8px 12px;resize:vertical;"></textarea>
+                  <div style="text-align:right;margin-top:8px;">
+                    <button class="p-btn p-btn-navy p-btn-sm" onclick="addNote()"><i class="fa-solid fa-save"></i> Save Note</button>
+                  </div>
+                </div>
+                <div id="notes-wrap"></div>
+              </div>
+
+              <!-- Tab: Billing -->
+              <div id="mtab-billing" style="display:none;padding:16px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+                  <div id="billing-total" style="font-size:13px;color:var(--grey-mid);"></div>
+                  <button class="p-btn p-btn-gold p-btn-sm" onclick="showModal('modal-add-billing')"><i class="fa-solid fa-plus"></i> Add Entry</button>
+                </div>
+                <div id="billing-wrap"></div>
+              </div>
+
+            </div>
           </div>
 
-          <!-- Right: Details sidebar -->
+          <!-- RIGHT: Sidebar -->
           <div class="p-col-side">
             <div class="p-card">
               <div class="p-card-head"><div class="p-card-title">Matter Details</div></div>
               <div id="matter-details"></div>
             </div>
             <div class="p-card" style="margin-top:16px;">
-              <div class="p-card-head"><div class="p-card-title">Change Status</div></div>
+              <div class="p-card-head"><div class="p-card-title">Update Status</div></div>
               <div style="padding:12px 16px 16px;">
                 <select id="status-select" style="width:100%;font-size:13px;padding:8px 10px;border:1.5px solid #D6D2C9;border-radius:2px;font-family:inherit;margin-bottom:10px;">
                   <option value="open">Open</option>
@@ -99,13 +142,14 @@
                   <option value="normal">Normal Priority</option>
                   <option value="urgent">Urgent</option>
                 </select>
-                <button class="p-btn p-btn-gold" style="width:100%;" onclick="saveStatusChange()">Update Status</button>
+                <button class="p-btn p-btn-gold" style="width:100%;" onclick="saveStatusChange()">Save Status</button>
               </div>
             </div>
           </div>
 
         </div>
       </div>
+
       <div id="matter-404" style="display:none;" class="p-empty">
         <i class="fa-solid fa-triangle-exclamation"></i>
         <div class="p-empty-title">Matter not found</div>
@@ -128,15 +172,11 @@
         <input type="text" id="ev-event" placeholder="e.g. Originating summons filed at Federal High Court">
       </div>
       <div class="p-form-row">
-        <div class="p-form-group"><label>Date</label>
-          <input type="date" id="ev-date">
-        </div>
+        <div class="p-form-group"><label>Date</label><input type="date" id="ev-date"></div>
         <div class="p-form-group"><label>Type</label>
           <select id="ev-type">
-            <option value="update">Update</option>
-            <option value="court">Court Date</option>
-            <option value="filing">Filing</option>
-            <option value="milestone">Milestone</option>
+            <option value="update">Update</option><option value="court">Court Date</option>
+            <option value="filing">Filing</option><option value="milestone">Milestone</option>
           </select>
         </div>
       </div>
@@ -167,9 +207,7 @@
         <input type="text" id="acd-court" placeholder="e.g. Federal High Court Abuja">
       </div>
       <div class="p-form-row">
-        <div class="p-form-group"><label>Venue / Courtroom</label>
-          <input type="text" id="acd-venue" placeholder="e.g. Courtroom 3">
-        </div>
+        <div class="p-form-group"><label>Venue / Courtroom</label><input type="text" id="acd-venue"></div>
         <div class="p-form-group"><label>Judge</label><input type="text" id="acd-judge"></div>
       </div>
       <div class="p-form-row">
@@ -187,9 +225,7 @@
           </select>
         </div>
       </div>
-      <div class="p-form-group"><label>Notes</label>
-        <textarea id="acd-notes" style="min-height:60px;"></textarea>
-      </div>
+      <div class="p-form-group"><label>Notes</label><textarea id="acd-notes" style="min-height:60px;"></textarea></div>
     </div>
     <div class="p-modal-foot">
       <button class="p-btn p-btn-outline" onclick="hideModal('modal-add-date')">Cancel</button>
@@ -215,9 +251,7 @@
       <div class="p-form-row">
         <div class="p-form-group"><label>Status</label>
           <select id="ecd-status">
-            <option value="scheduled">Scheduled</option>
-            <option value="adjourned">Adjourned</option>
-            <option value="concluded">Concluded</option>
+            <option value="scheduled">Scheduled</option><option value="adjourned">Adjourned</option><option value="concluded">Concluded</option>
           </select>
         </div>
         <div class="p-form-group"><label>Type</label>
@@ -239,16 +273,120 @@
   </div>
 </div>
 
+<!-- ── MODAL: UPLOAD DOCUMENT ────────────────────────── -->
+<div class="p-modal-bg" id="modal-upload-doc">
+  <div class="p-modal">
+    <div class="p-modal-head">
+      <div class="p-modal-title">Upload Document</div>
+      <button class="p-modal-close" onclick="hideModal('modal-upload-doc')">&times;</button>
+    </div>
+    <div class="p-modal-body">
+      <div class="p-form-group"><label>File *</label>
+        <input type="file" id="doc-file" style="padding:6px 0;">
+      </div>
+      <div class="p-form-group"><label>Document Name</label>
+        <input type="text" id="doc-name" placeholder="Leave blank to use file name">
+      </div>
+      <div class="p-form-group"><label>Category</label>
+        <select id="doc-category">
+          <option value="">General</option>
+          <option value="pleading">Pleading</option>
+          <option value="evidence">Evidence</option>
+          <option value="brief">Brief / Argument</option>
+          <option value="order">Court Order / Judgment</option>
+          <option value="correspondence">Correspondence</option>
+          <option value="contract">Contract / Agreement</option>
+          <option value="id">ID Document</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="p-modal-foot">
+      <button class="p-btn p-btn-outline" onclick="hideModal('modal-upload-doc')">Cancel</button>
+      <button class="p-btn p-btn-gold" id="doc-upload-btn" onclick="uploadDocument()"><i class="fa-solid fa-upload"></i> Upload</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── MODAL: ADD TASK ───────────────────────────────── -->
+<div class="p-modal-bg" id="modal-add-task">
+  <div class="p-modal">
+    <div class="p-modal-head">
+      <div class="p-modal-title">Add Task</div>
+      <button class="p-modal-close" onclick="hideModal('modal-add-task')">&times;</button>
+    </div>
+    <div class="p-modal-body">
+      <div class="p-form-group"><label>Task Description *</label>
+        <input type="text" id="task-title" placeholder="e.g. File originating motion at registry">
+      </div>
+      <div class="p-form-row">
+        <div class="p-form-group"><label>Due Date</label><input type="date" id="task-due"></div>
+        <div class="p-form-group"><label>Priority</label>
+          <select id="task-priority"><option value="normal">Normal</option><option value="urgent">Urgent</option></select>
+        </div>
+      </div>
+      <div class="p-form-group"><label>Assigned To</label>
+        <input type="text" id="task-assign" placeholder="Staff member name">
+      </div>
+      <div class="p-form-group"><label>Notes</label>
+        <textarea id="task-notes" style="min-height:60px;" placeholder="Additional details…"></textarea>
+      </div>
+    </div>
+    <div class="p-modal-foot">
+      <button class="p-btn p-btn-outline" onclick="hideModal('modal-add-task')">Cancel</button>
+      <button class="p-btn p-btn-gold" onclick="addTask()">Add Task</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── MODAL: ADD BILLING ENTRY ──────────────────────── -->
+<div class="p-modal-bg" id="modal-add-billing">
+  <div class="p-modal">
+    <div class="p-modal-head">
+      <div class="p-modal-title">Add Billing Entry</div>
+      <button class="p-modal-close" onclick="hideModal('modal-add-billing')">&times;</button>
+    </div>
+    <div class="p-modal-body">
+      <div class="p-form-row">
+        <div class="p-form-group"><label>Type</label>
+          <select id="bill-type">
+            <option value="fee">Professional Fee</option>
+            <option value="disbursement">Disbursement</option>
+          </select>
+        </div>
+        <div class="p-form-group"><label>Date</label><input type="date" id="bill-date"></div>
+      </div>
+      <div class="p-form-group"><label>Description *</label>
+        <input type="text" id="bill-desc" placeholder="e.g. Filing fees at Federal High Court">
+      </div>
+      <div class="p-form-row">
+        <div class="p-form-group"><label>Hours</label><input type="number" id="bill-hours" placeholder="0.0" min="0" step="0.5"></div>
+        <div class="p-form-group"><label>Rate (₦/hr)</label><input type="number" id="bill-rate" placeholder="0"></div>
+      </div>
+      <div class="p-form-group"><label>Amount (₦) *</label>
+        <input type="number" id="bill-amount" placeholder="0.00">
+      </div>
+    </div>
+    <div class="p-modal-foot">
+      <button class="p-btn p-btn-outline" onclick="hideModal('modal-add-billing')">Cancel</button>
+      <button class="p-btn p-btn-gold" onclick="addBillingEntry()">Add Entry</button>
+    </div>
+  </div>
+</div>
+
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
 <script src="../app.js"></script>
 <script>
 let currentMatter = null;
 let matterId = null;
+let staffUser = null;
+let editingDateId = null;
 
 (async () => {
-  const staffUser = await requireRole(['staff','admin']);
+  staffUser = await requireRole(['staff','admin']);
   if (!staffUser) return;
   setUserBlock(staffUser);
   initMobileSidebar();
@@ -257,17 +395,28 @@ let matterId = null;
   matterId = params.get('id');
   if (!matterId) { showError(); return; }
 
-  document.getElementById('ev-date').value = new Date().toISOString().split('T')[0];
+  document.getElementById('ev-date').value   = new Date().toISOString().split('T')[0];
+  document.getElementById('bill-date').value = new Date().toISOString().split('T')[0];
+
   await loadMatter();
+  await Promise.all([loadCourtDates(), loadDocuments(), loadTasks(), loadNotes(), loadBilling()]);
 })();
 
+/* ── Tab switching ─────────────────────────────────── */
+function showMatterTab(name) {
+  ['timeline','courtdates','documents','tasks','notes','billing'].forEach(t => {
+    document.getElementById(`mtab-${t}`).style.display = t === name ? 'block' : 'none';
+    document.getElementById(`mtab-btn-${t}`).classList.toggle('active', t === name);
+  });
+}
+
+/* ── Matter load / render ──────────────────────────── */
 async function loadMatter() {
   try {
     const snap = await db.collection('matters').doc(matterId).get();
     if (!snap.exists) { showError(); return; }
     currentMatter = { id: snap.id, ...snap.data() };
     renderMatter();
-    await loadCourtDates();
     document.getElementById('matter-loading').style.display = 'none';
     document.getElementById('matter-body').style.display    = 'block';
   } catch(e) { showError(); }
@@ -283,62 +432,53 @@ function renderMatter() {
   document.title = `${m.reference||'Matter'} — Bowyard Partners`;
   document.getElementById('matter-ref-title').textContent = m.reference || 'Matter';
 
-  // Header strip
   document.getElementById('matter-header').innerHTML = `
     <div class="matter-header-main">
       <div class="matter-ref">${m.reference||'—'}</div>
       <div class="matter-title">${m.title}</div>
       <div class="matter-meta">
-        <span>${m.type||'—'}</span>
-        <span>·</span>
-        <span>Client: ${m.clientName||'—'}</span>
-        <span>·</span>
+        <span>${m.type||'—'}</span><span>·</span>
+        <span>Client: ${m.clientName||'—'}</span><span>·</span>
         <span>Opened: ${fmtDate(m.createdAt)}</span>
-        ${m.priority === 'urgent' ? '<span>·</span><span class="p-badge urgent" style="font-size:10px;">Urgent</span>' : ''}
+        ${m.priority==='urgent' ? '<span>·</span><span class="p-badge urgent" style="font-size:10px;">Urgent</span>' : ''}
       </div>
     </div>
-    <div class="matter-header-badge">${statusBadge(m.status)}</div>
-  `;
+    <div class="matter-header-badge">${statusBadge(m.status)}</div>`;
 
-  // Set status/priority selects
   document.getElementById('status-select').value   = m.status   || 'open';
   document.getElementById('priority-select').value = m.priority || 'normal';
 
-  // Details sidebar
   const items = [
-    ['Reference',  m.reference||'—'],
-    ['Type',       m.type||'—'],
-    ['Status',     statusBadge(m.status)],
-    ['Priority',   m.priority === 'urgent' ? '<span class="p-badge urgent">Urgent</span>' : 'Normal'],
-    ['Client',     m.clientName||'—'],
-    ['Opened',     fmtDate(m.createdAt)],
-    ['Last Updated', fmtDate(m.updatedAt)],
+    ['Reference', m.reference||'—'],
+    ['Type', m.type||'—'],
+    ['Status', statusBadge(m.status)],
+    ['Priority', m.priority==='urgent' ? '<span class="p-badge urgent">Urgent</span>' : 'Normal'],
+    ['Client', m.clientName||'—'],
+    ['Opened', fmtDate(m.createdAt)],
+    ['Updated', fmtDate(m.updatedAt)]
   ];
-  if (m.description) items.push(['Description', `<span style="color:var(--grey-mid);font-size:12px;">${m.description}</span>`]);
+  if (m.description) items.push(['Notes', `<span style="font-size:12px;color:var(--grey-mid);">${m.description}</span>`]);
   document.getElementById('matter-details').innerHTML = `<div class="p-detail-list">${
     items.map(([k,v]) => `<div class="p-detail-row"><div class="p-detail-label">${k}</div><div class="p-detail-val">${v}</div></div>`).join('')
   }</div>`;
 
-  // Timeline
-  const timeline = [...(m.timeline||[])].sort((a,b) => {
+  renderTimeline(m.timeline || []);
+}
+
+function renderTimeline(timeline) {
+  const sorted = [...timeline].sort((a,b) => {
     const aD = a.date?.toDate ? a.date.toDate() : new Date(a.date||0);
     const bD = b.date?.toDate ? b.date.toDate() : new Date(b.date||0);
     return bD - aD;
   });
-
-  if (!timeline.length) {
-    document.getElementById('timeline-wrap').innerHTML = `
-      <div class="p-empty" style="padding:24px;">
-        <i class="fa-solid fa-clock-rotate-left"></i>
-        <div class="p-empty-title">No updates yet</div>
-        <div class="p-empty-sub">Add the first timeline entry above</div>
-      </div>`;
+  const el = document.getElementById('timeline-wrap');
+  if (!sorted.length) {
+    el.innerHTML = `<div class="p-empty" style="padding:24px;"><i class="fa-solid fa-clock-rotate-left"></i><div class="p-empty-title">No updates yet</div><div class="p-empty-sub">Add the first timeline entry</div></div>`;
     return;
   }
-
   const iconMap = { court:'gavel', filing:'file-circle-check', milestone:'flag', update:'pen-to-square' };
-  document.getElementById('timeline-wrap').innerHTML = `<div class="p-timeline" style="padding:8px 16px 16px;">${
-    timeline.map(t => {
+  el.innerHTML = `<div class="p-timeline" style="padding:8px 16px 16px;">${
+    sorted.map(t => {
       const dt = t.date?.toDate ? t.date.toDate() : (t.date ? new Date(t.date) : null);
       const ico = iconMap[t.type] || 'circle-dot';
       return `<div class="p-tl-item">
@@ -353,26 +493,55 @@ function renderMatter() {
   }</div>`;
 }
 
-async function loadCourtDates() {
-  const snap = await db.collection('court_dates')
-    .where('matterId','==', matterId)
-    .orderBy('date','asc').get();
+/* ── Timeline ──────────────────────────────────────── */
+async function saveEvent() {
+  const event = document.getElementById('ev-event').value.trim();
+  const date  = document.getElementById('ev-date').value;
+  const type  = document.getElementById('ev-type').value;
+  const note  = document.getElementById('ev-note').value.trim();
+  if (!event) { alert('Enter an event description.'); return; }
+  const entry = { event, type, note, date: new Date(date) };
+  await db.collection('matters').doc(matterId).update({
+    timeline: firebase.firestore.FieldValue.arrayUnion(entry),
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+  hideModal('modal-add-event');
+  document.getElementById('ev-event').value = '';
+  document.getElementById('ev-note').value  = '';
+  await loadMatter();
+}
 
+/* ── Status / Priority ─────────────────────────────── */
+async function saveStatusChange() {
+  const status   = document.getElementById('status-select').value;
+  const priority = document.getElementById('priority-select').value;
+  const entry = { event: `Status changed to "${status.replace(/_/g,' ')}"`, type:'update', note:'', date:new Date() };
+  await db.collection('matters').doc(matterId).update({
+    status, priority,
+    timeline: firebase.firestore.FieldValue.arrayUnion(entry),
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+  await loadMatter();
+}
+
+/* ── Court Dates ───────────────────────────────────── */
+async function loadCourtDates() {
+  let snap;
+  try {
+    snap = await db.collection('court_dates').where('matterId','==',matterId).orderBy('date','asc').get();
+  } catch(e) {
+    snap = await db.collection('court_dates').where('matterId','==',matterId).get();
+  }
   const el = document.getElementById('court-dates-wrap');
   if (snap.empty) {
-    el.innerHTML = `<div class="p-empty" style="padding:24px;">
-      <i class="fa-solid fa-gavel"></i>
-      <div class="p-empty-title">No court dates</div>
-      <div class="p-empty-sub">Add court dates for this matter above</div>
-    </div>`;
+    el.innerHTML = `<div class="p-empty" style="padding:24px;"><i class="fa-solid fa-gavel"></i><div class="p-empty-title">No court dates</div><div class="p-empty-sub">Add hearing dates for this matter</div></div>`;
     return;
   }
-
   let html = '';
   snap.forEach(d => {
     const c = d.data();
     const dt = c.date?.toDate ? c.date.toDate() : new Date(c.date);
-    html += `<div class="cause-item" style="padding:12px 16px;cursor:pointer;" onclick="openEditDate('${d.id}')">
+    html += `<div class="cause-item" style="padding:12px 0;cursor:pointer;" onclick="openEditDate('${d.id}')">
       <div>
         <div class="cause-time">${dt.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</div>
         <div class="cause-court">${c.time||'—'}</div>
@@ -388,78 +557,36 @@ async function loadCourtDates() {
   el.innerHTML = html;
 }
 
-async function saveEvent() {
-  const event = document.getElementById('ev-event').value.trim();
-  const date  = document.getElementById('ev-date').value;
-  const type  = document.getElementById('ev-type').value;
-  const note  = document.getElementById('ev-note').value.trim();
-  if (!event) { alert('Enter an event description.'); return; }
-
-  const entry = { event, type, note, date: new Date(date) };
-  await db.collection('matters').doc(matterId).update({
-    timeline: firebase.firestore.FieldValue.arrayUnion(entry),
-    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-  });
-  hideModal('modal-add-event');
-  document.getElementById('ev-event').value = '';
-  document.getElementById('ev-note').value  = '';
-  await loadMatter();
-}
-
-async function saveStatusChange() {
-  const status   = document.getElementById('status-select').value;
-  const priority = document.getElementById('priority-select').value;
-  await db.collection('matters').doc(matterId).update({
-    status, priority,
-    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-  });
-  const entry = {
-    event: `Status changed to "${status.replace('_',' ')}"`,
-    type: 'update',
-    note: '',
-    date: new Date()
-  };
-  await db.collection('matters').doc(matterId).update({
-    timeline: firebase.firestore.FieldValue.arrayUnion(entry)
-  });
-  await loadMatter();
-}
-
 async function saveMatterCourtDate() {
   const date  = document.getElementById('acd-date').value;
   const court = document.getElementById('acd-court').value.trim();
   if (!date || !court) { alert('Date and court are required.'); return; }
   await db.collection('court_dates').add({
-    matterId,
-    matterTitle: currentMatter.title,
-    clientName:  currentMatter.clientName,
-    date:        new Date(date),
-    time:        document.getElementById('acd-time').value,
-    court,
-    venue:       document.getElementById('acd-venue').value.trim(),
-    judge:       document.getElementById('acd-judge').value.trim(),
-    type:        document.getElementById('acd-type').value,
-    status:      document.getElementById('acd-status').value,
-    notes:       document.getElementById('acd-notes').value.trim(),
-    createdAt:   firebase.firestore.FieldValue.serverTimestamp()
+    matterId, matterTitle: currentMatter.title, clientName: currentMatter.clientName,
+    date: new Date(date), time: document.getElementById('acd-time').value, court,
+    venue: document.getElementById('acd-venue').value.trim(),
+    judge: document.getElementById('acd-judge').value.trim(),
+    type:  document.getElementById('acd-type').value,
+    status: document.getElementById('acd-status').value,
+    notes: document.getElementById('acd-notes').value.trim(),
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
   });
   hideModal('modal-add-date');
   await loadCourtDates();
 }
 
-let editingDateId = null;
 async function openEditDate(id) {
   editingDateId = id;
   const snap = await db.collection('court_dates').doc(id).get();
   const c = snap.data();
   const dt = c.date?.toDate ? c.date.toDate() : new Date(c.date);
-  document.getElementById('ecd-id').value       = id;
-  document.getElementById('ecd-date').value     = dt.toISOString().split('T')[0];
-  document.getElementById('ecd-time').value     = c.time || '';
-  document.getElementById('ecd-court').value    = c.court || '';
-  document.getElementById('ecd-status').value   = c.status || 'scheduled';
-  document.getElementById('ecd-type').value     = c.type || 'Mention';
-  document.getElementById('ecd-notes').value    = c.notes || '';
+  document.getElementById('ecd-id').value     = id;
+  document.getElementById('ecd-date').value   = dt.toISOString().split('T')[0];
+  document.getElementById('ecd-time').value   = c.time || '';
+  document.getElementById('ecd-court').value  = c.court || '';
+  document.getElementById('ecd-status').value = c.status || 'scheduled';
+  document.getElementById('ecd-type').value   = c.type || 'Mention';
+  document.getElementById('ecd-notes').value  = c.notes || '';
   showModal('modal-edit-date');
 }
 
@@ -482,6 +609,233 @@ async function deleteCourtDate() {
   await db.collection('court_dates').doc(editingDateId).delete();
   hideModal('modal-edit-date');
   await loadCourtDates();
+}
+
+/* ── Documents ─────────────────────────────────────── */
+async function loadDocuments() {
+  const snap = await db.collection('matters').doc(matterId).collection('documents')
+    .orderBy('uploadedAt','desc').get();
+  const el = document.getElementById('documents-wrap');
+  document.getElementById('doc-count').textContent = snap.size ? `${snap.size} file${snap.size!==1?'s':''}` : '';
+  if (snap.empty) {
+    el.innerHTML = `<div class="p-empty" style="padding:24px;"><i class="fa-solid fa-folder-open"></i><div class="p-empty-title">No documents</div><div class="p-empty-sub">Upload files related to this matter</div></div>`;
+    return;
+  }
+  const extIcon = ext => ['pdf'].includes(ext)?'file-pdf':['doc','docx'].includes(ext)?'file-word':['xls','xlsx'].includes(ext)?'file-excel':['jpg','jpeg','png','gif','webp'].includes(ext)?'file-image':'file';
+  el.innerHTML = snap.docs.map(d => {
+    const doc = d.data();
+    const ext = (doc.fileName||'').split('.').pop()?.toLowerCase();
+    const size = doc.size ? (doc.size>1048576 ? (doc.size/1048576).toFixed(1)+'MB' : Math.round(doc.size/1024)+'KB') : '';
+    const cat = doc.category ? `<span class="p-badge closed" style="font-size:8px;">${doc.category}</span>&nbsp;` : '';
+    return `<div class="doc-item">
+      <i class="fa-solid fa-${extIcon(ext)} doc-icon"></i>
+      <div class="doc-info">
+        <div class="doc-name">${doc.name||doc.fileName}</div>
+        <div class="doc-meta">${cat}${size ? size+' · ' : ''}${doc.uploadedBy} · ${fmtDate(doc.uploadedAt)}</div>
+      </div>
+      <div style="display:flex;gap:6px;margin-left:auto;flex-shrink:0;">
+        ${doc.url ? `<a href="${doc.url}" target="_blank" class="p-btn p-btn-outline p-btn-sm"><i class="fa-solid fa-download"></i></a>` : '<span style="font-size:11px;color:var(--grey-mid);">Pending</span>'}
+        <button class="p-btn p-btn-ghost p-btn-sm" onclick="deleteDocument('${d.id}')"><i class="fa-solid fa-trash"></i></button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function uploadDocument() {
+  const fileInput = document.getElementById('doc-file');
+  const file = fileInput.files[0];
+  if (!file) { alert('Select a file to upload.'); return; }
+  const docName = document.getElementById('doc-name').value.trim() || file.name;
+  const category = document.getElementById('doc-category').value;
+  const btn = document.getElementById('doc-upload-btn');
+  btn.disabled = true; btn.textContent = 'Uploading…';
+  try {
+    let url = null;
+    try {
+      url = await uploadFile(file, `matter-docs/${matterId}/${Date.now()}-${file.name}`);
+    } catch(uploadErr) { console.warn('Storage upload skipped:', uploadErr.message); }
+    await db.collection('matters').doc(matterId).collection('documents').add({
+      name: docName, url, fileName: file.name, size: file.size, category,
+      uploadedBy: staffUser.name,
+      uploadedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    hideModal('modal-upload-doc');
+    document.getElementById('doc-name').value = '';
+    fileInput.value = '';
+    await loadDocuments();
+  } catch(e) { alert('Failed: ' + e.message); }
+  btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-upload"></i> Upload';
+}
+
+async function deleteDocument(id) {
+  if (!confirm('Delete this document record?')) return;
+  await db.collection('matters').doc(matterId).collection('documents').doc(id).delete();
+  await loadDocuments();
+}
+
+/* ── Tasks ─────────────────────────────────────────── */
+async function loadTasks() {
+  const snap = await db.collection('matters').doc(matterId).collection('tasks')
+    .orderBy('createdAt','asc').get();
+  const tasks = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  const done  = tasks.filter(t => t.status === 'done').length;
+  const pct   = tasks.length ? Math.round(done/tasks.length*100) : 0;
+
+  document.getElementById('task-summary').textContent = tasks.length ? `${done} of ${tasks.length} complete` : '';
+  document.getElementById('task-progress').innerHTML = tasks.length
+    ? `<div class="p-progress-bar"><div class="p-progress-fill" style="width:${pct}%"></div></div>`
+    : '';
+
+  const el = document.getElementById('tasks-wrap');
+  if (!tasks.length) {
+    el.innerHTML = `<div class="p-empty" style="padding:24px;"><i class="fa-solid fa-list-check"></i><div class="p-empty-title">No tasks</div><div class="p-empty-sub">Add action items and checklists</div></div>`;
+    return;
+  }
+  el.innerHTML = tasks.map(t => `
+    <div class="task-item">
+      <input type="checkbox" ${t.status==='done'?'checked':''} onchange="toggleTask('${t.id}',this.checked)">
+      <div class="task-body">
+        <div class="task-title${t.status==='done'?' done':''}">${t.title}</div>
+        <div class="task-meta">
+          ${t.priority==='urgent' ? '<span class="p-badge urgent" style="font-size:8px;">Urgent</span>&nbsp;' : ''}
+          ${t.dueDate ? `Due: ${t.dueDate}` : ''}
+          ${t.assignedTo ? `${t.dueDate?' · ':''}Assigned: ${t.assignedTo}` : ''}
+          ${t.notes ? `<br><span style="color:var(--grey-dark);font-size:11px;">${t.notes}</span>` : ''}
+        </div>
+      </div>
+      <button class="p-btn p-btn-ghost p-btn-sm" onclick="deleteTask('${t.id}')"><i class="fa-solid fa-trash"></i></button>
+    </div>`).join('');
+}
+
+async function addTask() {
+  const title = document.getElementById('task-title').value.trim();
+  if (!title) { alert('Enter a task description.'); return; }
+  await db.collection('matters').doc(matterId).collection('tasks').add({
+    title,
+    dueDate:    document.getElementById('task-due').value || '',
+    assignedTo: document.getElementById('task-assign').value.trim(),
+    notes:      document.getElementById('task-notes').value.trim(),
+    priority:   document.getElementById('task-priority').value,
+    status: 'open',
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+  hideModal('modal-add-task');
+  ['task-title','task-due','task-assign','task-notes'].forEach(id => document.getElementById(id).value = '');
+  await loadTasks();
+}
+
+async function toggleTask(id, done) {
+  await db.collection('matters').doc(matterId).collection('tasks').doc(id).update({ status: done ? 'done' : 'open' });
+  await loadTasks();
+}
+
+async function deleteTask(id) {
+  if (!confirm('Delete this task?')) return;
+  await db.collection('matters').doc(matterId).collection('tasks').doc(id).delete();
+  await loadTasks();
+}
+
+/* ── Internal Notes ────────────────────────────────── */
+async function loadNotes() {
+  const snap = await db.collection('matters').doc(matterId).collection('notes')
+    .orderBy('createdAt','desc').get();
+  const el = document.getElementById('notes-wrap');
+  if (snap.empty) {
+    el.innerHTML = `<div class="p-empty" style="padding:16px;"><i class="fa-regular fa-note-sticky"></i><div class="p-empty-title">No notes yet</div></div>`;
+    return;
+  }
+  el.innerHTML = snap.docs.map(d => {
+    const n = d.data();
+    const safe = (n.text||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    return `<div class="note-item">
+      <div class="note-body">${safe}</div>
+      <div class="note-footer">
+        <span>${n.author||'Staff'} · ${fmtDateTime(n.createdAt)}</span>
+        <button class="p-btn p-btn-ghost p-btn-sm" style="padding:2px 6px;" onclick="deleteNote('${d.id}')"><i class="fa-solid fa-trash"></i></button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function addNote() {
+  const text = document.getElementById('note-input').value.trim();
+  if (!text) { alert('Enter a note.'); return; }
+  await db.collection('matters').doc(matterId).collection('notes').add({
+    text, author: staffUser.name,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+  document.getElementById('note-input').value = '';
+  await loadNotes();
+}
+
+async function deleteNote(id) {
+  if (!confirm('Delete this note?')) return;
+  await db.collection('matters').doc(matterId).collection('notes').doc(id).delete();
+  await loadNotes();
+}
+
+/* ── Billing ───────────────────────────────────────── */
+async function loadBilling() {
+  const snap = await db.collection('matters').doc(matterId).collection('billing')
+    .orderBy('date','desc').get();
+  const entries = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  const total   = entries.reduce((s, e) => s + (parseFloat(e.amount)||0), 0);
+  const el = document.getElementById('billing-wrap');
+
+  document.getElementById('billing-total').innerHTML = entries.length
+    ? `Running Total: <strong style="color:var(--navy);">₦${total.toLocaleString('en-NG')}</strong>`
+    : '';
+
+  if (!entries.length) {
+    el.innerHTML = `<div class="p-empty" style="padding:24px;"><i class="fa-solid fa-receipt"></i><div class="p-empty-title">No billing entries</div><div class="p-empty-sub">Log professional fees and disbursements</div></div>`;
+    return;
+  }
+  el.innerHTML = entries.map(e => {
+    const dt = e.date?.toDate ? e.date.toDate() : (e.date ? new Date(e.date) : null);
+    return `<div class="billing-row">
+      <div class="billing-desc">
+        <div style="font-weight:600;">${e.description}</div>
+        <div class="doc-meta">
+          <span class="p-badge ${e.type==='fee'?'submitted':'open'}" style="font-size:8px;">${e.type==='fee'?'Professional Fee':'Disbursement'}</span>
+          ${e.hours ? `&nbsp;${e.hours}h @ ₦${(e.rate||0).toLocaleString()}/hr` : ''}
+          &nbsp;·&nbsp;${dt ? dt.toLocaleDateString('en-GB') : '—'}
+          &nbsp;·&nbsp;${e.addedBy||'Staff'}
+        </div>
+      </div>
+      <div class="billing-amount">₦${parseFloat(e.amount||0).toLocaleString('en-NG')}</div>
+      <button class="p-btn p-btn-ghost p-btn-sm" onclick="deleteBilling('${e.id}')"><i class="fa-solid fa-trash"></i></button>
+    </div>`;
+  }).join('') +
+  `<div class="billing-total-row">
+    <span>Total (${entries.length} ${entries.length===1?'entry':'entries'})</span>
+    <span>₦${total.toLocaleString('en-NG')}</span>
+  </div>`;
+}
+
+async function addBillingEntry() {
+  const desc   = document.getElementById('bill-desc').value.trim();
+  const amount = parseFloat(document.getElementById('bill-amount').value) || 0;
+  if (!desc || !amount) { alert('Description and amount are required.'); return; }
+  const dateVal = document.getElementById('bill-date').value;
+  await db.collection('matters').doc(matterId).collection('billing').add({
+    description: desc,
+    type:   document.getElementById('bill-type').value,
+    hours:  parseFloat(document.getElementById('bill-hours').value) || null,
+    rate:   parseFloat(document.getElementById('bill-rate').value)  || null,
+    amount,
+    date:      dateVal ? new Date(dateVal) : new Date(),
+    addedBy:   staffUser.name,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+  hideModal('modal-add-billing');
+  ['bill-desc','bill-hours','bill-rate','bill-amount'].forEach(id => document.getElementById(id).value='');
+  await loadBilling();
+}
+
+async function deleteBilling(id) {
+  if (!confirm('Delete this billing entry?')) return;
+  await db.collection('matters').doc(matterId).collection('billing').doc(id).delete();
+  await loadBilling();
 }
 </script>
 </body>

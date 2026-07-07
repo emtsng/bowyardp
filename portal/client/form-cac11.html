@@ -404,35 +404,46 @@ async function submitForm() {
   const err = document.getElementById('submit-error');
   const ok  = document.getElementById('submit-success');
   err.classList.remove('show'); ok.style.display = 'none';
-  btn.disabled = true; btn.textContent = 'Uploading files…';
+  btn.disabled = true; btn.textContent = 'Submitting…';
 
   try {
     const fd = collectFormData();
     const uid = portalUser.uid;
     const ts = Date.now();
-
-    // Upload per-director files
     const dirUploads = {};
-    for (let i = 0; i < dirCount; i++) {
-      const nameEl = document.querySelector(`[data-dir="${i}"][data-field="name"]`);
-      if (!nameEl || !nameEl.value.trim()) continue;
-      const [idDocUrl, sigUrl] = await Promise.all([
-        uploadFile(document.getElementById(`dir-${i}-idfile`)?.files[0], `cac-uploads/${uid}/${ts}-cac11-dir${i}-id`),
-        uploadFile(document.getElementById(`dir-${i}-sigfile`)?.files[0], `cac-uploads/${uid}/${ts}-cac11-dir${i}-sig`)
-      ]);
-      if (idDocUrl || sigUrl) dirUploads[`dir${i}`] = { idDocUrl, sigUrl };
-    }
+    let secIdDocUrl = null, secSigUrl = null;
 
-    // Upload secretary files (individual only)
+    const anyDirFile = Array.from({length: dirCount}, (_,i) =>
+      document.getElementById(`dir-${i}-idfile`)?.files[0] ||
+      document.getElementById(`dir-${i}-sigfile`)?.files[0]
+    ).some(Boolean);
     const secIsIndividual = document.getElementById('secType').value === 'individual';
-    const [secIdDocUrl, secSigUrl] = secIsIndividual
-      ? await Promise.all([
-          uploadFile(document.getElementById('secIdFile')?.files[0], `cac-uploads/${uid}/${ts}-cac11-sec-id`),
-          uploadFile(document.getElementById('secSigFile')?.files[0], `cac-uploads/${uid}/${ts}-cac11-sec-sig`)
-        ])
-      : [null, null];
+    const anySecFile = secIsIndividual && (
+      document.getElementById('secIdFile')?.files[0] ||
+      document.getElementById('secSigFile')?.files[0]
+    );
 
-    btn.textContent = 'Submitting…';
+    if (anyDirFile || anySecFile) {
+      btn.textContent = 'Uploading files…';
+      try {
+        for (let i = 0; i < dirCount; i++) {
+          const nameEl = document.querySelector(`[data-dir="${i}"][data-field="name"]`);
+          if (!nameEl || !nameEl.value.trim()) continue;
+          const [idDocUrl, sigUrl] = await Promise.all([
+            uploadFile(document.getElementById(`dir-${i}-idfile`)?.files[0], `cac-uploads/${uid}/${ts}-cac11-dir${i}-id`),
+            uploadFile(document.getElementById(`dir-${i}-sigfile`)?.files[0], `cac-uploads/${uid}/${ts}-cac11-dir${i}-sig`)
+          ]);
+          if (idDocUrl || sigUrl) dirUploads[`dir${i}`] = { idDocUrl, sigUrl };
+        }
+        if (secIsIndividual) {
+          [secIdDocUrl, secSigUrl] = await Promise.all([
+            uploadFile(document.getElementById('secIdFile')?.files[0], `cac-uploads/${uid}/${ts}-cac11-sec-id`),
+            uploadFile(document.getElementById('secSigFile')?.files[0], `cac-uploads/${uid}/${ts}-cac11-sec-sig`)
+          ]);
+        }
+      } catch (uploadErr) { console.warn('File upload skipped:', uploadErr.message); }
+      btn.textContent = 'Submitting…';
+    }
     await db.collection('cac_submissions').add({
       formType: 'CAC 1.1',
       status: 'submitted',

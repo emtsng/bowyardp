@@ -62,13 +62,14 @@
           <div class="p-card-head">
             <div class="p-card-title">All Matters</div>
             <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+              <input type="text" id="matters-search" placeholder="Search matters…" oninput="renderMattersTable()" style="font-size:11px;padding:5px 10px;border:1.5px solid #D6D2C9;border-radius:2px;font-family:inherit;width:160px;">
               <select id="filter-status" onchange="renderMattersTable()" style="font-size:11px;padding:5px 10px;border:1.5px solid #D6D2C9;border-radius:2px;font-family:inherit;">
-                  <option value="">All Statuses</option>
-                  <option value="open">Open</option>
-                  <option value="in_progress">In Progress</option>
-                  <option value="pending_client">Pending Client</option>
-                  <option value="closed">Closed</option>
-                </select>
+                <option value="">All Statuses</option>
+                <option value="open">Open</option>
+                <option value="in_progress">In Progress</option>
+                <option value="pending_client">Pending Client</option>
+                <option value="closed">Closed</option>
+              </select>
               <button class="p-btn p-btn-gold p-btn-sm" onclick="showModal('modal-new-matter')"><i class="fa-solid fa-plus"></i> New Matter</button>
             </div>
           </div>
@@ -101,8 +102,9 @@
         <div class="p-card-head" style="margin-bottom:16px;">
           <div>
             <div class="p-section-title">Client Directory</div>
-            <div class="p-section-sub">Registered portal accounts</div>
+            <div class="p-section-sub">Registered and manually added clients</div>
           </div>
+          <button class="p-btn p-btn-gold p-btn-sm" onclick="showModal('modal-new-client')"><i class="fa-solid fa-user-plus"></i> New Client</button>
         </div>
         <div class="p-card" id="clients-table"><div class="p-loading"><div class="p-spinner"></div></div></div>
       </div>
@@ -263,6 +265,33 @@
   </div>
 </div>
 
+<!-- ── MODAL: NEW CLIENT ──────────────────────────────── -->
+<div class="p-modal-bg" id="modal-new-client">
+  <div class="p-modal">
+    <div class="p-modal-head">
+      <div class="p-modal-title">Add New Client</div>
+      <button class="p-modal-close" onclick="hideModal('modal-new-client')">&times;</button>
+    </div>
+    <div class="p-modal-body">
+      <div id="nc-error" class="p-error"></div>
+      <div class="p-form-row">
+        <div class="p-form-group"><label>Full Name *</label><input type="text" id="nc-name" placeholder="Client's full name"></div>
+        <div class="p-form-group"><label>Email</label><input type="email" id="nc-email" placeholder="client@example.com"></div>
+      </div>
+      <div class="p-form-row">
+        <div class="p-form-group"><label>Phone</label><input type="tel" id="nc-phone" placeholder="+234 …"></div>
+        <div class="p-form-group"><label>Organisation</label><input type="text" id="nc-org" placeholder="Company or firm"></div>
+      </div>
+      <div class="p-form-group"><label>Notes</label><textarea id="nc-notes" style="min-height:60px;" placeholder="Internal notes about this client…"></textarea></div>
+      <p style="font-size:11px;color:var(--grey-mid);margin-top:-4px;">This creates a client record for tracking. The client can also self-register on the portal to gain online access.</p>
+    </div>
+    <div class="p-modal-foot">
+      <button class="p-btn p-btn-outline" onclick="hideModal('modal-new-client')">Cancel</button>
+      <button class="p-btn p-btn-gold" id="nc-save-btn" onclick="saveNewClient()">Add Client</button>
+    </div>
+  </div>
+</div>
+
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
@@ -303,7 +332,8 @@ function switchTab(name) {
   const actions = {
     matters: `<button class="p-btn p-btn-gold p-btn-sm" onclick="showModal('modal-new-matter')"><i class="fa-solid fa-plus"></i> New Matter</button>`,
     causelist: `<button class="p-btn p-btn-gold p-btn-sm" onclick="showModal('modal-new-date')"><i class="fa-solid fa-plus"></i> Add Court Date</button>`,
-    clients: '', cac: ''
+    clients: `<button class="p-btn p-btn-gold p-btn-sm" onclick="showModal('modal-new-client')"><i class="fa-solid fa-user-plus"></i> New Client</button>`,
+    cac: ''
   };
   document.getElementById('topbar-actions').innerHTML = actions[name] || '';
   if (name === 'causelist') loadCauselist();
@@ -320,7 +350,14 @@ async function loadMatters() {
 
 function renderMattersTable() {
   const statusFilter = document.getElementById('filter-status')?.value;
-  const filtered = statusFilter ? allMatters.filter(m => m.status === statusFilter) : allMatters;
+  const q = (document.getElementById('matters-search')?.value || '').toLowerCase();
+  let filtered = statusFilter ? allMatters.filter(m => m.status === statusFilter) : allMatters;
+  if (q) filtered = filtered.filter(m =>
+    m.title?.toLowerCase().includes(q) ||
+    m.clientName?.toLowerCase().includes(q) ||
+    m.reference?.toLowerCase().includes(q) ||
+    m.type?.toLowerCase().includes(q)
+  );
   const el = document.getElementById('matters-table');
   if (!filtered.length) {
     el.innerHTML = `<div class="p-empty"><i class="fa-solid fa-briefcase"></i><div class="p-empty-title">No matters found</div></div>`;
@@ -357,15 +394,17 @@ async function saveMatter() {
   const title    = document.getElementById('nm-title').value.trim();
   const type     = document.getElementById('nm-type').value;
   const priority = document.getElementById('nm-priority').value;
-  const clientId = document.getElementById('nm-client-id').value;
-  const clientName = document.getElementById('nm-client-name').textContent.replace('✓ ','');
+  const clientId   = document.getElementById('nm-client-id').value;
+  const clientName = clientId
+    ? document.getElementById('nm-client-name').textContent.replace('✓ ','')
+    : document.getElementById('nm-client-search').value.trim();
   const desc     = document.getElementById('nm-desc').value.trim();
   const ref      = document.getElementById('nm-ref').value.trim() || genRef();
   const err      = document.getElementById('new-matter-error');
   err.classList.remove('show');
 
   if (!title || !type) { err.textContent = 'Title and practice area are required.'; err.classList.add('show'); return; }
-  if (!clientId) { err.textContent = 'Please select a client.'; err.classList.add('show'); return; }
+  if (!clientName) { err.textContent = 'Please enter or select a client name.'; err.classList.add('show'); return; }
 
   const btn = document.getElementById('nm-save-btn');
   btn.disabled = true; btn.textContent = 'Saving…';
@@ -499,15 +538,16 @@ function renderClientsTable() {
     return;
   }
   el.innerHTML = `<div class="p-table-wrap"><table class="p-table"><thead><tr>
-    <th>Name</th><th>Email</th><th>Organisation</th><th>Phone</th><th>Status</th><th>Registered</th>
+    <th>Name</th><th>Email</th><th>Organisation</th><th>Phone</th><th>Status</th><th>Added</th><th></th>
   </tr></thead><tbody>
   ${allClients.map(c => `<tr>
-    <td><strong>${c.name||'—'}</strong></td>
+    <td><strong>${c.name||'—'}</strong>${c.createdByStaff ? '&nbsp;<span style="font-size:9px;color:var(--grey-mid);">manual</span>' : ''}</td>
     <td style="font-size:12px;">${c.email||'—'}</td>
     <td style="font-size:12px;">${c.organisation||'—'}</td>
     <td style="font-size:12px;">${c.phone||'—'}</td>
     <td>${c.status === 'pending' ? '<span class="p-badge pending">Pending</span>' : '<span class="p-badge closed">Active</span>'}</td>
     <td style="font-size:11px;">${fmtDate(c.createdAt)}</td>
+    <td><button class="p-btn p-btn-ghost p-btn-sm" onclick="filterMattersByClient('${(c.name||'').replace(/'/g,'\\\'')}')" title="View matters"><i class="fa-solid fa-briefcase"></i></button></td>
   </tr>`).join('')}
   </tbody></table></div>`;
 }
@@ -601,6 +641,39 @@ function openUpdateModal(matterId) {
   document.getElementById('update-date').value    = new Date().toISOString().split('T')[0];
   document.getElementById('update-status').value  = '';
   showModal('modal-update-matter');
+}
+
+function filterMattersByClient(name) {
+  switchTab('matters');
+  document.getElementById('matters-search').value = name;
+  renderMattersTable();
+}
+
+/* ── New client (staff-created) ─────────────────────── */
+async function saveNewClient() {
+  const name  = document.getElementById('nc-name').value.trim();
+  const email = document.getElementById('nc-email').value.trim();
+  const phone = document.getElementById('nc-phone').value.trim();
+  const org   = document.getElementById('nc-org').value.trim();
+  const notes = document.getElementById('nc-notes').value.trim();
+  const err   = document.getElementById('nc-error');
+  err.classList.remove('show');
+  if (!name) { err.textContent = 'Client name is required.'; err.classList.add('show'); return; }
+  const btn = document.getElementById('nc-save-btn');
+  btn.disabled = true; btn.textContent = 'Saving…';
+  try {
+    await db.collection('users').add({
+      name, email, phone, organisation: org, notes,
+      role: 'client', status: 'active',
+      createdByStaff: true,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    hideModal('modal-new-client');
+    ['nc-name','nc-email','nc-phone','nc-org','nc-notes'].forEach(id => document.getElementById(id).value = '');
+    await loadClients();
+    renderClientsTable();
+  } catch(e) { err.textContent = e.message; err.classList.add('show'); }
+  btn.disabled = false; btn.textContent = 'Add Client';
 }
 
 async function saveUpdate() {

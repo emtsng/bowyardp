@@ -37,6 +37,18 @@
  *     match /mail/{id} {
  *       allow create: if request.auth.uid != null;
  *     }
+ *     match /matters/{matterId}/tasks/{id} {
+ *       allow read, write: if isStaff();
+ *     }
+ *     match /matters/{matterId}/documents/{id} {
+ *       allow read, write: if isStaff();
+ *     }
+ *     match /matters/{matterId}/notes/{id} {
+ *       allow read, write: if isStaff();
+ *     }
+ *     match /matters/{matterId}/billing/{id} {
+ *       allow read, write: if isStaff();
+ *     }
  *   }
  * }
  *
@@ -48,6 +60,9 @@
  *     match /cac-uploads/{userId}/{allPaths=**} {
  *       allow write: if request.auth.uid == userId;
  *       allow read: if request.auth.uid != null;
+ *     }
+ *     match /matter-docs/{allPaths=**} {
+ *       allow read, write: if request.auth.uid != null;
  *     }
  *   }
  * }
@@ -192,6 +207,7 @@ function loading(id, show) {
 /* ── Reference generator ──────────────────────────────── */
 async function uploadFile(file, storagePath) {
   if (!file || !file.size) return null;
+  if (typeof firebase.storage !== 'function') return null;
   const ref = firebase.storage().ref(storagePath);
   await ref.put(file);
   return ref.getDownloadURL();
