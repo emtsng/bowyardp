@@ -35,7 +35,7 @@
         <div class="portal-login-badge">Bowyard Portal</div>
       </div>
       <div class="portal-login-title">Welcome Back</div>
-      <p class="portal-login-sub">Sign in to manage your matters and files. Staff and clients use the same login — you will be directed to the right portal automatically.</p>
+      <p class="portal-login-sub">Sign in to manage your matters and files. Staff use their <strong>@bowyardpartners.com</strong> email — both clients and staff are directed to the right portal automatically.</p>
 
       <div class="login-tabs">
         <button class="login-tab active" data-panel="login-panel">Sign In</button>
@@ -88,7 +88,7 @@
         <button class="p-btn p-btn-gold" style="width:100%;justify-content:center;margin-top:4px;" id="reg-btn">
           Create Account &nbsp;<i class="fa-solid fa-arrow-right"></i>
         </button>
-        <p style="font-size:11px;color:var(--grey-mid);margin-top:14px;line-height:1.6;">By registering you agree to our terms. A member of the Bowyard team will activate your account.</p>
+        <p style="font-size:11px;color:var(--grey-mid);margin-top:14px;line-height:1.6;">By registering you agree to our terms. Staff accounts require a <strong>@bowyardpartners.com</strong> email and are activated immediately.</p>
       </div>
 
     </div>
@@ -165,16 +165,15 @@
     if (!name || !email || !pass) { err.textContent = 'Name, email and password are required.'; err.classList.add('show'); return; }
     if (pass.length < 8) { err.textContent = 'Password must be at least 8 characters.'; err.classList.add('show'); return; }
     try {
+      const isStaff = email.toLowerCase().endsWith('@bowyardpartners.com');
       const cred = await auth.createUserWithEmailAndPassword(email, pass);
       await db.collection('users').doc(cred.user.uid).set({
         name, email, phone, organisation: org,
-        role: 'client', status: 'pending',
+        role: isStaff ? 'staff' : 'client',
+        status: 'active',
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
       });
-      await auth.signOut();
-      ok.textContent = 'Account created. A member of the Bowyard team will confirm your access shortly.';
-      ok.classList.add('show');
-      document.getElementById('reg-btn').disabled = true;
+      window.location.href = isStaff ? 'staff/index.html' : 'client/index.html';
     } catch(e) {
       err.textContent = e.code === 'auth/email-already-in-use'
         ? 'An account with this email already exists.' : (e.message || 'Registration failed.');
