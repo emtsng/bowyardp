@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CAC 7 — Appointment of Director | Bowyard Portal</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/fav.png">
+  <link rel="stylesheet" href="../../assets/css/plugins/fontawesome.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../portal.css">
+</head>
+<body>
+<div class="portal-layout">
+  <aside class="portal-sidebar">
+    <div class="portal-logo">
+      <img src="../../assets/images/logo/bplogowhite.png" alt="Bowyard Partners">
+      <div class="portal-logo-sub">Client Portal</div>
+    </div>
+    <nav class="portal-nav">
+      <div class="portal-nav-label">Menu</div>
+      <a href="index.html" class="portal-nav-link"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+      <a href="index.html#matters" class="portal-nav-link"><i class="fa-solid fa-briefcase"></i> My Matters</a>
+      <a href="forms.html" class="portal-nav-link active"><i class="fa-solid fa-file-lines"></i> Regulatory Forms</a>
+    </nav>
+    <div class="portal-sidebar-foot"><div id="user-block"></div></div>
+  </aside>
+  <div class="p-overlay" id="p-overlay"></div>
+
+  <main class="portal-main">
+    <header class="portal-topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="p-mobile-toggle" id="mobile-toggle"><span></span><span></span><span></span></button>
+        <div>
+          <div class="portal-page-title">Form CAC 7</div>
+          <div style="font-size:11px;color:var(--grey-mid);">Appointment of Director — Section 321 CAMA 2020</div>
+        </div>
+      </div>
+      <a href="forms.html" class="p-btn p-btn-outline p-btn-sm"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    </header>
+
+    <div class="portal-content">
+      <div class="p-wizard-steps">
+        <div class="p-wizard-step active" data-step="0"><div class="p-wizard-num">1</div> Company</div>
+        <div class="p-wizard-step" data-step="1"><div class="p-wizard-num">2</div> Director Details</div>
+        <div class="p-wizard-step" data-step="2"><div class="p-wizard-num">3</div> Service Address</div>
+        <div class="p-wizard-step" data-step="3"><div class="p-wizard-num">4</div> Residential Address</div>
+        <div class="p-wizard-step" data-step="4"><div class="p-wizard-num">5</div> Review &amp; Submit</div>
+      </div>
+
+      <div class="p-card">
+
+        <!-- STEP 1 -->
+        <div class="p-step-panel active" id="step-0">
+          <div class="p-section-title" style="margin-bottom:18px;">Company Details</div>
+          <div class="p-form-row">
+            <div class="p-form-group"><label>Company Registration Number *</label><input type="text" id="regNo" placeholder="RC or BN number"></div>
+            <div class="p-form-group"><label>Company Name (Full) *</label><input type="text" id="companyNameFull" placeholder="Full registered name"></div>
+          </div>
+          <div class="p-form-group"><label>Date of Director's Appointment *</label><input type="date" id="appointmentDate"></div>
+          <div class="p-step-nav">
+            <div></div>
+            <button class="p-btn p-btn-gold" onclick="nextStep(0)">Next <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="p-step-panel" id="step-1">
+          <div class="p-section-title" style="margin-bottom:18px;">New Director's Details</div>
+          <div class="p-form-row-3">
+            <div class="p-form-group"><label>Title</label>
+              <select id="title"><option value="" disabled selected>Select</option><option>Mr</option><option>Mrs</option><option>Ms</option><option>Dr</option><option>Prof</option><option>Chief</option><option>Alhaji</option></select>
+            </div>
+            <div class="p-form-group"><label>First / Middle Name(s) *</label><input type="text" id="forenames" placeholder="All forenames"></div>
+            <div class="p-form-group"><label>Surname *</label><input type="text" id="surname"></div>
+          </div>
+          <div class="p-form-row">
+            <div class="p-form-group"><label>Former Name(s)</label><input type="text" id="formerName" placeholder="If name changed"></div>
+            <div class="p-form-group"><label>Gender *</label>
+              <select id="gender"><option value="" disabled selected>Select</option><option>Male</option><option>Female</option></select>
+            </div>
+          </div>
+          <div class="p-form-row">
+            <div class="p-form-group"><label>Country/State of Residence *</label><input type="text" id="residenceCountry" value="Nigeria"></div>
+            <div class="p-form-group"><label>Phone Number *</label><input type="tel" id="dirPhone"></div>
+          </div>
+          <div class="p-form-row">
+            <div class="p-form-group"><label>Nationality *</label><input type="text" id="nationality" value="Nigerian"></div>
+            <div class="p-form-group"><label>Email Address *</label><input type="email" id="dirEmail"></div>
+          </div>
+          <div class="p-form-row">
+            <div class="p-form-group"><label>Identity Type *</label>
+              <select id="idType"><option value="" disabled selected>Select</option><option>International Passport</option><option>Driver's Licence</option><option>National Identity Card</option><option>Voter's Card</option></select>
+            </div>
+            <div class="p-form-group"><label>Identity Number *</label><input type="text" id="idNo"></div>
+          </div>
+          <div class="p-form-row">
+            <div class="p-form-group"><label>Date of Birth *</label><input type="date" id="dob"></div>
+            <div class="p-form-group"><label>Business Occupation</label><input type="text" id="occupation" placeholder="e.g. Business Executive"></div>
+          </div>
+          <div class="p-step-nav">
+            <button class="p-btn p-btn-outline" onclick="prevStep(1)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <button class="p-btn p-btn-gold" onclick="nextStep(1)">Next: Service Address <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="p-step-panel" id="step-2">
+          <div class="p-section-title" style="margin-bottom:6px;">Service Address</div>
+          <p class="p-form-hint" style="margin-bottom:18px;">This address will appear on the public register. You may use the company's registered office.</p>
+          <div class="p-form-group"><label>Number / Building Name *</label><input type="text" id="svcBuilding"></div>
+          <div class="p-form-group"><label>Street *</label><input type="text" id="svcStreet"></div>
+          <div class="p-form-row">
+            <div class="p-form-group"><label>City/Town</label><input type="text" id="svcCity"></div>
+            <div class="p-form-group"><label>Local Government</label><input type="text" id="svcLGA"></div>
+          </div>
+          <div class="p-form-row">
+            <div class="p-form-group"><label>Postal Code</label><input type="text" id="svcPostal"></div>
+            <div class="p-form-group"><label>State</label><input type="text" id="svcState"></div>
+          </div>
+          <div class="p-form-group"><label>Country</label><input type="text" id="svcCountry" value="Nigeria"></div>
+          <div class="p-step-nav">
+            <button class="p-btn p-btn-outline" onclick="prevStep(2)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <button class="p-btn p-btn-gold" onclick="nextStep(2)">Next: Residential Address <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="p-step-panel" id="step-3">
+          <div class="p-section-title" style="margin-bottom:10px;">Residential Address</div>
+          <div class="p-form-group" style="margin-bottom:18px;">
+            <label style="display:flex;align-items:center;gap:8px;text-transform:none;letter-spacing:0;font-size:13px;font-weight:500;cursor:pointer;">
+              <input type="checkbox" id="same-as-svc" style="width:auto;" onchange="toggleResidential(this)">
+              Same as service address
+            </label>
+          </div>
+          <div id="residential-fields">
+            <div class="p-form-group"><label>Number / Building Name *</label><input type="text" id="resBuilding"></div>
+            <div class="p-form-group"><label>Street *</label><input type="text" id="resStreet"></div>
+            <div class="p-form-row">
+              <div class="p-form-group"><label>City/Town</label><input type="text" id="resCity"></div>
+              <div class="p-form-group"><label>Local Government</label><input type="text" id="resLGA"></div>
+            </div>
+            <div class="p-form-row">
+              <div class="p-form-group"><label>Postal Code</label><input type="text" id="resPostal"></div>
+              <div class="p-form-group"><label>State</label><input type="text" id="resState"></div>
+            </div>
+            <div class="p-form-group"><label>Country</label><input type="text" id="resCountry" value="Nigeria"></div>
+          </div>
+          <div class="p-step-nav">
+            <button class="p-btn p-btn-outline" onclick="prevStep(3)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <button class="p-btn p-btn-gold" onclick="nextStep(3)">Review &amp; Submit <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="p-step-panel" id="step-4">
+          <div class="p-section-title" style="margin-bottom:18px;">Review Your Submission</div>
+          <div id="review-content"></div>
+          <div id="submit-error" class="p-error"></div>
+          <div id="submit-success" class="p-success" style="display:none;"></div>
+          <div class="p-step-nav">
+            <button class="p-btn p-btn-outline" onclick="prevStep(4)"><i class="fa-solid fa-arrow-left"></i> Back &amp; Edit</button>
+            <div style="display:flex;gap:10px;">
+              <button class="p-btn p-btn-outline" onclick="generatePDF()"><i class="fa-solid fa-download"></i> Download PDF</button>
+              <button class="p-btn p-btn-gold" id="submit-btn" onclick="submitForm()"><i class="fa-solid fa-paper-plane"></i> Submit to Bowyard</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="../app.js"></script>
+<script>
+let portalUser = null;
+(async () => {
+  portalUser = await requireRole(['client']);
+  if (!portalUser) return;
+  setUserBlock(portalUser); initMobileSidebar();
+})();
+
+function v(id) { return document.getElementById(id)?.value.trim() || ''; }
+
+function nextStep(from) {
+  const required = {
+    0: ['regNo','companyNameFull','appointmentDate'],
+    1: ['forenames','surname','gender','residenceCountry','dirPhone','nationality','dirEmail','idType','idNo','dob'],
+    2: ['svcBuilding','svcStreet'],
+    3: []
+  };
+  const missing = (required[from]||[]).find(id => !v(id));
+  if (missing) { alert('Please fill all required fields.'); document.getElementById(missing)?.focus(); return; }
+  setStep(from + 1);
+  if (from + 1 === 4) buildReview();
+}
+function prevStep(from) { setStep(from - 1); }
+function setStep(n) {
+  document.querySelectorAll('.p-step-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(`step-${n}`).classList.add('active');
+  document.querySelectorAll('.p-wizard-step').forEach((s,i) => {
+    s.classList.toggle('active', i === n); s.classList.toggle('done', i < n);
+  });
+}
+function toggleResidential(cb) {
+  document.getElementById('residential-fields').style.display = cb.checked ? 'none' : 'block';
+}
+
+function collectData() {
+  const sameAddr = document.getElementById('same-as-svc').checked;
+  return {
+    companyNameFull: v('companyNameFull'), regNo: v('regNo'), appointmentDate: v('appointmentDate'),
+    title: v('title'), forenames: v('forenames'), surname: v('surname'),
+    formerName: v('formerName'), gender: v('gender'),
+    residenceCountry: v('residenceCountry'), dirPhone: v('dirPhone'),
+    nationality: v('nationality'), dirEmail: v('dirEmail'),
+    idType: v('idType'), idNo: v('idNo'), dob: v('dob'), occupation: v('occupation'),
+    serviceAddress: { building: v('svcBuilding'), street: v('svcStreet'), city: v('svcCity'), lga: v('svcLGA'), postal: v('svcPostal'), state: v('svcState'), country: v('svcCountry') },
+    residentialSameAsService: sameAddr,
+    residentialAddress: sameAddr
+      ? null
+      : { building: v('resBuilding'), street: v('resStreet'), city: v('resCity'), lga: v('resLGA'), postal: v('resPostal'), state: v('resState'), country: v('resCountry') }
+  };
+}
+
+function addrStr(a) {
+  if (!a) return 'Same as service address';
+  return [a.building, a.street, a.city, a.lga, a.state, a.country].filter(Boolean).join(', ');
+}
+
+function buildReview() {
+  const d = collectData();
+  document.getElementById('review-content').innerHTML = `
+    <div class="p-grid-2" style="margin-bottom:14px;">
+      <div class="p-card" style="border:1px solid #E8E4DE;">
+        <div class="p-card-title" style="margin-bottom:12px;">Company</div>
+        <div class="sub-field"><div class="sub-label">Company</div><div class="sub-value">${d.companyNameFull}</div></div>
+        <div class="sub-field"><div class="sub-label">Reg. No</div><div class="sub-value">${d.regNo}</div></div>
+        <div class="sub-field"><div class="sub-label">Date of Appointment</div><div class="sub-value">${d.appointmentDate}</div></div>
+      </div>
+      <div class="p-card" style="border:1px solid #E8E4DE;">
+        <div class="p-card-title" style="margin-bottom:12px;">New Director</div>
+        <div class="sub-field"><div class="sub-label">Full Name</div><div class="sub-value">${d.title} ${d.forenames} ${d.surname}</div></div>
+        <div class="sub-field"><div class="sub-label">DOB / Gender</div><div class="sub-value">${d.dob} / ${d.gender}</div></div>
+        <div class="sub-field"><div class="sub-label">Nationality</div><div class="sub-value">${d.nationality}</div></div>
+        <div class="sub-field"><div class="sub-label">Identity</div><div class="sub-value">${d.idType}: ${d.idNo}</div></div>
+        <div class="sub-field"><div class="sub-label">Contact</div><div class="sub-value">${d.dirPhone} | ${d.dirEmail}</div></div>
+      </div>
+    </div>
+    <div class="p-grid-2">
+      <div class="p-card" style="border:1px solid #E8E4DE;">
+        <div class="p-card-title" style="margin-bottom:12px;">Service Address</div>
+        <div class="sub-value">${addrStr(d.serviceAddress)}</div>
+      </div>
+      <div class="p-card" style="border:1px solid #E8E4DE;">
+        <div class="p-card-title" style="margin-bottom:12px;">Residential Address</div>
+        <div class="sub-value">${addrStr(d.residentialAddress)}</div>
+      </div>
+    </div>`;
+}
+
+async function submitForm() {
+  const btn = document.getElementById('submit-btn');
+  const err = document.getElementById('submit-error'); const ok = document.getElementById('submit-success');
+  err.classList.remove('show'); ok.style.display = 'none';
+  btn.disabled = true; btn.textContent = 'Submitting…';
+  try {
+    await db.collection('cac_submissions').add({
+      formType: 'CAC 7', status: 'submitted',
+      clientId: portalUser.uid, clientName: portalUser.name,
+      data: collectData(),
+      submittedAt: firebase.firestore.FieldValue.serverTimestamp(), notes: ''
+    });
+    ok.textContent = 'Submitted. The Bowyard team will review and be in touch.';
+    ok.style.display = 'block'; btn.textContent = 'Submitted';
+  } catch(e) { err.textContent = 'Failed: ' + e.message; err.classList.add('show'); btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit to Bowyard'; }
+}
+
+function generatePDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF('p','mm','a4');
+  const d = collectData(); const lm=20; let y=20;
+  const label = (l, val) => {
+    doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(120,120,120); doc.text(l.toUpperCase(), lm, y);
+    doc.setFontSize(10); doc.setFont('helvetica','normal'); doc.setTextColor(0,0,0); doc.text(val||'—', lm+55, y); y += 6;
+  };
+  doc.setFontSize(14); doc.setFont('helvetica','bold'); doc.setTextColor(13,27,42);
+  doc.text('CORPORATE AFFAIRS COMMISSION', 105, y, {align:'center'}); y += 7;
+  doc.setFontSize(11); doc.text('FORM CAC 7 — APPOINTMENT OF DIRECTOR', 105, y, {align:'center'}); y += 6;
+  doc.setFontSize(9); doc.setFont('helvetica','italic'); doc.text('Pursuant to Section 321 of the Companies and Allied Matters Act, 2020', 105, y, {align:'center'}); y += 12;
+  doc.setDrawColor(184,150,46); doc.line(lm, y, 190, y); y += 6;
+  doc.setFontSize(11); doc.setFont('helvetica','bold'); doc.setTextColor(0,0,0); doc.text('1. COMPANY DETAILS', lm, y); y += 6;
+  label('Company Name', d.companyNameFull); label('Registration No.', d.regNo); label('Date of Appointment', d.appointmentDate);
+  y += 4; doc.line(lm, y, 190, y); y += 6;
+  doc.setFontSize(11); doc.setFont('helvetica','bold'); doc.text('2. NEW DIRECTOR\'S DETAILS', lm, y); y += 6;
+  label('Title', d.title); label('Forenames', d.forenames); label('Surname', d.surname);
+  if (d.formerName) label('Former Name(s)', d.formerName);
+  label('Date of Birth', d.dob); label('Gender', d.gender); label('Nationality', d.nationality);
+  label('Country of Residence', d.residenceCountry);
+  label('Phone', d.dirPhone); label('Email', d.dirEmail);
+  label('Identity Type', d.idType); label('Identity Number', d.idNo);
+  if (d.occupation) label('Business Occupation', d.occupation);
+  y += 4; doc.line(lm, y, 190, y); y += 6;
+  doc.setFontSize(11); doc.setFont('helvetica','bold'); doc.text('3. SERVICE ADDRESS', lm, y); y += 6;
+  doc.setFontSize(10); doc.setFont('helvetica','normal'); doc.text(addrStr(d.serviceAddress), lm, y); y += 10;
+  doc.line(lm, y, 190, y); y += 6;
+  doc.setFontSize(11); doc.setFont('helvetica','bold'); doc.text('4. RESIDENTIAL ADDRESS', lm, y); y += 6;
+  doc.setFontSize(10); doc.setFont('helvetica','normal'); doc.text(addrStr(d.residentialAddress), lm, y); y += 14;
+  doc.setFontSize(8); doc.setFont('helvetica','italic'); doc.setTextColor(120,120,120);
+  doc.text('Prepared by Bowyard Partners for client review. For official filing purposes only.', 105, 285, {align:'center'});
+  doc.save(`CAC-7-${d.surname}-${d.companyNameFull.split(' ')[0]}.pdf`);
+}
+</script>
+</body>
+</html>

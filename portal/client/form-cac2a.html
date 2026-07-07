@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CAC 2A — Return of Allotment | Bowyard Portal</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/fav.png">
+  <link rel="stylesheet" href="../../assets/css/plugins/fontawesome.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../portal.css">
+</head>
+<body>
+<div class="portal-layout">
+  <aside class="portal-sidebar">
+    <div class="portal-logo">
+      <img src="../../assets/images/logo/bplogowhite.png" alt="Bowyard Partners">
+      <div class="portal-logo-sub">Client Portal</div>
+    </div>
+    <nav class="portal-nav">
+      <div class="portal-nav-label">Menu</div>
+      <a href="index.html" class="portal-nav-link"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+      <a href="index.html#matters" class="portal-nav-link"><i class="fa-solid fa-briefcase"></i> My Matters</a>
+      <a href="forms.html" class="portal-nav-link active"><i class="fa-solid fa-file-lines"></i> Regulatory Forms</a>
+    </nav>
+    <div class="portal-sidebar-foot"><div id="user-block"></div></div>
+  </aside>
+  <div class="p-overlay" id="p-overlay"></div>
+
+  <main class="portal-main">
+    <header class="portal-topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="p-mobile-toggle" id="mobile-toggle"><span></span><span></span><span></span></button>
+        <div>
+          <div class="portal-page-title">Form CAC 2A</div>
+          <div style="font-size:11px;color:var(--grey-mid);">Return of Allotment (Post Incorporation) — Section 129 CAMA</div>
+        </div>
+      </div>
+      <a href="forms.html" class="p-btn p-btn-outline p-btn-sm"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    </header>
+
+    <div class="portal-content">
+      <div class="p-wizard-steps">
+        <div class="p-wizard-step active" data-step="0"><div class="p-wizard-num">1</div> Company</div>
+        <div class="p-wizard-step" data-step="1"><div class="p-wizard-num">2</div> Allotment Details</div>
+        <div class="p-wizard-step" data-step="2"><div class="p-wizard-num">3</div> Allottees</div>
+        <div class="p-wizard-step" data-step="3"><div class="p-wizard-num">4</div> Post-Allotment Shareholders</div>
+        <div class="p-wizard-step" data-step="4"><div class="p-wizard-num">5</div> Review &amp; Submit</div>
+      </div>
+
+      <div class="p-card">
+
+        <!-- STEP 1 -->
+        <div class="p-step-panel active" id="step-0">
+          <div class="p-section-title" style="margin-bottom:18px;">Company Information</div>
+          <div class="p-form-row">
+            <div class="p-form-group"><label>Company Number *</label><input type="text" id="companyNo" placeholder="CAC registration number"></div>
+            <div class="p-form-group"><label>Date of Resolution *</label><input type="date" id="resolutionDate"></div>
+          </div>
+          <div class="p-form-group"><label>Company Name *</label><input type="text" id="companyName" placeholder="Full registered company name"></div>
+          <div class="p-step-nav">
+            <div></div>
+            <button class="p-btn p-btn-gold" onclick="nextStep(0)">Next <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="p-step-panel" id="step-1">
+          <div class="p-section-title" style="margin-bottom:18px;">Section A — Allotment Details</div>
+          <div class="p-form-row">
+            <div class="p-form-group"><label>Shares Allotted Payable in Cash</label><input type="number" id="cashShares" placeholder="Number of shares"></div>
+            <div class="p-form-group"><label>Nominal Amount of Cash Shares (₦)</label><input type="number" id="nominalAmt" placeholder="Total nominal value"></div>
+          </div>
+          <div class="p-form-group"><label>Amount Paid / Due Per Cash Share (₦)</label><input type="number" id="amtPerCash"></div>
+          <hr class="p-divider">
+          <div class="p-form-row">
+            <div class="p-form-group"><label>Shares for Non-Cash Consideration</label><input type="number" id="nonCashShares" placeholder="Number of shares (or 0)"></div>
+            <div class="p-form-group"><label>Amount Treated as Paid Per Non-Cash Share (₦)</label><input type="number" id="amtPerNonCash"></div>
+          </div>
+          <div class="p-form-group"><label>Consideration for Non-Cash Shares</label><input type="text" id="nonCashConsideration" placeholder="e.g. Transfer of property, services, etc."></div>
+          <div class="p-step-nav">
+            <button class="p-btn p-btn-outline" onclick="prevStep(1)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <button class="p-btn p-btn-gold" onclick="nextStep(1)">Next: Allottees <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="p-step-panel" id="step-2">
+          <div class="p-section-title" style="margin-bottom:6px;">Section B — Particulars of Allottees</div>
+          <p class="p-form-hint" style="margin-bottom:18px;">Enter each person or entity receiving shares in this allotment (up to 6).</p>
+          <div id="allottees-container"></div>
+          <button class="p-btn p-btn-outline p-btn-sm" id="add-allottee-btn" onclick="addPerson('allottees-container','allottee')" style="margin-top:8px;"><i class="fa-solid fa-plus"></i> Add Allottee</button>
+          <div class="p-step-nav">
+            <button class="p-btn p-btn-outline" onclick="prevStep(2)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <button class="p-btn p-btn-gold" onclick="nextStep(2)">Next: Shareholders <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="p-step-panel" id="step-3">
+          <div class="p-section-title" style="margin-bottom:6px;">Section C — Shareholders After This Allotment</div>
+          <p class="p-form-hint" style="margin-bottom:18px;">List all shareholders and their total holdings after this allotment (up to 6).</p>
+          <div id="shareholders-container"></div>
+          <button class="p-btn p-btn-outline p-btn-sm" id="add-sh-btn" onclick="addPerson('shareholders-container','shareholder')" style="margin-top:8px;"><i class="fa-solid fa-plus"></i> Add Shareholder</button>
+          <div class="p-step-nav">
+            <button class="p-btn p-btn-outline" onclick="prevStep(3)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <button class="p-btn p-btn-gold" onclick="nextStep(3)">Review &amp; Submit <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="p-step-panel" id="step-4">
+          <div class="p-section-title" style="margin-bottom:18px;">Review Your Submission</div>
+          <div id="review-content"></div>
+          <div id="submit-error" class="p-error"></div>
+          <div id="submit-success" class="p-success" style="display:none;"></div>
+          <div class="p-step-nav">
+            <button class="p-btn p-btn-outline" onclick="prevStep(4)"><i class="fa-solid fa-arrow-left"></i> Back &amp; Edit</button>
+            <div style="display:flex;gap:10px;">
+              <button class="p-btn p-btn-outline" onclick="generatePDF()"><i class="fa-solid fa-download"></i> Download PDF</button>
+              <button class="p-btn p-btn-gold" id="submit-btn" onclick="submitForm()"><i class="fa-solid fa-paper-plane"></i> Submit to Bowyard</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="../app.js"></script>
+<script>
+let portalUser = null;
+const counters = { allottee: 0, shareholder: 0 };
+const maxPer = 6;
+
+(async () => {
+  portalUser = await requireRole(['client']);
+  if (!portalUser) return;
+  setUserBlock(portalUser); initMobileSidebar();
+  addPerson('allottees-container','allottee');
+  addPerson('shareholders-container','shareholder');
+})();
+
+function v(id) { return document.getElementById(id)?.value.trim() || ''; }
+
+function addPerson(containerId, type) {
+  if (counters[type] >= maxPer) { alert(`Maximum ${maxPer} entries.`); return; }
+  const i = counters[type];
+  const label = type === 'allottee' ? 'Allottee' : 'Shareholder';
+  document.getElementById(containerId).insertAdjacentHTML('beforeend', `
+    <div id="${type}-${i}" style="margin-bottom:14px;${i>0?'padding-top:14px;border-top:1px solid #E8E4DE;':''}">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <strong style="font-size:12px;">${label} ${i+1}</strong>
+        ${i > 0 ? `<button class="p-btn p-btn-ghost p-btn-sm" onclick="removePerson('${type}',${i})"><i class="fa-solid fa-trash"></i></button>` : ''}
+      </div>
+      <div class="p-form-row">
+        <div class="p-form-group"><label>Name *</label><input type="text" id="${type}-name-${i}" placeholder="Full name or company name"></div>
+        <div class="p-form-group"><label>Address *</label><input type="text" id="${type}-addr-${i}"></div>
+      </div>
+      <div class="p-form-row-3">
+        <div class="p-form-group"><label>City</label><input type="text" id="${type}-city-${i}"></div>
+        <div class="p-form-group"><label>State</label><input type="text" id="${type}-state-${i}"></div>
+        <div class="p-form-group"><label>No. of Shares</label><input type="number" id="${type}-shares-${i}"></div>
+      </div>
+      <div class="p-form-group"><label>Type of Shares</label>
+        <select id="${type}-type-${i}"><option value="" disabled selected>Select</option><option>Ordinary</option><option>Preference</option><option>Redeemable</option></select>
+      </div>
+    </div>`);
+  counters[type]++;
+}
+
+function removePerson(type, i) {
+  document.getElementById(`${type}-${i}`)?.remove();
+}
+
+function collectPersons(type) {
+  const out = [];
+  for (let i = 0; i < counters[type]; i++) {
+    const el = document.getElementById(`${type}-${i}`);
+    if (!el) continue;
+    const name = document.getElementById(`${type}-name-${i}`)?.value.trim();
+    if (!name) continue;
+    out.push({
+      name, address: document.getElementById(`${type}-addr-${i}`)?.value.trim(),
+      city: document.getElementById(`${type}-city-${i}`)?.value.trim(),
+      state: document.getElementById(`${type}-state-${i}`)?.value.trim(),
+      shares: document.getElementById(`${type}-shares-${i}`)?.value.trim(),
+      shareType: document.getElementById(`${type}-type-${i}`)?.value.trim()
+    });
+  }
+  return out;
+}
+
+function nextStep(from) {
+  if (from === 0 && (!v('companyNo')||!v('resolutionDate')||!v('companyName'))) { alert('Please fill all required fields.'); return; }
+  if (from === 2 && collectPersons('allottee').length === 0) { alert('Please add at least one allottee.'); return; }
+  if (from === 3 && collectPersons('shareholder').length === 0) { alert('Please add at least one shareholder.'); return; }
+  setStep(from + 1);
+  if (from + 1 === 4) buildReview();
+}
+function prevStep(from) { setStep(from - 1); }
+function setStep(n) {
+  document.querySelectorAll('.p-step-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(`step-${n}`).classList.add('active');
+  document.querySelectorAll('.p-wizard-step').forEach((s,i) => {
+    s.classList.toggle('active', i === n); s.classList.toggle('done', i < n);
+  });
+}
+
+function personTable(persons) {
+  if (!persons.length) return '<p style="font-size:12px;color:var(--grey-mid);">None entered.</p>';
+  return `<table class="p-table" style="margin-top:8px;"><thead><tr><th>Name</th><th>Address</th><th>City</th><th>State</th><th>Shares</th><th>Type</th></tr></thead><tbody>
+    ${persons.map(p => `<tr><td>${p.name}</td><td>${p.address||'—'}</td><td>${p.city||'—'}</td><td>${p.state||'—'}</td><td>${p.shares||'—'}</td><td>${p.shareType||'—'}</td></tr>`).join('')}
+  </tbody></table>`;
+}
+
+function buildReview() {
+  document.getElementById('review-content').innerHTML = `
+    <div class="p-card" style="border:1px solid #E8E4DE;margin-bottom:14px;">
+      <div class="p-card-title" style="margin-bottom:10px;">Company</div>
+      <div class="p-form-row">
+        <div class="sub-field"><div class="sub-label">Company No.</div><div class="sub-value">${v('companyNo')}</div></div>
+        <div class="sub-field"><div class="sub-label">Resolution Date</div><div class="sub-value">${v('resolutionDate')}</div></div>
+      </div>
+      <div class="sub-field"><div class="sub-label">Company Name</div><div class="sub-value">${v('companyName')}</div></div>
+    </div>
+    <div class="p-card" style="border:1px solid #E8E4DE;margin-bottom:14px;">
+      <div class="p-card-title" style="margin-bottom:10px;">Section A — Allotment Details</div>
+      <div class="p-grid-2">
+        <div><div class="sub-label">Cash Shares</div><div class="sub-value">${v('cashShares')||'—'}</div></div>
+        <div><div class="sub-label">Nominal Amount</div><div class="sub-value">₦${v('nominalAmt')||'—'}</div></div>
+        <div><div class="sub-label">Amt per Cash Share</div><div class="sub-value">₦${v('amtPerCash')||'—'}</div></div>
+        <div><div class="sub-label">Non-Cash Shares</div><div class="sub-value">${v('nonCashShares')||'—'}</div></div>
+      </div>
+      ${v('nonCashConsideration') ? `<div class="sub-field" style="margin-top:8px;"><div class="sub-label">Non-Cash Consideration</div><div class="sub-value">${v('nonCashConsideration')}</div></div>` : ''}
+    </div>
+    <div class="p-card" style="border:1px solid #E8E4DE;margin-bottom:14px;">
+      <div class="p-card-title" style="margin-bottom:4px;">Section B — Allottees</div>
+      ${personTable(collectPersons('allottee'))}
+    </div>
+    <div class="p-card" style="border:1px solid #E8E4DE;">
+      <div class="p-card-title" style="margin-bottom:4px;">Section C — Post-Allotment Shareholders</div>
+      ${personTable(collectPersons('shareholder'))}
+    </div>`;
+}
+
+function collectData() {
+  return {
+    companyNo: v('companyNo'), resolutionDate: v('resolutionDate'), companyName: v('companyName'),
+    cashShares: v('cashShares'), nominalAmt: v('nominalAmt'), amtPerCash: v('amtPerCash'),
+    nonCashShares: v('nonCashShares'), amtPerNonCash: v('amtPerNonCash'), nonCashConsideration: v('nonCashConsideration'),
+    allottees: collectPersons('allottee'),
+    shareholders: collectPersons('shareholder')
+  };
+}
+
+async function submitForm() {
+  const btn = document.getElementById('submit-btn');
+  const err = document.getElementById('submit-error'); const ok = document.getElementById('submit-success');
+  err.classList.remove('show'); ok.style.display = 'none';
+  btn.disabled = true; btn.textContent = 'Submitting…';
+  try {
+    await db.collection('cac_submissions').add({
+      formType: 'CAC 2A', status: 'submitted',
+      clientId: portalUser.uid, clientName: portalUser.name,
+      data: collectData(),
+      submittedAt: firebase.firestore.FieldValue.serverTimestamp(), notes: ''
+    });
+    ok.textContent = 'Submitted. Bowyard Partners will review and contact you shortly.';
+    ok.style.display = 'block'; btn.textContent = 'Submitted';
+  } catch(e) { err.textContent = 'Error: ' + e.message; err.classList.add('show'); btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit to Bowyard'; }
+}
+
+function generatePDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF('p','mm','a4');
+  const d = collectData(); const lm=20; let y=20;
+  const hr = () => { doc.setDrawColor(184,150,46); doc.line(lm,y,190,y); y+=5; };
+  const row = (l, val) => {
+    doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(120,120,120); doc.text(l.toUpperCase(), lm, y);
+    doc.setFontSize(10); doc.setFont('helvetica','normal'); doc.setTextColor(0,0,0); doc.text(String(val||'—'), lm+55, y); y+=6;
+  };
+  const sHead = (t) => { doc.setFontSize(11); doc.setFont('helvetica','bold'); doc.setTextColor(13,27,42); doc.text(t, lm, y); y+=7; };
+
+  doc.setFontSize(14); doc.setFont('helvetica','bold'); doc.setTextColor(13,27,42);
+  doc.text('CORPORATE AFFAIRS COMMISSION', 105, y, {align:'center'}); y+=7;
+  doc.setFontSize(11); doc.text('FORM CAC 2A', 105, y, {align:'center'}); y+=6;
+  doc.setFontSize(10); doc.text('RETURN OF ALLOTMENT (POST INCORPORATION)', 105, y, {align:'center'}); y+=5;
+  doc.setFontSize(9); doc.setFont('helvetica','italic'); doc.text('Pursuant to Section 129', 105, y, {align:'center'}); y+=10;
+  hr();
+  row('Company Number', d.companyNo); row('Date of Resolution', d.resolutionDate); row('Company Name', d.companyName);
+  y+=3; hr();
+  sHead('SECTION A — ALLOTMENT DETAILS');
+  row('Cash Shares Allotted', d.cashShares); row('Nominal Amount (₦)', d.nominalAmt);
+  row('Amount per Cash Share (₦)', d.amtPerCash); row('Non-Cash Shares', d.nonCashShares);
+  row('Amt per Non-Cash Share (₦)', d.amtPerNonCash);
+  if (d.nonCashConsideration) row('Non-Cash Consideration', d.nonCashConsideration);
+  y+=3; hr();
+  sHead('SECTION B — ALLOTTEES');
+  d.allottees.forEach((p,i) => {
+    if (y > 240) { doc.addPage(); y=20; }
+    doc.setFontSize(10); doc.setFont('helvetica','bold'); doc.text(`${i+1}. ${p.name}`, lm, y); y+=5;
+    doc.setFont('helvetica','normal'); doc.text(`   Address: ${p.address||'—'}, ${p.city||''}, ${p.state||''}`, lm, y); y+=5;
+    doc.text(`   Shares: ${p.shares||'—'} (${p.shareType||'—'})`, lm, y); y+=6;
+  });
+  y+=2; hr();
+  sHead('SECTION C — SHAREHOLDERS AFTER ALLOTMENT');
+  d.shareholders.forEach((p,i) => {
+    if (y > 240) { doc.addPage(); y=20; }
+    doc.setFontSize(10); doc.setFont('helvetica','bold'); doc.text(`${i+1}. ${p.name}`, lm, y); y+=5;
+    doc.setFont('helvetica','normal'); doc.text(`   Address: ${p.address||'—'}, ${p.city||''}, ${p.state||''}`, lm, y); y+=5;
+    doc.text(`   Shares: ${p.shares||'—'} (${p.shareType||'—'})`, lm, y); y+=6;
+  });
+  doc.setFontSize(8); doc.setFont('helvetica','italic'); doc.setTextColor(120,120,120);
+  doc.text('Prepared by Bowyard Partners for client review. For official filing purposes only.', 105, 285, {align:'center'});
+  doc.save(`CAC-2A-${d.companyName.replace(/\s+/g,'-')}.pdf`);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matter Detail — Bowyard Partners</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/fav.png">
+  <link rel="stylesheet" href="../../assets/css/plugins/fontawesome.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../portal.css">
+</head>
+<body>
+<div class="portal-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="portal-sidebar">
+    <div class="portal-logo">
+      <img src="../../assets/images/logo/bplogowhite.png" alt="Bowyard Partners">
+      <div class="portal-logo-sub">Staff Portal</div>
+    </div>
+    <nav class="portal-nav">
+      <div class="portal-nav-label">Work</div>
+      <a href="index.html" class="portal-nav-link active"><i class="fa-solid fa-briefcase"></i> Matters</a>
+      <a href="index.html#causelist" class="portal-nav-link"><i class="fa-solid fa-gavel"></i> Cause List</a>
+      <a href="index.html#clients" class="portal-nav-link"><i class="fa-solid fa-users"></i> Clients</a>
+      <a href="index.html#cac" class="portal-nav-link"><i class="fa-solid fa-file-lines"></i> CAC Submissions</a>
+    </nav>
+    <div class="portal-sidebar-foot"><div id="user-block"></div></div>
+  </aside>
+  <div class="p-overlay" id="p-overlay"></div>
+
+  <main class="portal-main">
+    <header class="portal-topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="p-mobile-toggle" id="mobile-toggle"><span></span><span></span><span></span></button>
+        <a href="index.html" style="color:var(--grey-mid);font-size:13px;text-decoration:none;">
+          <i class="fa-solid fa-arrow-left"></i> Matters
+        </a>
+        <div class="portal-page-title" id="matter-ref-title">Matter</div>
+      </div>
+      <div id="topbar-actions"></div>
+    </header>
+
+    <div class="portal-content">
+      <div id="matter-loading" class="p-loading" style="padding:60px 0;"><div class="p-spinner"></div></div>
+      <div id="matter-body" style="display:none;">
+
+        <!-- Matter header strip -->
+        <div class="matter-header" id="matter-header"></div>
+
+        <!-- Two-column layout -->
+        <div class="p-layout-cols">
+
+          <!-- Left: Timeline + Court Dates -->
+          <div class="p-col-main">
+
+            <!-- Timeline -->
+            <div class="p-card" style="margin-bottom:16px;">
+              <div class="p-card-head">
+                <div class="p-card-title">Timeline</div>
+                <button class="p-btn p-btn-gold p-btn-sm" onclick="showModal('modal-add-event')">
+                  <i class="fa-solid fa-plus"></i> Add Update
+                </button>
+              </div>
+              <div id="timeline-wrap"></div>
+            </div>
+
+            <!-- Court dates for this matter -->
+            <div class="p-card">
+              <div class="p-card-head">
+                <div class="p-card-title">Court Dates</div>
+                <button class="p-btn p-btn-outline p-btn-sm" onclick="showModal('modal-add-date')">
+                  <i class="fa-solid fa-plus"></i> Add Date
+                </button>
+              </div>
+              <div id="court-dates-wrap"></div>
+            </div>
+
+          </div>
+
+          <!-- Right: Details sidebar -->
+          <div class="p-col-side">
+            <div class="p-card">
+              <div class="p-card-head"><div class="p-card-title">Matter Details</div></div>
+              <div id="matter-details"></div>
+            </div>
+            <div class="p-card" style="margin-top:16px;">
+              <div class="p-card-head"><div class="p-card-title">Change Status</div></div>
+              <div style="padding:12px 16px 16px;">
+                <select id="status-select" style="width:100%;font-size:13px;padding:8px 10px;border:1.5px solid #D6D2C9;border-radius:2px;font-family:inherit;margin-bottom:10px;">
+                  <option value="open">Open</option>
+                  <option value="in_progress">In Progress</option>
+                  <option value="pending_client">Pending Client</option>
+                  <option value="closed">Closed</option>
+                </select>
+                <select id="priority-select" style="width:100%;font-size:13px;padding:8px 10px;border:1.5px solid #D6D2C9;border-radius:2px;font-family:inherit;margin-bottom:10px;">
+                  <option value="normal">Normal Priority</option>
+                  <option value="urgent">Urgent</option>
+                </select>
+                <button class="p-btn p-btn-gold" style="width:100%;" onclick="saveStatusChange()">Update Status</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div id="matter-404" style="display:none;" class="p-empty">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <div class="p-empty-title">Matter not found</div>
+        <div class="p-empty-sub">Check the URL or return to the matters list.</div>
+        <a href="index.html" class="p-btn p-btn-outline" style="margin-top:12px;">Back to Matters</a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ── MODAL: ADD TIMELINE EVENT ─────────────────────── -->
+<div class="p-modal-bg" id="modal-add-event">
+  <div class="p-modal">
+    <div class="p-modal-head">
+      <div class="p-modal-title">Add Timeline Update</div>
+      <button class="p-modal-close" onclick="hideModal('modal-add-event')">&times;</button>
+    </div>
+    <div class="p-modal-body">
+      <div class="p-form-group"><label>Event / Update *</label>
+        <input type="text" id="ev-event" placeholder="e.g. Originating summons filed at Federal High Court">
+      </div>
+      <div class="p-form-row">
+        <div class="p-form-group"><label>Date</label>
+          <input type="date" id="ev-date">
+        </div>
+        <div class="p-form-group"><label>Type</label>
+          <select id="ev-type">
+            <option value="update">Update</option>
+            <option value="court">Court Date</option>
+            <option value="filing">Filing</option>
+            <option value="milestone">Milestone</option>
+          </select>
+        </div>
+      </div>
+      <div class="p-form-group"><label>Notes (visible to client)</label>
+        <textarea id="ev-note" style="min-height:70px;" placeholder="Additional context for the client…"></textarea>
+      </div>
+    </div>
+    <div class="p-modal-foot">
+      <button class="p-btn p-btn-outline" onclick="hideModal('modal-add-event')">Cancel</button>
+      <button class="p-btn p-btn-gold" onclick="saveEvent()">Save Update</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── MODAL: ADD COURT DATE ─────────────────────────── -->
+<div class="p-modal-bg" id="modal-add-date">
+  <div class="p-modal">
+    <div class="p-modal-head">
+      <div class="p-modal-title">Add Court Date</div>
+      <button class="p-modal-close" onclick="hideModal('modal-add-date')">&times;</button>
+    </div>
+    <div class="p-modal-body">
+      <div class="p-form-row">
+        <div class="p-form-group"><label>Date *</label><input type="date" id="acd-date"></div>
+        <div class="p-form-group"><label>Time</label><input type="time" id="acd-time"></div>
+      </div>
+      <div class="p-form-group"><label>Court / Tribunal *</label>
+        <input type="text" id="acd-court" placeholder="e.g. Federal High Court Abuja">
+      </div>
+      <div class="p-form-row">
+        <div class="p-form-group"><label>Venue / Courtroom</label>
+          <input type="text" id="acd-venue" placeholder="e.g. Courtroom 3">
+        </div>
+        <div class="p-form-group"><label>Judge</label><input type="text" id="acd-judge"></div>
+      </div>
+      <div class="p-form-row">
+        <div class="p-form-group"><label>Hearing Type</label>
+          <select id="acd-type">
+            <option>Mention</option><option>Hearing</option><option>Ruling</option>
+            <option>Judgment</option><option>Interlocutory</option><option>Case Management</option>
+          </select>
+        </div>
+        <div class="p-form-group"><label>Status</label>
+          <select id="acd-status">
+            <option value="scheduled">Scheduled</option>
+            <option value="adjourned">Adjourned</option>
+            <option value="concluded">Concluded</option>
+          </select>
+        </div>
+      </div>
+      <div class="p-form-group"><label>Notes</label>
+        <textarea id="acd-notes" style="min-height:60px;"></textarea>
+      </div>
+    </div>
+    <div class="p-modal-foot">
+      <button class="p-btn p-btn-outline" onclick="hideModal('modal-add-date')">Cancel</button>
+      <button class="p-btn p-btn-gold" onclick="saveMatterCourtDate()">Add Date</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── MODAL: EDIT COURT DATE ────────────────────────── -->
+<div class="p-modal-bg" id="modal-edit-date">
+  <div class="p-modal">
+    <div class="p-modal-head">
+      <div class="p-modal-title">Edit Court Date</div>
+      <button class="p-modal-close" onclick="hideModal('modal-edit-date')">&times;</button>
+    </div>
+    <div class="p-modal-body">
+      <input type="hidden" id="ecd-id">
+      <div class="p-form-row">
+        <div class="p-form-group"><label>Date</label><input type="date" id="ecd-date"></div>
+        <div class="p-form-group"><label>Time</label><input type="time" id="ecd-time"></div>
+      </div>
+      <div class="p-form-group"><label>Court</label><input type="text" id="ecd-court"></div>
+      <div class="p-form-row">
+        <div class="p-form-group"><label>Status</label>
+          <select id="ecd-status">
+            <option value="scheduled">Scheduled</option>
+            <option value="adjourned">Adjourned</option>
+            <option value="concluded">Concluded</option>
+          </select>
+        </div>
+        <div class="p-form-group"><label>Type</label>
+          <select id="ecd-type">
+            <option>Mention</option><option>Hearing</option><option>Ruling</option>
+            <option>Judgment</option><option>Interlocutory</option><option>Case Management</option>
+          </select>
+        </div>
+      </div>
+      <div class="p-form-group"><label>Notes</label><textarea id="ecd-notes" style="min-height:60px;"></textarea></div>
+    </div>
+    <div class="p-modal-foot">
+      <button class="p-btn p-btn-danger p-btn-sm" onclick="deleteCourtDate()">Delete</button>
+      <div style="display:flex;gap:8px;">
+        <button class="p-btn p-btn-outline" onclick="hideModal('modal-edit-date')">Cancel</button>
+        <button class="p-btn p-btn-gold" onclick="updateCourtDate()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="../app.js"></script>
+<script>
+let currentMatter = null;
+let matterId = null;
+
+(async () => {
+  const staffUser = await requireRole(['staff','admin']);
+  if (!staffUser) return;
+  setUserBlock(staffUser);
+  initMobileSidebar();
+
+  const params = new URLSearchParams(location.search);
+  matterId = params.get('id');
+  if (!matterId) { showError(); return; }
+
+  document.getElementById('ev-date').value = new Date().toISOString().split('T')[0];
+  await loadMatter();
+})();
+
+async function loadMatter() {
+  try {
+    const snap = await db.collection('matters').doc(matterId).get();
+    if (!snap.exists) { showError(); return; }
+    currentMatter = { id: snap.id, ...snap.data() };
+    renderMatter();
+    await loadCourtDates();
+    document.getElementById('matter-loading').style.display = 'none';
+    document.getElementById('matter-body').style.display    = 'block';
+  } catch(e) { showError(); }
+}
+
+function showError() {
+  document.getElementById('matter-loading').style.display = 'none';
+  document.getElementById('matter-404').style.display     = 'flex';
+}
+
+function renderMatter() {
+  const m = currentMatter;
+  document.title = `${m.reference||'Matter'} — Bowyard Partners`;
+  document.getElementById('matter-ref-title').textContent = m.reference || 'Matter';
+
+  // Header strip
+  document.getElementById('matter-header').innerHTML = `
+    <div class="matter-header-main">
+      <div class="matter-ref">${m.reference||'—'}</div>
+      <div class="matter-title">${m.title}</div>
+      <div class="matter-meta">
+        <span>${m.type||'—'}</span>
+        <span>·</span>
+        <span>Client: ${m.clientName||'—'}</span>
+        <span>·</span>
+        <span>Opened: ${fmtDate(m.createdAt)}</span>
+        ${m.priority === 'urgent' ? '<span>·</span><span class="p-badge urgent" style="font-size:10px;">Urgent</span>' : ''}
+      </div>
+    </div>
+    <div class="matter-header-badge">${statusBadge(m.status)}</div>
+  `;
+
+  // Set status/priority selects
+  document.getElementById('status-select').value   = m.status   || 'open';
+  document.getElementById('priority-select').value = m.priority || 'normal';
+
+  // Details sidebar
+  const items = [
+    ['Reference',  m.reference||'—'],
+    ['Type',       m.type||'—'],
+    ['Status',     statusBadge(m.status)],
+    ['Priority',   m.priority === 'urgent' ? '<span class="p-badge urgent">Urgent</span>' : 'Normal'],
+    ['Client',     m.clientName||'—'],
+    ['Opened',     fmtDate(m.createdAt)],
+    ['Last Updated', fmtDate(m.updatedAt)],
+  ];
+  if (m.description) items.push(['Description', `<span style="color:var(--grey-mid);font-size:12px;">${m.description}</span>`]);
+  document.getElementById('matter-details').innerHTML = `<div class="p-detail-list">${
+    items.map(([k,v]) => `<div class="p-detail-row"><div class="p-detail-label">${k}</div><div class="p-detail-val">${v}</div></div>`).join('')
+  }</div>`;
+
+  // Timeline
+  const timeline = [...(m.timeline||[])].sort((a,b) => {
+    const aD = a.date?.toDate ? a.date.toDate() : new Date(a.date||0);
+    const bD = b.date?.toDate ? b.date.toDate() : new Date(b.date||0);
+    return bD - aD;
+  });
+
+  if (!timeline.length) {
+    document.getElementById('timeline-wrap').innerHTML = `
+      <div class="p-empty" style="padding:24px;">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <div class="p-empty-title">No updates yet</div>
+        <div class="p-empty-sub">Add the first timeline entry above</div>
+      </div>`;
+    return;
+  }
+
+  const iconMap = { court:'gavel', filing:'file-circle-check', milestone:'flag', update:'pen-to-square' };
+  document.getElementById('timeline-wrap').innerHTML = `<div class="p-timeline" style="padding:8px 16px 16px;">${
+    timeline.map(t => {
+      const dt = t.date?.toDate ? t.date.toDate() : (t.date ? new Date(t.date) : null);
+      const ico = iconMap[t.type] || 'circle-dot';
+      return `<div class="p-tl-item">
+        <div class="p-tl-dot ${t.type||'update'}"><i class="fa-solid fa-${ico}"></i></div>
+        <div class="p-tl-body">
+          <div class="p-tl-event">${t.event}</div>
+          ${t.note ? `<div class="p-tl-note">${t.note}</div>` : ''}
+          <div class="p-tl-date">${dt ? dt.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}) : '—'}</div>
+        </div>
+      </div>`;
+    }).join('')
+  }</div>`;
+}
+
+async function loadCourtDates() {
+  const snap = await db.collection('court_dates')
+    .where('matterId','==', matterId)
+    .orderBy('date','asc').get();
+
+  const el = document.getElementById('court-dates-wrap');
+  if (snap.empty) {
+    el.innerHTML = `<div class="p-empty" style="padding:24px;">
+      <i class="fa-solid fa-gavel"></i>
+      <div class="p-empty-title">No court dates</div>
+      <div class="p-empty-sub">Add court dates for this matter above</div>
+    </div>`;
+    return;
+  }
+
+  let html = '';
+  snap.forEach(d => {
+    const c = d.data();
+    const dt = c.date?.toDate ? c.date.toDate() : new Date(c.date);
+    html += `<div class="cause-item" style="padding:12px 16px;cursor:pointer;" onclick="openEditDate('${d.id}')">
+      <div>
+        <div class="cause-time">${dt.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</div>
+        <div class="cause-court">${c.time||'—'}</div>
+      </div>
+      <div>
+        <div class="cause-matter">${c.court}</div>
+        <div class="cause-client">${c.venue||''} · ${c.type||''} ${c.judge ? '· Before: '+c.judge : ''}</div>
+        ${c.notes ? `<div class="cause-client" style="font-style:italic;">${c.notes}</div>` : ''}
+      </div>
+      <div>${statusBadge(c.status)}</div>
+    </div>`;
+  });
+  el.innerHTML = html;
+}
+
+async function saveEvent() {
+  const event = document.getElementById('ev-event').value.trim();
+  const date  = document.getElementById('ev-date').value;
+  const type  = document.getElementById('ev-type').value;
+  const note  = document.getElementById('ev-note').value.trim();
+  if (!event) { alert('Enter an event description.'); return; }
+
+  const entry = { event, type, note, date: new Date(date) };
+  await db.collection('matters').doc(matterId).update({
+    timeline: firebase.firestore.FieldValue.arrayUnion(entry),
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+  hideModal('modal-add-event');
+  document.getElementById('ev-event').value = '';
+  document.getElementById('ev-note').value  = '';
+  await loadMatter();
+}
+
+async function saveStatusChange() {
+  const status   = document.getElementById('status-select').value;
+  const priority = document.getElementById('priority-select').value;
+  await db.collection('matters').doc(matterId).update({
+    status, priority,
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+  const entry = {
+    event: `Status changed to "${status.replace('_',' ')}"`,
+    type: 'update',
+    note: '',
+    date: new Date()
+  };
+  await db.collection('matters').doc(matterId).update({
+    timeline: firebase.firestore.FieldValue.arrayUnion(entry)
+  });
+  await loadMatter();
+}
+
+async function saveMatterCourtDate() {
+  const date  = document.getElementById('acd-date').value;
+  const court = document.getElementById('acd-court').value.trim();
+  if (!date || !court) { alert('Date and court are required.'); return; }
+  await db.collection('court_dates').add({
+    matterId,
+    matterTitle: currentMatter.title,
+    clientName:  currentMatter.clientName,
+    date:        new Date(date),
+    time:        document.getElementById('acd-time').value,
+    court,
+    venue:       document.getElementById('acd-venue').value.trim(),
+    judge:       document.getElementById('acd-judge').value.trim(),
+    type:        document.getElementById('acd-type').value,
+    status:      document.getElementById('acd-status').value,
+    notes:       document.getElementById('acd-notes').value.trim(),
+    createdAt:   firebase.firestore.FieldValue.serverTimestamp()
+  });
+  hideModal('modal-add-date');
+  await loadCourtDates();
+}
+
+let editingDateId = null;
+async function openEditDate(id) {
+  editingDateId = id;
+  const snap = await db.collection('court_dates').doc(id).get();
+  const c = snap.data();
+  const dt = c.date?.toDate ? c.date.toDate() : new Date(c.date);
+  document.getElementById('ecd-id').value       = id;
+  document.getElementById('ecd-date').value     = dt.toISOString().split('T')[0];
+  document.getElementById('ecd-time').value     = c.time || '';
+  document.getElementById('ecd-court').value    = c.court || '';
+  document.getElementById('ecd-status').value   = c.status || 'scheduled';
+  document.getElementById('ecd-type').value     = c.type || 'Mention';
+  document.getElementById('ecd-notes').value    = c.notes || '';
+  showModal('modal-edit-date');
+}
+
+async function updateCourtDate() {
+  const id = document.getElementById('ecd-id').value;
+  await db.collection('court_dates').doc(id).update({
+    date:   new Date(document.getElementById('ecd-date').value),
+    time:   document.getElementById('ecd-time').value,
+    court:  document.getElementById('ecd-court').value.trim(),
+    status: document.getElementById('ecd-status').value,
+    type:   document.getElementById('ecd-type').value,
+    notes:  document.getElementById('ecd-notes').value.trim()
+  });
+  hideModal('modal-edit-date');
+  await loadCourtDates();
+}
+
+async function deleteCourtDate() {
+  if (!confirm('Delete this court date?')) return;
+  await db.collection('court_dates').doc(editingDateId).delete();
+  hideModal('modal-edit-date');
+  await loadCourtDates();
+}
+</script>
+</body>
+</html>

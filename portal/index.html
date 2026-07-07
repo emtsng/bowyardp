@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Portal — Bowyard Partners</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../assets/images/fav.png">
+  <link rel="stylesheet" href="../assets/css/plugins/fontawesome.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="portal.css">
+  <style>
+    .portal-login-bg{position:absolute;inset:0;overflow:hidden;}
+    .portal-login-bg svg{position:absolute;right:-80px;bottom:-80px;opacity:.06;}
+    .login-tabs{display:flex;border-bottom:2px solid #E8E4DE;margin-bottom:24px;}
+    .login-tab{flex:1;padding:10px;text-align:center;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-mid);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;background:transparent;border-top:none;border-left:none;border-right:none;transition:all .15s;font-family:inherit;}
+    .login-tab.active{color:var(--navy);border-bottom-color:var(--gold);}
+    .login-panel{display:none;}.login-panel.active{display:block;}
+    .login-divider{text-align:center;margin:16px 0;font-size:11px;color:var(--grey-mid);}
+    .portal-back{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,.4);text-decoration:none;margin-bottom:20px;transition:color .15s;}
+    .portal-back:hover{color:rgba(255,255,255,.7);}
+  </style>
+</head>
+<body>
+<div class="portal-login-wrap" style="position:relative;">
+  <div class="portal-login-bg">
+    <svg width="600" height="600" viewBox="0 0 600 600" fill="white"><polygon points="300,0 600,300 300,600 0,300"/></svg>
+  </div>
+  <div style="width:100%;max-width:420px;position:relative;z-index:2;">
+    <a href="../index.html" class="portal-back"><i class="fa-solid fa-arrow-left"></i> Back to main site</a>
+    <div class="portal-login-card">
+      <div class="portal-login-logo">
+        <img src="../assets/images/logo/bplogowhite.png" alt="Bowyard Partners" style="filter:invert(1) brightness(0.2) sepia(1) hue-rotate(0deg) saturate(5);">
+        <div class="portal-login-badge">Client Portal</div>
+      </div>
+      <div class="portal-login-title">Welcome Back</div>
+      <p class="portal-login-sub">Sign in to manage your matters and files.</p>
+
+      <div class="login-tabs">
+        <button class="login-tab active" data-panel="login-panel">Sign In</button>
+        <button class="login-tab" data-panel="register-panel">Register</button>
+      </div>
+
+      <!-- LOGIN -->
+      <div id="login-panel" class="login-panel active">
+        <div id="login-error" class="p-error"></div>
+        <div class="p-form-group">
+          <label for="login-email">Email Address</label>
+          <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="p-form-group">
+          <label for="login-pass">Password</label>
+          <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <button class="p-btn p-btn-navy" style="width:100%;justify-content:center;margin-top:4px;" id="login-btn">
+          Sign In &nbsp;<i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <div class="login-divider">
+          <a href="#" id="forgot-link" style="color:var(--gold);text-decoration:none;font-size:12px;">Forgot password?</a>
+        </div>
+      </div>
+
+      <!-- REGISTER -->
+      <div id="register-panel" class="login-panel">
+        <div id="reg-error" class="p-error"></div>
+        <div id="reg-success" class="p-success"></div>
+        <div class="p-form-group">
+          <label for="reg-name">Full Name</label>
+          <input type="text" id="reg-name" placeholder="Your full name">
+        </div>
+        <div class="p-form-group">
+          <label for="reg-org">Organisation (optional)</label>
+          <input type="text" id="reg-org" placeholder="Company or firm">
+        </div>
+        <div class="p-form-group">
+          <label for="reg-email">Email Address</label>
+          <input type="email" id="reg-email" placeholder="you@example.com">
+        </div>
+        <div class="p-form-group">
+          <label for="reg-phone">Phone Number</label>
+          <input type="tel" id="reg-phone" placeholder="+234 ...">
+        </div>
+        <div class="p-form-group">
+          <label for="reg-pass">Password</label>
+          <input type="password" id="reg-pass" placeholder="Min. 8 characters">
+        </div>
+        <button class="p-btn p-btn-gold" style="width:100%;justify-content:center;margin-top:4px;" id="reg-btn">
+          Create Account &nbsp;<i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <p style="font-size:11px;color:var(--grey-mid);margin-top:14px;line-height:1.6;">By registering you agree to our terms. A member of the Bowyard team will activate your account.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="app.js"></script>
+<script>
+  // Tab switching
+  document.querySelectorAll('.login-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.login-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.login-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.panel).classList.add('active');
+    });
+  });
+
+  // Login
+  document.getElementById('login-btn').addEventListener('click', async () => {
+    const email = document.getElementById('login-email').value.trim();
+    const pass  = document.getElementById('login-pass').value;
+    const err   = document.getElementById('login-error');
+    err.classList.remove('show');
+    if (!email || !pass) { err.textContent = 'Please enter your email and password.'; err.classList.add('show'); return; }
+    try {
+      const cred = await auth.signInWithEmailAndPassword(email, pass);
+      const snap = await db.collection('users').doc(cred.user.uid).get();
+      if (!snap.exists) throw new Error('Account not found. Please contact Bowyard.');
+      const role = snap.data().role;
+      if (role === 'staff' || role === 'admin') {
+        window.location.href = 'staff/index.html';
+      } else {
+        window.location.href = 'client/index.html';
+      }
+    } catch (e) {
+      err.textContent = e.code === 'auth/wrong-password' || e.code === 'auth/user-not-found'
+        ? 'Incorrect email or password.' : (e.message || 'Sign in failed.');
+      err.classList.add('show');
+    }
+  });
+
+  document.getElementById('login-pass').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('login-btn').click();
+  });
+
+  // Forgot password
+  document.getElementById('forgot-link').addEventListener('click', async e => {
+    e.preventDefault();
+    const email = document.getElementById('login-email').value.trim();
+    const err   = document.getElementById('login-error');
+    if (!email) { err.textContent = 'Enter your email above first.'; err.classList.add('show'); return; }
+    try {
+      await auth.sendPasswordResetEmail(email);
+      err.textContent = '';
+      err.classList.remove('show');
+      alert('Password reset email sent.');
+    } catch(e) { err.textContent = e.message; err.classList.add('show'); }
+  });
+
+  // Register
+  document.getElementById('reg-btn').addEventListener('click', async () => {
+    const name  = document.getElementById('reg-name').value.trim();
+    const org   = document.getElementById('reg-org').value.trim();
+    const email = document.getElementById('reg-email').value.trim();
+    const phone = document.getElementById('reg-phone').value.trim();
+    const pass  = document.getElementById('reg-pass').value;
+    const err   = document.getElementById('reg-error');
+    const ok    = document.getElementById('reg-success');
+    err.classList.remove('show'); ok.classList.remove('show');
+    if (!name || !email || !pass) { err.textContent = 'Name, email and password are required.'; err.classList.add('show'); return; }
+    if (pass.length < 8) { err.textContent = 'Password must be at least 8 characters.'; err.classList.add('show'); return; }
+    try {
+      const cred = await auth.createUserWithEmailAndPassword(email, pass);
+      await db.collection('users').doc(cred.user.uid).set({
+        name, email, phone, organisation: org,
+        role: 'client', status: 'pending',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      await auth.signOut();
+      ok.textContent = 'Account created. A member of the Bowyard team will confirm your access shortly.';
+      ok.classList.add('show');
+      document.getElementById('reg-btn').disabled = true;
+    } catch(e) {
+      err.textContent = e.code === 'auth/email-already-in-use'
+        ? 'An account with this email already exists.' : (e.message || 'Registration failed.');
+      err.classList.add('show');
+    }
+  });
+
+  // Demo login
+  function demoLogin(role) {
+    sessionStorage.setItem('bp_demo_role', role);
+    window.location.href = role === 'staff' ? 'staff/index.html' : 'client/index.html';
+  }
+
+  // Check if already logged in
+  auth.onAuthStateChanged(async user => {
+    if (!user) return;
+    const snap = await db.collection('users').doc(user.uid).get();
+    if (!snap.exists) return;
+    const role = snap.data().role;
+    window.location.href = (role === 'staff' || role === 'admin') ? 'staff/index.html' : 'client/index.html';
+  });
+</script>
+</body>
+</html>

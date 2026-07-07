@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Portal — Bowyard Partners</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/fav.png">
+  <link rel="stylesheet" href="../../assets/css/plugins/fontawesome.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../portal.css">
+</head>
+<body>
+<div class="portal-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="portal-sidebar">
+    <div class="portal-logo">
+      <img src="../../assets/images/logo/bplogowhite.png" alt="Bowyard Partners">
+      <div class="portal-logo-sub">Staff Portal</div>
+    </div>
+    <nav class="portal-nav">
+      <div class="portal-nav-label">Work</div>
+      <a href="#" class="portal-nav-link active" id="nav-matters" onclick="switchTab('matters');return false;">
+        <i class="fa-solid fa-briefcase"></i> Matters <span class="p-nav-badge" id="badge-matters">0</span>
+      </a>
+      <a href="#" class="portal-nav-link" id="nav-causelist" onclick="switchTab('causelist');return false;">
+        <i class="fa-solid fa-gavel"></i> Cause List
+      </a>
+      <a href="#" class="portal-nav-link" id="nav-clients" onclick="switchTab('clients');return false;">
+        <i class="fa-solid fa-users"></i> Clients
+      </a>
+      <a href="#" class="portal-nav-link" id="nav-cac" onclick="switchTab('cac');return false;">
+        <i class="fa-solid fa-file-lines"></i> CAC Submissions <span class="p-nav-badge" id="badge-cac">0</span>
+      </a>
+    </nav>
+    <div class="portal-sidebar-foot"><div id="user-block"></div></div>
+  </aside>
+  <div class="p-overlay" id="p-overlay"></div>
+
+  <main class="portal-main">
+    <header class="portal-topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="p-mobile-toggle" id="mobile-toggle"><span></span><span></span><span></span></button>
+        <div class="portal-page-title" id="page-title">Matters</div>
+      </div>
+      <div class="portal-topbar-right" id="topbar-actions"></div>
+    </header>
+
+    <div class="portal-content">
+
+      <!-- ── MATTERS TAB ──────────────────────────────── -->
+      <div id="tab-matters">
+        <div class="p-stats" id="matters-stats">
+          <div class="p-stat gold"><div class="p-stat-label">Total Active</div><div class="p-stat-val" id="s-active">—</div></div>
+          <div class="p-stat amber"><div class="p-stat-label">Pending Client</div><div class="p-stat-val" id="s-pending">—</div></div>
+          <div class="p-stat green"><div class="p-stat-label">Closed</div><div class="p-stat-val" id="s-closed">—</div></div>
+          <div class="p-stat navy"><div class="p-stat-label">Urgent</div><div class="p-stat-val" id="s-urgent">—</div></div>
+        </div>
+        <div class="p-card">
+          <div class="p-card-head">
+            <div class="p-card-title">All Matters</div>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+              <select id="filter-status" onchange="renderMattersTable()" style="font-size:11px;padding:5px 10px;border:1.5px solid #D6D2C9;border-radius:2px;font-family:inherit;">
+                  <option value="">All Statuses</option>
+                  <option value="open">Open</option>
+                  <option value="in_progress">In Progress</option>
+                  <option value="pending_client">Pending Client</option>
+                  <option value="closed">Closed</option>
+                </select>
+              <button class="p-btn p-btn-gold p-btn-sm" onclick="showModal('modal-new-matter')"><i class="fa-solid fa-plus"></i> New Matter</button>
+            </div>
+          </div>
+          <div id="matters-table" class="p-table-wrap"><div class="p-loading"><div class="p-spinner"></div></div></div>
+        </div>
+      </div>
+
+      <!-- ── CAUSE LIST TAB ───────────────────────────── -->
+      <div id="tab-causelist" style="display:none;">
+        <div class="p-card-head" style="margin-bottom:16px;">
+          <div>
+            <div class="p-section-title">Court Cause List</div>
+            <div class="p-section-sub">Upcoming court dates and hearings</div>
+          </div>
+          <button class="p-btn p-btn-gold p-btn-sm" onclick="showModal('modal-new-date')"><i class="fa-solid fa-plus"></i> Add Court Date</button>
+        </div>
+        <div class="p-grid-2" style="margin-bottom:16px;">
+          <div class="p-form-group" style="margin:0;">
+            <input type="date" id="cause-from" onchange="loadCauselist()" style="font-size:12px;padding:7px 12px;border:1.5px solid #D6D2C9;border-radius:2px;font-family:inherit;">
+          </div>
+          <div class="p-form-group" style="margin:0;">
+            <input type="date" id="cause-to" onchange="loadCauselist()" style="font-size:12px;padding:7px 12px;border:1.5px solid #D6D2C9;border-radius:2px;font-family:inherit;">
+          </div>
+        </div>
+        <div class="p-card" id="causelist-content"><div class="p-loading"><div class="p-spinner"></div></div></div>
+      </div>
+
+      <!-- ── CLIENTS TAB ──────────────────────────────── -->
+      <div id="tab-clients" style="display:none;">
+        <div class="p-card-head" style="margin-bottom:16px;">
+          <div>
+            <div class="p-section-title">Client Directory</div>
+            <div class="p-section-sub">Registered portal accounts</div>
+          </div>
+        </div>
+        <div class="p-card" id="clients-table"><div class="p-loading"><div class="p-spinner"></div></div></div>
+      </div>
+
+      <!-- ── CAC SUBMISSIONS TAB ──────────────────────── -->
+      <div id="tab-cac" style="display:none;">
+        <div class="p-card-head" style="margin-bottom:16px;">
+          <div>
+            <div class="p-section-title">CAC Form Submissions</div>
+            <div class="p-section-sub">Client-submitted regulatory filing instructions</div>
+          </div>
+          <select id="cac-filter" onchange="loadCACSubmissions()" style="font-size:11px;padding:5px 10px;border:1.5px solid #D6D2C9;border-radius:2px;font-family:inherit;">
+            <option value="">All Forms</option>
+            <option value="CAC 1.1">CAC 1.1</option>
+            <option value="CAC 7">CAC 7</option>
+            <option value="CAC 2A">CAC 2A</option>
+          </select>
+        </div>
+        <div class="p-card" id="cac-table"><div class="p-loading"><div class="p-spinner"></div></div></div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- ── MODAL: NEW MATTER ──────────────────────────────── -->
+<div class="p-modal-bg" id="modal-new-matter">
+  <div class="p-modal">
+    <div class="p-modal-head">
+      <div class="p-modal-title">Open New Matter</div>
+      <button class="p-modal-close" onclick="hideModal('modal-new-matter')">&times;</button>
+    </div>
+    <div class="p-modal-body">
+      <div id="new-matter-error" class="p-error"></div>
+      <div class="p-form-group"><label>Matter Title *</label><input type="text" id="nm-title" placeholder="e.g. Acquisition of ABC Limited"></div>
+      <div class="p-form-row">
+        <div class="p-form-group"><label>Practice Area *</label>
+          <select id="nm-type"><option value="" disabled selected>Select area</option></select>
+        </div>
+        <div class="p-form-group"><label>Priority</label>
+          <select id="nm-priority"><option value="normal">Normal</option><option value="urgent">Urgent</option></select>
+        </div>
+      </div>
+      <div class="p-form-group"><label>Client (email or name) *</label>
+        <input type="text" id="nm-client-search" placeholder="Type to search registered clients…" oninput="searchClients(this.value)">
+        <div id="client-suggestions" style="border:1px solid #D6D2C9;border-top:none;display:none;max-height:140px;overflow-y:auto;"></div>
+        <input type="hidden" id="nm-client-id">
+        <div id="nm-client-name" style="font-size:11px;color:var(--gold);margin-top:3px;"></div>
+      </div>
+      <div class="p-form-group"><label>Matter Description</label>
+        <textarea id="nm-desc" placeholder="Brief description of the matter…"></textarea>
+      </div>
+      <div class="p-form-group"><label>Reference (auto-generated if blank)</label>
+        <input type="text" id="nm-ref" placeholder="e.g. BP/2025/001">
+      </div>
+    </div>
+    <div class="p-modal-foot">
+      <button class="p-btn p-btn-outline" onclick="hideModal('modal-new-matter')">Cancel</button>
+      <button class="p-btn p-btn-gold" id="nm-save-btn" onclick="saveMatter()">Open Matter</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── MODAL: ADD COURT DATE ─────────────────────────── -->
+<div class="p-modal-bg" id="modal-new-date">
+  <div class="p-modal">
+    <div class="p-modal-head">
+      <div class="p-modal-title">Add Court Date</div>
+      <button class="p-modal-close" onclick="hideModal('modal-new-date')">&times;</button>
+    </div>
+    <div class="p-modal-body">
+      <div class="p-form-group"><label>Matter Title *</label><input type="text" id="cd-matter" placeholder="Matter name or reference"></div>
+      <div class="p-form-group"><label>Client Name</label><input type="text" id="cd-client"></div>
+      <div class="p-form-row">
+        <div class="p-form-group"><label>Date *</label><input type="date" id="cd-date"></div>
+        <div class="p-form-group"><label>Time</label><input type="time" id="cd-time"></div>
+      </div>
+      <div class="p-form-group"><label>Court / Tribunal *</label><input type="text" id="cd-court" placeholder="e.g. Federal High Court Abuja"></div>
+      <div class="p-form-row">
+        <div class="p-form-group"><label>Venue / Courtroom</label><input type="text" id="cd-venue" placeholder="e.g. Courtroom 3"></div>
+        <div class="p-form-group"><label>Judge</label><input type="text" id="cd-judge"></div>
+      </div>
+      <div class="p-form-row">
+        <div class="p-form-group"><label>Hearing Type</label>
+          <select id="cd-type">
+            <option>Mention</option><option>Hearing</option><option>Ruling</option>
+            <option>Judgment</option><option>Interlocutory</option><option>Case Management</option>
+          </select>
+        </div>
+        <div class="p-form-group"><label>Status</label>
+          <select id="cd-status"><option value="scheduled">Scheduled</option><option value="adjourned">Adjourned</option><option value="concluded">Concluded</option></select>
+        </div>
+      </div>
+      <div class="p-form-group"><label>Notes</label><textarea id="cd-notes" style="min-height:60px;"></textarea></div>
+    </div>
+    <div class="p-modal-foot">
+      <button class="p-btn p-btn-outline" onclick="hideModal('modal-new-date')">Cancel</button>
+      <button class="p-btn p-btn-gold" onclick="saveCourtDate()">Save Date</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── MODAL: CAC SUBMISSION DETAIL ──────────────────── -->
+<div class="p-modal-bg" id="modal-cac-detail">
+  <div class="p-modal" style="max-width:680px;">
+    <div class="p-modal-head">
+      <div class="p-modal-title" id="cac-modal-title">Submission Detail</div>
+      <button class="p-modal-close" onclick="hideModal('modal-cac-detail')">&times;</button>
+    </div>
+    <div class="p-modal-body" id="cac-modal-body"></div>
+    <div class="p-modal-foot">
+      <select id="cac-status-select" style="font-size:12px;padding:7px 10px;border:1.5px solid #D6D2C9;border-radius:2px;font-family:inherit;">
+        <option value="submitted">Submitted</option>
+        <option value="under_review">Under Review</option>
+        <option value="filed">Filed</option>
+        <option value="rejected">Rejected</option>
+      </select>
+      <input type="text" id="cac-notes-input" placeholder="Staff notes…" style="flex:1;font-size:12px;padding:7px 10px;border:1.5px solid #D6D2C9;border-radius:2px;font-family:inherit;">
+      <button class="p-btn p-btn-gold p-btn-sm" id="cac-update-btn">Update</button>
+      <button class="p-btn p-btn-outline" onclick="hideModal('modal-cac-detail')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── MODAL: MATTER TIMELINE UPDATE ─────────────────── -->
+<div class="p-modal-bg" id="modal-update-matter">
+  <div class="p-modal">
+    <div class="p-modal-head">
+      <div class="p-modal-title">Update Matter</div>
+      <button class="p-modal-close" onclick="hideModal('modal-update-matter')">&times;</button>
+    </div>
+    <div class="p-modal-body">
+      <input type="hidden" id="update-matter-id">
+      <div class="p-form-group"><label>Update / Event *</label><input type="text" id="update-event" placeholder="e.g. Documents filed at court"></div>
+      <div class="p-form-row">
+        <div class="p-form-group"><label>Date</label><input type="date" id="update-date"></div>
+        <div class="p-form-group"><label>Event Type</label>
+          <select id="update-type"><option value="update">Update</option><option value="court">Court Date</option><option value="filing">Filing</option><option value="milestone">Milestone</option></select>
+        </div>
+      </div>
+      <div class="p-form-group"><label>Notes (visible to client)</label><textarea id="update-note" style="min-height:60px;"></textarea></div>
+      <div class="p-form-row">
+        <div class="p-form-group"><label>Change Status To</label>
+          <select id="update-status">
+            <option value="">— No change —</option>
+            <option value="open">Open</option>
+            <option value="in_progress">In Progress</option>
+            <option value="pending_client">Pending Client</option>
+            <option value="closed">Closed</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="p-modal-foot">
+      <button class="p-btn p-btn-outline" onclick="hideModal('modal-update-matter')">Cancel</button>
+      <button class="p-btn p-btn-gold" onclick="saveUpdate()">Save Update</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="../app.js"></script>
+<script>
+let staffUser = null;
+let allMatters = [];
+let allClients = [];
+
+(async () => {
+  staffUser = await requireRole(['staff','admin']);
+  if (!staffUser) return;
+  setUserBlock(staffUser);
+  initMobileSidebar();
+
+  // Populate matter type select
+  const sel = document.getElementById('nm-type');
+  MATTER_TYPES.forEach(t => sel.insertAdjacentHTML('beforeend', `<option value="${t}">${t}</option>`));
+
+  // Default cause list date range: this week
+  const today = new Date();
+  const nextWeek = new Date(today); nextWeek.setDate(today.getDate() + 14);
+  document.getElementById('cause-from').value = today.toISOString().split('T')[0];
+  document.getElementById('cause-to').value   = nextWeek.toISOString().split('T')[0];
+
+  await Promise.all([loadMatters(), loadClients()]);
+  updateBadges();
+})();
+
+/* ── Tab switching ──────────────────────────────────── */
+function switchTab(name) {
+  ['matters','causelist','clients','cac'].forEach(t => {
+    document.getElementById(`tab-${t}`).style.display = t === name ? 'block' : 'none';
+    document.getElementById(`nav-${t}`)?.classList.toggle('active', t === name);
+  });
+  const titles = { matters:'Matters', causelist:'Cause List', clients:'Clients', cac:'CAC Submissions' };
+  document.getElementById('page-title').textContent = titles[name];
+  const actions = {
+    matters: `<button class="p-btn p-btn-gold p-btn-sm" onclick="showModal('modal-new-matter')"><i class="fa-solid fa-plus"></i> New Matter</button>`,
+    causelist: `<button class="p-btn p-btn-gold p-btn-sm" onclick="showModal('modal-new-date')"><i class="fa-solid fa-plus"></i> Add Court Date</button>`,
+    clients: '', cac: ''
+  };
+  document.getElementById('topbar-actions').innerHTML = actions[name] || '';
+  if (name === 'causelist') loadCauselist();
+  if (name === 'clients')   renderClientsTable();
+  if (name === 'cac')       loadCACSubmissions();
+}
+
+/* ── Matters ────────────────────────────────────────── */
+async function loadMatters() {
+  const snap = await db.collection('matters').orderBy('updatedAt','desc').get();
+  allMatters = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  renderMattersTable();
+}
+
+function renderMattersTable() {
+  const statusFilter = document.getElementById('filter-status')?.value;
+  const filtered = statusFilter ? allMatters.filter(m => m.status === statusFilter) : allMatters;
+  const el = document.getElementById('matters-table');
+  if (!filtered.length) {
+    el.innerHTML = `<div class="p-empty"><i class="fa-solid fa-briefcase"></i><div class="p-empty-title">No matters found</div></div>`;
+    return;
+  }
+  el.innerHTML = `<table class="p-table"><thead><tr>
+    <th>Reference</th><th>Matter</th><th>Client</th><th>Type</th><th>Status</th><th>Updated</th><th></th>
+  </tr></thead><tbody>
+  ${filtered.map(m => `<tr>
+    <td style="font-size:10px;color:var(--grey-mid);">${m.reference||'—'}</td>
+    <td><strong>${m.title}</strong>${m.priority==='urgent'?'&nbsp;<span class="p-badge urgent" style="font-size:8px;">Urgent</span>':''}</td>
+    <td>${m.clientName||'—'}</td>
+    <td style="font-size:12px;">${m.type||'—'}</td>
+    <td>${statusBadge(m.status)}</td>
+    <td style="font-size:11px;">${fmtDate(m.updatedAt)}</td>
+    <td style="white-space:nowrap;">
+      <a href="matter.html?id=${m.id}" class="p-btn p-btn-outline p-btn-sm">View</a>
+      <button class="p-btn p-btn-ghost p-btn-sm" onclick="openUpdateModal('${m.id}')"><i class="fa-solid fa-pen"></i></button>
+    </td>
+  </tr>`).join('')}
+  </tbody></table>`;
+}
+
+function updateBadges() {
+  const open = allMatters.filter(m => m.status !== 'closed').length;
+  document.getElementById('badge-matters').textContent = open;
+  document.getElementById('s-active').textContent  = allMatters.filter(m => m.status === 'open' || m.status === 'in_progress').length;
+  document.getElementById('s-pending').textContent = allMatters.filter(m => m.status === 'pending_client').length;
+  document.getElementById('s-closed').textContent  = allMatters.filter(m => m.status === 'closed').length;
+  document.getElementById('s-urgent').textContent  = allMatters.filter(m => m.priority === 'urgent').length;
+}
+
+async function saveMatter() {
+  const title    = document.getElementById('nm-title').value.trim();
+  const type     = document.getElementById('nm-type').value;
+  const priority = document.getElementById('nm-priority').value;
+  const clientId = document.getElementById('nm-client-id').value;
+  const clientName = document.getElementById('nm-client-name').textContent.replace('✓ ','');
+  const desc     = document.getElementById('nm-desc').value.trim();
+  const ref      = document.getElementById('nm-ref').value.trim() || genRef();
+  const err      = document.getElementById('new-matter-error');
+  err.classList.remove('show');
+
+  if (!title || !type) { err.textContent = 'Title and practice area are required.'; err.classList.add('show'); return; }
+  if (!clientId) { err.textContent = 'Please select a client.'; err.classList.add('show'); return; }
+
+  const btn = document.getElementById('nm-save-btn');
+  btn.disabled = true; btn.textContent = 'Saving…';
+  try {
+    const now = firebase.firestore.FieldValue.serverTimestamp();
+    await db.collection('matters').add({
+      title, type, priority, reference: ref,
+      clientId, clientName, description: desc,
+      status: 'open', timeline: [],
+      createdAt: now, updatedAt: now
+    });
+    hideModal('modal-new-matter');
+    document.getElementById('nm-title').value = '';
+    document.getElementById('nm-ref').value   = '';
+    document.getElementById('nm-desc').value  = '';
+    document.getElementById('nm-client-id').value = '';
+    document.getElementById('nm-client-name').textContent = '';
+    document.getElementById('nm-client-search').value = '';
+    await loadMatters(); updateBadges();
+  } catch(e) { err.textContent = e.message; err.classList.add('show'); }
+  btn.disabled = false; btn.textContent = 'Open Matter';
+}
+
+/* ── Client search (for new matter) ────────────────── */
+async function loadClients() {
+  const snap = await db.collection('users').where('role','==','client').get();
+  allClients = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+}
+
+function searchClients(q) {
+  const box = document.getElementById('client-suggestions');
+  if (!q) { box.style.display = 'none'; return; }
+  const matches = allClients.filter(c =>
+    c.name?.toLowerCase().includes(q.toLowerCase()) ||
+    c.email?.toLowerCase().includes(q.toLowerCase()) ||
+    c.organisation?.toLowerCase().includes(q.toLowerCase())
+  ).slice(0,6);
+  if (!matches.length) { box.style.display = 'none'; return; }
+  box.innerHTML = matches.map(c => `
+    <div onclick="selectClient('${c.id}','${c.name||c.email}')"
+      style="padding:8px 12px;cursor:pointer;border-bottom:1px solid #F0EDE8;font-size:12px;"
+      onmouseover="this.style.background='#FAFAF8'" onmouseout="this.style.background=''">
+      <strong>${c.name||'—'}</strong>&nbsp;<span style="color:var(--grey-mid);">${c.email||''}</span>
+      ${c.organisation ? `<br><span style="font-size:10px;color:var(--grey-mid);">${c.organisation}</span>` : ''}
+    </div>`).join('');
+  box.style.display = 'block';
+}
+
+function selectClient(id, name) {
+  document.getElementById('nm-client-id').value = id;
+  document.getElementById('nm-client-search').value = name;
+  document.getElementById('nm-client-name').textContent = `✓ ${name}`;
+  document.getElementById('client-suggestions').style.display = 'none';
+}
+
+/* ── Cause List ─────────────────────────────────────── */
+async function loadCauselist() {
+  const el  = document.getElementById('causelist-content');
+  const from = document.getElementById('cause-from').value;
+  const to   = document.getElementById('cause-to').value;
+  el.innerHTML = '<div class="p-loading"><div class="p-spinner"></div></div>';
+
+  let q = db.collection('court_dates').orderBy('date','asc');
+  if (from) q = q.where('date','>=', new Date(from));
+  if (to)   q = q.where('date','<=', new Date(to + 'T23:59:59'));
+  const snap = await q.get();
+
+  if (snap.empty) {
+    el.innerHTML = `<div class="p-empty"><i class="fa-solid fa-gavel"></i><div class="p-empty-title">No court dates in range</div></div>`;
+    return;
+  }
+
+  const byDay = {};
+  snap.forEach(d => {
+    const cd = d.data();
+    const dt  = cd.date?.toDate ? cd.date.toDate() : new Date(cd.date);
+    const key = dt.toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+    if (!byDay[key]) byDay[key] = [];
+    byDay[key].push({ id: d.id, ...cd, _dt: dt });
+  });
+
+  let html = '';
+  Object.entries(byDay).forEach(([day, items]) => {
+    html += `<div class="cause-day-label">${day}</div>`;
+    items.forEach(c => {
+      html += `<div class="cause-item">
+        <div>
+          <div class="cause-time">${c.time||'—'}</div>
+          <div class="cause-court">${c.court||'—'}</div>
+        </div>
+        <div>
+          <div class="cause-matter">${c.matterTitle||c.matter||'—'}</div>
+          <div class="cause-client">${c.clientName||'—'} &nbsp;·&nbsp; ${c.venue||''} &nbsp;·&nbsp; ${c.type||''}</div>
+          ${c.judge ? `<div class="cause-client">Before: ${c.judge}</div>` : ''}
+          ${c.notes ? `<div class="cause-client" style="font-style:italic;">${c.notes}</div>` : ''}
+        </div>
+        <div>${statusBadge(c.status)}</div>
+      </div>`;
+    });
+  });
+  el.innerHTML = html;
+}
+
+async function saveCourtDate() {
+  const matter = document.getElementById('cd-matter').value.trim();
+  const date   = document.getElementById('cd-date').value;
+  const court  = document.getElementById('cd-court').value.trim();
+  if (!matter || !date || !court) { alert('Matter, date and court are required.'); return; }
+  await db.collection('court_dates').add({
+    matterTitle: matter,
+    clientName:  document.getElementById('cd-client').value.trim(),
+    date:        new Date(date),
+    time:        document.getElementById('cd-time').value,
+    court,
+    venue:       document.getElementById('cd-venue').value.trim(),
+    judge:       document.getElementById('cd-judge').value.trim(),
+    type:        document.getElementById('cd-type').value,
+    status:      document.getElementById('cd-status').value,
+    notes:       document.getElementById('cd-notes').value.trim(),
+    createdAt:   firebase.firestore.FieldValue.serverTimestamp()
+  });
+  hideModal('modal-new-date');
+  loadCauselist();
+}
+
+/* ── Clients tab ────────────────────────────────────── */
+function renderClientsTable() {
+  const el = document.getElementById('clients-table');
+  if (!allClients.length) {
+    el.innerHTML = `<div class="p-empty"><i class="fa-solid fa-users"></i><div class="p-empty-title">No clients registered</div><div class="p-empty-sub">Clients appear here once they register on the portal</div></div>`;
+    return;
+  }
+  el.innerHTML = `<div class="p-table-wrap"><table class="p-table"><thead><tr>
+    <th>Name</th><th>Email</th><th>Organisation</th><th>Phone</th><th>Status</th><th>Registered</th>
+  </tr></thead><tbody>
+  ${allClients.map(c => `<tr>
+    <td><strong>${c.name||'—'}</strong></td>
+    <td style="font-size:12px;">${c.email||'—'}</td>
+    <td style="font-size:12px;">${c.organisation||'—'}</td>
+    <td style="font-size:12px;">${c.phone||'—'}</td>
+    <td>${c.status === 'pending' ? '<span class="p-badge pending">Pending</span>' : '<span class="p-badge closed">Active</span>'}</td>
+    <td style="font-size:11px;">${fmtDate(c.createdAt)}</td>
+  </tr>`).join('')}
+  </tbody></table></div>`;
+}
+
+/* ── CAC Submissions ────────────────────────────────── */
+async function loadCACSubmissions() {
+  const el = document.getElementById('cac-table');
+  el.innerHTML = '<div class="p-loading"><div class="p-spinner"></div></div>';
+  const formFilter = document.getElementById('cac-filter').value;
+  let q = db.collection('cac_submissions').orderBy('submittedAt','desc');
+  const snap = await q.get();
+
+  let docs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  if (formFilter) docs = docs.filter(d => d.formType === formFilter);
+
+  // Update badge
+  document.getElementById('badge-cac').textContent = docs.filter(d => d.status === 'submitted').length || '';
+
+  if (!docs.length) {
+    el.innerHTML = `<div class="p-empty"><i class="fa-regular fa-file"></i><div class="p-empty-title">No submissions</div></div>`;
+    return;
+  }
+  el.innerHTML = `<div class="p-table-wrap"><table class="p-table"><thead><tr>
+    <th>Form</th><th>Client</th><th>Company / Subject</th><th>Submitted</th><th>Status</th><th>Notes</th><th></th>
+  </tr></thead><tbody>
+  ${docs.map(s => `<tr>
+    <td><strong>${s.formType}</strong></td>
+    <td>${s.clientName||'—'}</td>
+    <td>${s.data?.companyName||s.data?.companyNameFull||'—'}</td>
+    <td style="font-size:11px;">${fmtDate(s.submittedAt)}</td>
+    <td>${statusBadge(s.status)}</td>
+    <td style="font-size:11px;color:var(--grey-mid);">${s.notes||'—'}</td>
+    <td><button class="p-btn p-btn-outline p-btn-sm" onclick="openCACDetail('${s.id}')">Review</button></td>
+  </tr>`).join('')}
+  </tbody></table></div>`;
+}
+
+let currentCACId = null;
+async function openCACDetail(id) {
+  currentCACId = id;
+  const snap = await db.collection('cac_submissions').doc(id).get();
+  const s = snap.data();
+  document.getElementById('cac-modal-title').textContent = `${s.formType} — ${s.clientName}`;
+  document.getElementById('cac-status-select').value = s.status;
+  document.getElementById('cac-notes-input').value  = s.notes || '';
+
+  const d = s.data || {};
+  let body = `<div style="margin-bottom:14px;">${statusBadge(s.status)}&nbsp;<span style="font-size:11px;color:var(--grey-mid);">Submitted ${fmtDateTime(s.submittedAt)}</span></div>`;
+
+  if (s.formType === 'CAC 1.1') {
+    body += fieldBlock('Company', ['Type: '+d.companyType, d.companyName, d.regAddress+', '+d.regCity+', '+d.regState, d.companyEmail]);
+    body += fieldBlock('Share Capital', ['₦'+Number(d.capitalAmount||0).toLocaleString()+' ('+d.capitalWords+')', d.numShares+' shares × ₦'+d.amtPerShare+' ('+d.shareType+')']);
+    (d.directors||[]).forEach((dir,i) => {
+      body += fieldBlock(`Director ${i+1}: ${dir.name}`, [dir.dob+' / '+dir.gender, dir.nationality, dir.address+', '+dir.city+', '+dir.state, dir.idType+': '+dir.idNo]);
+    });
+    body += fieldBlock('Secretary', [d.secretaryName, d.secretaryAddress, d.secretaryPhone+' | '+d.secretaryEmail]);
+  } else if (s.formType === 'CAC 7') {
+    body += fieldBlock('Company', [d.companyNameFull+' ('+d.regNo+')', 'Appointed: '+d.appointmentDate]);
+    body += fieldBlock('New Director', [d.title+' '+d.forenames+' '+d.surname, d.dob+' / '+d.gender, d.nationality, d.dirEmail+' / '+d.dirPhone, d.idType+': '+d.idNo]);
+    body += fieldBlock('Service Address', [[d.serviceAddress?.building, d.serviceAddress?.street, d.serviceAddress?.city, d.serviceAddress?.state, d.serviceAddress?.country].filter(Boolean).join(', ')]);
+    body += fieldBlock('Residential Address', [d.residentialSameAsService ? 'Same as service address' : [d.residentialAddress?.building, d.residentialAddress?.street, d.residentialAddress?.city].filter(Boolean).join(', ')]);
+  } else if (s.formType === 'CAC 2A') {
+    body += fieldBlock('Company', [d.companyName+' ('+d.companyNo+')', 'Resolution: '+d.resolutionDate]);
+    body += fieldBlock('Allotment', ['Cash shares: '+d.cashShares, 'Nominal: ₦'+d.nominalAmt, 'Per share: ₦'+d.amtPerCash, 'Non-cash shares: '+d.nonCashShares]);
+    body += `<div style="margin-bottom:12px;"><div class="sub-label">Allottees</div>${(d.allottees||[]).map(p=>`<div class="sub-value">${p.name} — ${p.shares} shares (${p.shareType})</div>`).join('')}</div>`;
+    body += `<div style="margin-bottom:12px;"><div class="sub-label">Post-Allotment Shareholders</div>${(d.shareholders||[]).map(p=>`<div class="sub-value">${p.name} — ${p.shares} shares (${p.shareType})</div>`).join('')}</div>`;
+  }
+
+  document.getElementById('cac-modal-body').innerHTML = body;
+  document.getElementById('cac-update-btn').onclick = () => updateCACStatus(id);
+  showModal('modal-cac-detail');
+}
+
+function fieldBlock(label, values) {
+  return `<div class="sub-field"><div class="sub-label">${label}</div>${values.filter(Boolean).map(v=>`<div class="sub-value">${v}</div>`).join('')}</div>`;
+}
+
+async function updateCACStatus(id) {
+  const status = document.getElementById('cac-status-select').value;
+  const notes  = document.getElementById('cac-notes-input').value.trim();
+  await db.collection('cac_submissions').doc(id).update({ status, notes });
+  hideModal('modal-cac-detail');
+  loadCACSubmissions();
+}
+
+/* ── Matter update modal ────────────────────────────── */
+function openUpdateModal(matterId) {
+  document.getElementById('update-matter-id').value = matterId;
+  document.getElementById('update-event').value   = '';
+  document.getElementById('update-note').value    = '';
+  document.getElementById('update-date').value    = new Date().toISOString().split('T')[0];
+  document.getElementById('update-status').value  = '';
+  showModal('modal-update-matter');
+}
+
+async function saveUpdate() {
+  const id    = document.getElementById('update-matter-id').value;
+  const event = document.getElementById('update-event').value.trim();
+  const date  = document.getElementById('update-date').value;
+  const type  = document.getElementById('update-type').value;
+  const note  = document.getElementById('update-note').value.trim();
+  const newStatus = document.getElementById('update-status').value;
+  if (!event) { alert('Enter an event description.'); return; }
+
+  const entry = { date: new Date(date), event, type, note };
+  const update = {
+    timeline: firebase.firestore.FieldValue.arrayUnion(entry),
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  };
+  if (newStatus) update.status = newStatus;
+
+  await db.collection('matters').doc(id).update(update);
+  hideModal('modal-update-matter');
+  await loadMatters(); updateBadges();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regulatory Forms — Bowyard Partners Portal</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/fav.png">
+  <link rel="stylesheet" href="../../assets/css/plugins/fontawesome.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../portal.css">
+</head>
+<body>
+<div class="portal-layout">
+  <aside class="portal-sidebar">
+    <div class="portal-logo">
+      <img src="../../assets/images/logo/bplogowhite.png" alt="Bowyard Partners">
+      <div class="portal-logo-sub">Client Portal</div>
+    </div>
+    <nav class="portal-nav">
+      <div class="portal-nav-label">Menu</div>
+      <a href="index.html" class="portal-nav-link"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+      <a href="index.html#matters" class="portal-nav-link"><i class="fa-solid fa-briefcase"></i> My Matters</a>
+      <a href="forms.html" class="portal-nav-link active"><i class="fa-solid fa-file-lines"></i> Regulatory Forms</a>
+      <div class="portal-nav-label" style="margin-top:8px;">Firm</div>
+      <a href="../../team.html" class="portal-nav-link" target="_blank"><i class="fa-solid fa-users"></i> Our Team</a>
+      <a href="../../contact.html" class="portal-nav-link" target="_blank"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+    </nav>
+    <div class="portal-sidebar-foot"><div id="user-block"></div></div>
+  </aside>
+  <div class="p-overlay" id="p-overlay"></div>
+
+  <main class="portal-main">
+    <header class="portal-topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="p-mobile-toggle" id="mobile-toggle"><span></span><span></span><span></span></button>
+        <div class="portal-page-title">Regulatory Forms</div>
+      </div>
+    </header>
+    <div class="portal-content">
+
+      <div class="p-alert p-alert-info" style="margin-bottom:24px;">
+        <i class="fa-solid fa-circle-info"></i>&nbsp;
+        Complete a form below and submit to the Bowyard team. We will review your submission, advise on any missing information, and file on your behalf with the CAC.
+      </div>
+
+      <div class="p-section-head" style="margin-bottom:20px;">
+        <div>
+          <div class="p-section-title">CAC Filing Forms</div>
+          <div class="p-section-sub">Corporate Affairs Commission — most common client filing instructions</div>
+        </div>
+      </div>
+
+      <div class="p-grid-3">
+        <a href="form-cac11.html" class="cac-card">
+          <div class="cac-num">Form CAC 1.1</div>
+          <div class="cac-title">Company Registration</div>
+          <div class="cac-desc">Application for Registration of a new company with the Corporate Affairs Commission pursuant to CAMA 2020.</div>
+          <ul class="cac-needs">
+            <li>Company name &amp; type (Ltd, Guarantee, Unlimited)</li>
+            <li>Registered office address</li>
+            <li>Authorised share capital details</li>
+            <li>First directors — names, IDs, addresses</li>
+            <li>Company secretary details</li>
+          </ul>
+          <span class="p-btn p-btn-gold p-btn-sm">Start Form <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+
+        <a href="form-cac7.html" class="cac-card">
+          <div class="cac-num">Form CAC 7</div>
+          <div class="cac-title">Appointment of Director</div>
+          <div class="cac-desc">Notify the CAC of the appointment of a new director pursuant to Section 321 of CAMA 2020.</div>
+          <ul class="cac-needs">
+            <li>Company registration number</li>
+            <li>New director's full particulars</li>
+            <li>Valid government-issued ID</li>
+            <li>Service and residential addresses</li>
+            <li>Date of appointment</li>
+          </ul>
+          <span class="p-btn p-btn-gold p-btn-sm">Start Form <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+
+        <a href="form-cac2a.html" class="cac-card">
+          <div class="cac-num">Form CAC 2A</div>
+          <div class="cac-title">Return of Allotment</div>
+          <div class="cac-desc">File a return of allotment of shares (post-incorporation) pursuant to Section 129 of CAMA 2020.</div>
+          <ul class="cac-needs">
+            <li>Company number &amp; date of resolution</li>
+            <li>Number and type of shares allotted</li>
+            <li>Cash and non-cash consideration details</li>
+            <li>Details of each allottee (up to 6)</li>
+            <li>Post-allotment shareholder list</li>
+          </ul>
+          <span class="p-btn p-btn-gold p-btn-sm">Start Form <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+      </div>
+
+      <div class="p-card" style="margin-top:28px;">
+        <div class="p-card-head"><div class="p-card-title">My Previous Submissions</div></div>
+        <div id="submissions-list"><div class="p-loading"><div class="p-spinner"></div></div></div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="../app.js"></script>
+<script>
+(async () => {
+  const user = await requireRole(['client']);
+  if (!user) return;
+  setUserBlock(user);
+  initMobileSidebar();
+
+  const snap = await db.collection('cac_submissions')
+    .where('clientId','==',user.uid)
+    .orderBy('submittedAt','desc').get();
+
+  const el = document.getElementById('submissions-list');
+  if (snap.empty) {
+    el.innerHTML = `<div class="p-empty"><i class="fa-regular fa-file"></i><div class="p-empty-title">No submissions yet</div><div class="p-empty-sub">Your completed forms will appear here</div></div>`;
+    return;
+  }
+  let html = '<div class="p-table-wrap"><table class="p-table"><thead><tr><th>Form</th><th>Company / Subject</th><th>Submitted</th><th>Status</th><th>Notes</th></tr></thead><tbody>';
+  snap.forEach(d => {
+    const s = d.data();
+    html += `<tr>
+      <td><strong>${s.formType}</strong></td>
+      <td>${s.data?.companyName || s.data?.companyNameFull || '—'}</td>
+      <td style="font-size:11px;">${fmtDate(s.submittedAt)}</td>
+      <td>${statusBadge(s.status)}</td>
+      <td style="font-size:12px;color:var(--grey-mid);">${s.notes||'—'}</td>
+    </tr>`;
+  });
+  html += '</tbody></table></div>';
+  el.innerHTML = html;
+})();
+</script>
+</body>
+</html>

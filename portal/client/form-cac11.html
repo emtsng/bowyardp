@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CAC 1.1 — Company Registration | Bowyard Portal</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/fav.png">
+  <link rel="stylesheet" href="../../assets/css/plugins/fontawesome.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../portal.css">
+</head>
+<body>
+<div class="portal-layout">
+  <aside class="portal-sidebar">
+    <div class="portal-logo">
+      <img src="../../assets/images/logo/bplogowhite.png" alt="Bowyard Partners">
+      <div class="portal-logo-sub">Client Portal</div>
+    </div>
+    <nav class="portal-nav">
+      <div class="portal-nav-label">Menu</div>
+      <a href="index.html" class="portal-nav-link"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+      <a href="index.html#matters" class="portal-nav-link"><i class="fa-solid fa-briefcase"></i> My Matters</a>
+      <a href="forms.html" class="portal-nav-link active"><i class="fa-solid fa-file-lines"></i> Regulatory Forms</a>
+    </nav>
+    <div class="portal-sidebar-foot"><div id="user-block"></div></div>
+  </aside>
+  <div class="p-overlay" id="p-overlay"></div>
+
+  <main class="portal-main">
+    <header class="portal-topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="p-mobile-toggle" id="mobile-toggle"><span></span><span></span><span></span></button>
+        <div>
+          <div class="portal-page-title">Form CAC 1.1</div>
+          <div style="font-size:11px;color:var(--grey-mid);">Application for Registration of Company</div>
+        </div>
+      </div>
+      <a href="forms.html" class="p-btn p-btn-outline p-btn-sm"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    </header>
+
+    <div class="portal-content">
+      <div class="p-wizard-steps" id="wizard-steps">
+        <div class="p-wizard-step active" data-step="0"><div class="p-wizard-num">1</div> Company Details</div>
+        <div class="p-wizard-step" data-step="1"><div class="p-wizard-num">2</div> Share Capital</div>
+        <div class="p-wizard-step" data-step="2"><div class="p-wizard-num">3</div> Directors</div>
+        <div class="p-wizard-step" data-step="3"><div class="p-wizard-num">4</div> Secretary</div>
+        <div class="p-wizard-step" data-step="4"><div class="p-wizard-num">5</div> Review &amp; Submit</div>
+      </div>
+
+      <div class="p-card">
+        <!-- STEP 1: Company Details -->
+        <div class="p-step-panel active" id="step-0">
+          <div class="p-section-title" style="margin-bottom:18px;">Section A — Company Details</div>
+          <div class="p-form-group">
+            <label>Type of Company *</label>
+            <select id="companyType">
+              <option value="" disabled selected>Select type</option>
+              <option>Limited by Shares</option>
+              <option>Limited by Guarantee</option>
+              <option>Unlimited</option>
+            </select>
+          </div>
+          <div class="p-form-group">
+            <label>Proposed Company Name *</label>
+            <input type="text" id="companyName" placeholder="e.g. Acme Ventures Limited">
+            <div class="p-form-hint">Include the designation (Limited, Ltd, etc.) as appropriate</div>
+          </div>
+          <div class="p-form-group">
+            <label>Registered Office Address *</label>
+            <input type="text" id="regAddress" placeholder="Building number/name and street">
+          </div>
+          <div class="p-form-row">
+            <div class="p-form-group"><label>City</label><input type="text" id="regCity"></div>
+            <div class="p-form-group"><label>State</label><input type="text" id="regState"></div>
+          </div>
+          <div class="p-form-group">
+            <label>Head Office Address (if different)</label>
+            <input type="text" id="headAddress" placeholder="Leave blank if same as registered office">
+          </div>
+          <div class="p-form-group">
+            <label>Company Email Address *</label>
+            <input type="email" id="companyEmail" placeholder="info@company.com">
+          </div>
+          <div class="p-step-nav">
+            <div></div>
+            <button class="p-btn p-btn-gold" onclick="nextStep(0)">Next: Share Capital <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Share Capital -->
+        <div class="p-step-panel" id="step-1">
+          <div class="p-section-title" style="margin-bottom:18px;">Section B — Authorised Share Capital</div>
+          <div class="p-form-row">
+            <div class="p-form-group">
+              <label>Total Capital Amount (₦) *</label>
+              <input type="number" id="capitalAmount" placeholder="e.g. 1000000">
+            </div>
+            <div class="p-form-group">
+              <label>Amount in Words *</label>
+              <input type="text" id="capitalWords" placeholder="e.g. One Million Naira">
+            </div>
+          </div>
+          <div class="p-form-row-3">
+            <div class="p-form-group">
+              <label>Number of Shares</label>
+              <input type="number" id="numShares" placeholder="e.g. 1000000">
+            </div>
+            <div class="p-form-group">
+              <label>Type of Shares</label>
+              <select id="shareType">
+                <option value="" disabled selected>Select</option>
+                <option>Ordinary</option>
+                <option>Preference</option>
+                <option>Redeemable</option>
+              </select>
+            </div>
+            <div class="p-form-group">
+              <label>Amount per Share (₦)</label>
+              <input type="number" id="amtPerShare" placeholder="e.g. 1">
+            </div>
+          </div>
+          <div class="p-step-nav">
+            <button class="p-btn p-btn-outline" onclick="prevStep(1)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <button class="p-btn p-btn-gold" onclick="nextStep(1)">Next: Directors <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Directors -->
+        <div class="p-step-panel" id="step-2">
+          <div class="p-section-title" style="margin-bottom:18px;">Section C — First Directors</div>
+          <div id="directors-container">
+            <div class="director-block" id="dir-0">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                <strong style="font-size:13px;">Director 1</strong>
+              </div>
+              <div class="p-form-row">
+                <div class="p-form-group"><label>Full Name *</label><input type="text" data-dir="0" data-field="name" placeholder="Full legal name"></div>
+                <div class="p-form-group"><label>Date of Birth *</label><input type="date" data-dir="0" data-field="dob"></div>
+              </div>
+              <div class="p-form-row-3">
+                <div class="p-form-group"><label>Gender</label>
+                  <select data-dir="0" data-field="gender"><option value="" disabled selected>Select</option><option>Male</option><option>Female</option></select>
+                </div>
+                <div class="p-form-group"><label>Nationality</label><input type="text" data-dir="0" data-field="nationality" placeholder="e.g. Nigerian"></div>
+                <div class="p-form-group"><label>Phone</label><input type="tel" data-dir="0" data-field="phone"></div>
+              </div>
+              <div class="p-form-row">
+                <div class="p-form-group"><label>Email</label><input type="email" data-dir="0" data-field="email"></div>
+                <div class="p-form-group"><label>Address</label><input type="text" data-dir="0" data-field="address"></div>
+              </div>
+              <div class="p-form-row-3">
+                <div class="p-form-group"><label>City</label><input type="text" data-dir="0" data-field="city"></div>
+                <div class="p-form-group"><label>State</label><input type="text" data-dir="0" data-field="state"></div>
+                <div class="p-form-group"><label>Country of Residence</label><input type="text" data-dir="0" data-field="country" value="Nigeria"></div>
+              </div>
+              <div class="p-form-row">
+                <div class="p-form-group"><label>ID Type</label>
+                  <select data-dir="0" data-field="idType"><option value="" disabled selected>Select</option><option>International Passport</option><option>Driver's Licence</option><option>National ID</option><option>Voter's Card</option></select>
+                </div>
+                <div class="p-form-group"><label>ID Number</label><input type="text" data-dir="0" data-field="idNo"></div>
+              </div>
+            </div>
+          </div>
+          <div id="directors-extra"></div>
+          <button class="p-btn p-btn-outline p-btn-sm" onclick="addDirector()" id="add-dir-btn" style="margin-top:10px;">
+            <i class="fa-solid fa-plus"></i> Add Another Director
+          </button>
+          <div class="p-step-nav">
+            <button class="p-btn p-btn-outline" onclick="prevStep(2)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <button class="p-btn p-btn-gold" onclick="nextStep(2)">Next: Secretary <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 4: Secretary -->
+        <div class="p-step-panel" id="step-3">
+          <div class="p-section-title" style="margin-bottom:18px;">Section D — Company Secretary</div>
+          <div class="p-form-group">
+            <label>Secretary Type</label>
+            <select id="secType">
+              <option value="individual">Individual</option>
+              <option value="firm">Firm / Corporation</option>
+            </select>
+          </div>
+          <div class="p-form-group"><label>Full Name / Firm Name *</label><input type="text" id="secName"></div>
+          <div class="p-form-group"><label>Address *</label><input type="text" id="secAddress"></div>
+          <div class="p-form-row">
+            <div class="p-form-group"><label>Phone</label><input type="tel" id="secPhone"></div>
+            <div class="p-form-group"><label>Email</label><input type="email" id="secEmail"></div>
+          </div>
+          <div class="p-form-row" id="sec-id-row">
+            <div class="p-form-group"><label>ID Type</label>
+              <select id="secIdType"><option value="" disabled selected>Select</option><option>International Passport</option><option>Driver's Licence</option><option>National ID</option></select>
+            </div>
+            <div class="p-form-group"><label>ID Number</label><input type="text" id="secIdNo"></div>
+          </div>
+          <div class="p-form-row" id="sec-bn-row" style="display:none;">
+            <div class="p-form-group"><label>BN/RC Number</label><input type="text" id="secBnRc"></div>
+          </div>
+          <div class="p-step-nav">
+            <button class="p-btn p-btn-outline" onclick="prevStep(3)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <button class="p-btn p-btn-gold" onclick="nextStep(3)">Review &amp; Submit <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 5: Review & Submit -->
+        <div class="p-step-panel" id="step-4">
+          <div class="p-section-title" style="margin-bottom:18px;">Review Your Submission</div>
+          <div id="review-content"></div>
+          <div id="submit-error" class="p-error" style="margin-top:14px;"></div>
+          <div id="submit-success" class="p-success" style="margin-top:14px;display:none;"></div>
+          <div class="p-step-nav">
+            <button class="p-btn p-btn-outline" onclick="prevStep(4)"><i class="fa-solid fa-arrow-left"></i> Back &amp; Edit</button>
+            <div style="display:flex;gap:10px;">
+              <button class="p-btn p-btn-outline" id="pdf-btn" onclick="generatePDF()"><i class="fa-solid fa-download"></i> Download PDF</button>
+              <button class="p-btn p-btn-gold" id="submit-btn" onclick="submitForm()"><i class="fa-solid fa-paper-plane"></i> Submit to Bowyard</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="../app.js"></script>
+<script>
+let currentStep = 0;
+let portalUser = null;
+let dirCount = 1;
+
+(async () => {
+  portalUser = await requireRole(['client']);
+  if (!portalUser) return;
+  setUserBlock(portalUser);
+  initMobileSidebar();
+  document.getElementById('secType').addEventListener('change', e => {
+    document.getElementById('sec-id-row').style.display = e.target.value === 'individual' ? 'grid' : 'none';
+    document.getElementById('sec-bn-row').style.display = e.target.value === 'firm' ? 'grid' : 'none';
+  });
+})();
+
+function nextStep(from) {
+  if (from === 0) {
+    if (!v('companyType') || !v('companyName') || !v('regAddress') || !v('companyEmail')) { alert('Please fill all required fields.'); return; }
+  }
+  if (from === 1) {
+    if (!v('capitalAmount') || !v('capitalWords')) { alert('Please fill all required fields.'); return; }
+  }
+  if (from === 2) {
+    const name = document.querySelector('[data-dir="0"][data-field="name"]')?.value.trim();
+    if (!name) { alert('Please enter at least one director\'s full name.'); return; }
+  }
+  if (from === 3) {
+    if (!v('secName') || !v('secAddress')) { alert('Please fill all required fields.'); return; }
+  }
+  setStep(from + 1);
+  if (from + 1 === 4) buildReview();
+}
+
+function prevStep(from) { setStep(from - 1); }
+
+function setStep(n) {
+  document.querySelectorAll('.p-step-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(`step-${n}`).classList.add('active');
+  document.querySelectorAll('.p-wizard-step').forEach((s,i) => {
+    s.classList.toggle('active', i === n);
+    s.classList.toggle('done', i < n);
+  });
+  currentStep = n;
+}
+
+function v(id) { return document.getElementById(id)?.value.trim() || ''; }
+
+function collectDirectors() {
+  const dirs = [];
+  for (let i = 0; i < dirCount; i++) {
+    const d = {};
+    document.querySelectorAll(`[data-dir="${i}"]`).forEach(el => { d[el.dataset.field] = el.value.trim(); });
+    if (d.name) dirs.push(d);
+  }
+  return dirs;
+}
+
+function addDirector() {
+  if (dirCount >= 4) { alert('Maximum 4 directors per form.'); return; }
+  const container = document.getElementById('directors-extra');
+  const i = dirCount;
+  container.insertAdjacentHTML('beforeend', `
+    <hr class="p-divider">
+    <div class="director-block" id="dir-${i}">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <strong style="font-size:13px;">Director ${i+1}</strong>
+        <button class="p-btn p-btn-ghost p-btn-sm" onclick="removeDirector(${i})"><i class="fa-solid fa-trash"></i></button>
+      </div>
+      <div class="p-form-row">
+        <div class="p-form-group"><label>Full Name</label><input type="text" data-dir="${i}" data-field="name"></div>
+        <div class="p-form-group"><label>Date of Birth</label><input type="date" data-dir="${i}" data-field="dob"></div>
+      </div>
+      <div class="p-form-row-3">
+        <div class="p-form-group"><label>Gender</label><select data-dir="${i}" data-field="gender"><option value="" disabled selected>Select</option><option>Male</option><option>Female</option></select></div>
+        <div class="p-form-group"><label>Nationality</label><input type="text" data-dir="${i}" data-field="nationality" value="Nigerian"></div>
+        <div class="p-form-group"><label>Phone</label><input type="tel" data-dir="${i}" data-field="phone"></div>
+      </div>
+      <div class="p-form-row">
+        <div class="p-form-group"><label>Email</label><input type="email" data-dir="${i}" data-field="email"></div>
+        <div class="p-form-group"><label>Address</label><input type="text" data-dir="${i}" data-field="address"></div>
+      </div>
+      <div class="p-form-row-3">
+        <div class="p-form-group"><label>City</label><input type="text" data-dir="${i}" data-field="city"></div>
+        <div class="p-form-group"><label>State</label><input type="text" data-dir="${i}" data-field="state"></div>
+        <div class="p-form-group"><label>Country</label><input type="text" data-dir="${i}" data-field="country" value="Nigeria"></div>
+      </div>
+      <div class="p-form-row">
+        <div class="p-form-group"><label>ID Type</label><select data-dir="${i}" data-field="idType"><option value="" disabled selected>Select</option><option>International Passport</option><option>Driver's Licence</option><option>National ID</option><option>Voter's Card</option></select></div>
+        <div class="p-form-group"><label>ID Number</label><input type="text" data-dir="${i}" data-field="idNo"></div>
+      </div>
+    </div>`);
+  dirCount++;
+  if (dirCount >= 4) document.getElementById('add-dir-btn').disabled = true;
+}
+
+function removeDirector(i) {
+  document.getElementById(`dir-${i}`)?.remove();
+  dirCount--;
+  document.getElementById('add-dir-btn').disabled = false;
+}
+
+function buildReview() {
+  const dirs = collectDirectors();
+  const el = document.getElementById('review-content');
+  el.innerHTML = `
+    <div class="p-grid-2" style="margin-bottom:16px;">
+      <div class="p-card" style="border:1px solid #E8E4DE;">
+        <div class="p-card-title" style="margin-bottom:12px;">Company Details</div>
+        <div class="sub-field"><div class="sub-label">Type</div><div class="sub-value">${v('companyType')}</div></div>
+        <div class="sub-field"><div class="sub-label">Proposed Name</div><div class="sub-value">${v('companyName')}</div></div>
+        <div class="sub-field"><div class="sub-label">Registered Office</div><div class="sub-value">${v('regAddress')}, ${v('regCity')}, ${v('regState')}</div></div>
+        <div class="sub-field"><div class="sub-label">Email</div><div class="sub-value">${v('companyEmail')}</div></div>
+      </div>
+      <div class="p-card" style="border:1px solid #E8E4DE;">
+        <div class="p-card-title" style="margin-bottom:12px;">Share Capital</div>
+        <div class="sub-field"><div class="sub-label">Amount</div><div class="sub-value">₦${Number(v('capitalAmount')).toLocaleString()}</div></div>
+        <div class="sub-field"><div class="sub-label">In Words</div><div class="sub-value">${v('capitalWords')}</div></div>
+        <div class="sub-field"><div class="sub-label">Shares</div><div class="sub-value">${v('numShares')} × ₦${v('amtPerShare')} (${v('shareType')||'Ordinary'})</div></div>
+      </div>
+    </div>
+    <div class="p-card" style="border:1px solid #E8E4DE;margin-bottom:14px;">
+      <div class="p-card-title" style="margin-bottom:12px;">Directors (${dirs.length})</div>
+      ${dirs.map((d,i) => `<div style="margin-bottom:${i<dirs.length-1?'14px':'0'};">
+        <strong style="font-size:13px;">Director ${i+1}: ${d.name}</strong>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:4px;">
+          <span style="font-size:11px;color:var(--grey-mid);">DOB: ${d.dob}</span>
+          <span style="font-size:11px;color:var(--grey-mid);">Gender: ${d.gender}</span>
+          <span style="font-size:11px;color:var(--grey-mid);">Nationality: ${d.nationality}</span>
+          <span style="font-size:11px;color:var(--grey-mid);">ID: ${d.idType} ${d.idNo}</span>
+        </div>
+        <div style="font-size:11px;color:var(--grey-mid);margin-top:2px;">${d.address}, ${d.city}, ${d.state}</div>
+      </div>`).join('<hr class="p-divider" style="margin:10px 0;">')}
+    </div>
+    <div class="p-card" style="border:1px solid #E8E4DE;">
+      <div class="p-card-title" style="margin-bottom:12px;">Company Secretary</div>
+      <div class="sub-field"><div class="sub-label">Name</div><div class="sub-value">${v('secName')}</div></div>
+      <div class="sub-field"><div class="sub-label">Address</div><div class="sub-value">${v('secAddress')}</div></div>
+      <div class="sub-field"><div class="sub-label">Contact</div><div class="sub-value">${v('secPhone')} | ${v('secEmail')}</div></div>
+    </div>`;
+}
+
+function collectFormData() {
+  return {
+    companyType: v('companyType'), companyName: v('companyName'),
+    regAddress: v('regAddress'), regCity: v('regCity'), regState: v('regState'),
+    headAddress: v('headAddress'), companyEmail: v('companyEmail'),
+    capitalAmount: v('capitalAmount'), capitalWords: v('capitalWords'),
+    numShares: v('numShares'), shareType: v('shareType'), amtPerShare: v('amtPerShare'),
+    directors: collectDirectors(),
+    secretaryType: v('secType'), secretaryName: v('secName'),
+    secretaryAddress: v('secAddress'), secretaryPhone: v('secPhone'),
+    secretaryEmail: v('secEmail'), secretaryIdType: v('secIdType'), secretaryIdNo: v('secIdNo')
+  };
+}
+
+async function submitForm() {
+  const btn = document.getElementById('submit-btn');
+  const err = document.getElementById('submit-error');
+  const ok  = document.getElementById('submit-success');
+  err.classList.remove('show'); ok.style.display = 'none';
+  btn.disabled = true; btn.textContent = 'Submitting…';
+
+  try {
+    await db.collection('cac_submissions').add({
+      formType: 'CAC 1.1',
+      status: 'submitted',
+      clientId: portalUser.uid,
+      clientName: portalUser.name,
+      data: collectFormData(),
+      submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
+      notes: ''
+    });
+    ok.textContent = 'Submitted successfully. The Bowyard team will review and contact you.';
+    ok.style.display = 'block';
+    btn.textContent = 'Submitted';
+    document.getElementById('pdf-btn').style.display = 'inline-flex';
+  } catch (e) {
+    err.textContent = 'Submission failed: ' + e.message;
+    err.classList.add('show');
+    btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit to Bowyard';
+  }
+}
+
+function generatePDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF('p', 'mm', 'a4');
+  const d = collectFormData();
+  const lm = 20, rm = 190, w = rm - lm;
+  let y = 20;
+
+  const line = () => { doc.setDrawColor(180,150,46); doc.line(lm, y, rm, y); y += 4; };
+  const head = (txt, size=13) => { doc.setFontSize(size); doc.setFont('helvetica','bold'); doc.text(txt, lm, y); y += 7; };
+  const label = (l, val) => {
+    doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(120,120,120); doc.text(l.toUpperCase(), lm, y);
+    doc.setFontSize(10); doc.setFont('helvetica','normal'); doc.setTextColor(0,0,0); doc.text(val||'—', lm+50, y); y += 6;
+  };
+
+  // Header
+  doc.setFontSize(14); doc.setFont('helvetica','bold'); doc.setTextColor(13,27,42);
+  doc.text('CORPORATE AFFAIRS COMMISSION', 105, y, {align:'center'}); y += 7;
+  doc.setFontSize(11); doc.text('FORM CAC 1.1', 105, y, {align:'center'}); y += 6;
+  doc.setFontSize(10); doc.setFont('helvetica','bold'); doc.text('APPLICATION FOR REGISTRATION OF COMPANY', 105, y, {align:'center'}); y += 5;
+  doc.setFontSize(9); doc.setFont('helvetica','italic'); doc.text('Pursuant to the Companies and Allied Matters Act 2020', 105, y, {align:'center'}); y += 10;
+
+  line();
+  head('COMPANY DETAILS', 11);
+  label('Type of Company', d.companyType);
+  label('Proposed Company Name', d.companyName);
+  label('Registered Office', `${d.regAddress}, ${d.regCity}, ${d.regState}`);
+  if (d.headAddress) label('Head Office Address', d.headAddress);
+  label('Company Email', d.companyEmail);
+  y += 4;
+
+  line();
+  head('SECTION B — AUTHORISED SHARE CAPITAL', 11);
+  label('Capital Amount', `₦${Number(d.capitalAmount).toLocaleString()}`);
+  label('Amount in Words', d.capitalWords);
+  label('Divided Into', `${d.numShares} shares of ₦${d.amtPerShare} each (${d.shareType})`);
+  y += 4;
+
+  line();
+  head('SECTION C — FIRST DIRECTORS', 11);
+  d.directors.forEach((dir, i) => {
+    if (y > 240) { doc.addPage(); y = 20; }
+    doc.setFontSize(10); doc.setFont('helvetica','bold'); doc.text(`Director ${i+1}: ${dir.name}`, lm, y); y += 5;
+    label('Date of Birth', dir.dob); label('Gender', dir.gender);
+    label('Nationality', dir.nationality); label('Phone', dir.phone); label('Email', dir.email);
+    label('Address', `${dir.address}, ${dir.city}, ${dir.state}, ${dir.country}`);
+    label('Identity', `${dir.idType}: ${dir.idNo}`);
+    y += 3;
+  });
+
+  if (y > 220) { doc.addPage(); y = 20; }
+  line();
+  head('SECTION D — COMPANY SECRETARY', 11);
+  label('Type', d.secretaryType === 'firm' ? 'Firm/Corporation' : 'Individual');
+  label('Name', d.secretaryName);
+  label('Address', d.secretaryAddress);
+  label('Phone', d.secretaryPhone); label('Email', d.secretaryEmail);
+  if (d.secretaryType === 'individual') label('Identity', `${d.secretaryIdType}: ${d.secretaryIdNo}`);
+  y += 8;
+
+  doc.setFontSize(8); doc.setFont('helvetica','italic'); doc.setTextColor(120,120,120);
+  doc.text('Prepared by Bowyard Partners for client review. For official filing purposes only.', 105, 285, {align:'center'});
+
+  doc.save(`CAC-1.1-${d.companyName.replace(/\s+/g,'-')}.pdf`);
+}
+</script>
+</body>
+</html>

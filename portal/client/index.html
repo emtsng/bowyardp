@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portal — Bowyard Partners</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/fav.png">
+  <link rel="stylesheet" href="../../assets/css/plugins/fontawesome.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../portal.css">
+</head>
+<body>
+<div class="portal-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="portal-sidebar">
+    <div class="portal-logo">
+      <img src="../../assets/images/logo/bplogowhite.png" alt="Bowyard Partners">
+      <div class="portal-logo-sub">Client Portal</div>
+    </div>
+    <nav class="portal-nav">
+      <div class="portal-nav-label">Menu</div>
+      <a href="index.html" class="portal-nav-link active" id="nav-dashboard">
+        <i class="fa-solid fa-gauge-high"></i> Dashboard
+      </a>
+      <a href="index.html#matters" class="portal-nav-link" id="nav-matters" onclick="showSection('matters')">
+        <i class="fa-solid fa-briefcase"></i> My Matters
+      </a>
+      <a href="forms.html" class="portal-nav-link">
+        <i class="fa-solid fa-file-lines"></i> Regulatory Forms
+      </a>
+      <div class="portal-nav-label" style="margin-top:8px;">Firm</div>
+      <a href="../../team.html" class="portal-nav-link" target="_blank">
+        <i class="fa-solid fa-users"></i> Our Team
+      </a>
+      <a href="../../contact.html" class="portal-nav-link" target="_blank">
+        <i class="fa-solid fa-envelope"></i> Contact Us
+      </a>
+    </nav>
+    <div class="portal-sidebar-foot">
+      <div id="user-block"></div>
+    </div>
+  </aside>
+  <div class="p-overlay" id="p-overlay"></div>
+
+  <!-- MAIN -->
+  <main class="portal-main">
+    <header class="portal-topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="p-mobile-toggle" id="mobile-toggle"><span></span><span></span><span></span></button>
+        <div class="portal-page-title" id="page-title">Dashboard</div>
+      </div>
+      <div class="portal-topbar-right">
+        <span id="topbar-greeting" style="font-size:12px;color:var(--grey-mid);"></span>
+      </div>
+    </header>
+
+    <div class="portal-content">
+
+      <!-- DASHBOARD SECTION -->
+      <div id="section-dashboard">
+        <div class="p-stats" id="stats-row">
+          <div class="p-stat gold"><div class="p-stat-label">Active Matters</div><div class="p-stat-val" id="stat-active">—</div><div class="p-stat-sub">Open or in progress</div></div>
+          <div class="p-stat amber"><div class="p-stat-label">Pending Action</div><div class="p-stat-val" id="stat-pending">—</div><div class="p-stat-sub">Awaiting your input</div></div>
+          <div class="p-stat green"><div class="p-stat-label">Concluded</div><div class="p-stat-val" id="stat-closed">—</div><div class="p-stat-sub">Closed matters</div></div>
+          <div class="p-stat navy"><div class="p-stat-label">Form Submissions</div><div class="p-stat-val" id="stat-forms">—</div><div class="p-stat-sub">Regulatory filings</div></div>
+        </div>
+
+        <div class="p-grid-2">
+          <div class="p-card">
+            <div class="p-card-head">
+              <div class="p-card-title">Recent Matters</div>
+              <a href="#" class="p-btn p-btn-outline p-btn-sm" onclick="showSection('matters');return false;">View All</a>
+            </div>
+            <div id="recent-matters"><div class="p-loading"><div class="p-spinner"></div></div></div>
+          </div>
+          <div class="p-card">
+            <div class="p-card-head">
+              <div class="p-card-title">Regulatory Forms</div>
+              <a href="forms.html" class="p-btn p-btn-outline p-btn-sm">Open Forms</a>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <a href="form-cac11.html" class="cac-card" style="padding:16px;">
+                <div class="cac-num">CAC 1.1</div>
+                <div class="cac-title" style="font-size:13px;margin-bottom:4px;">Company Registration</div>
+                <div class="cac-desc" style="margin-bottom:0;">Application to incorporate a new company</div>
+              </a>
+              <a href="form-cac7.html" class="cac-card" style="padding:16px;">
+                <div class="cac-num">CAC 7</div>
+                <div class="cac-title" style="font-size:13px;margin-bottom:4px;">Appointment of Director</div>
+                <div class="cac-desc" style="margin-bottom:0;">File a new director appointment</div>
+              </a>
+              <a href="form-cac2a.html" class="cac-card" style="padding:16px;">
+                <div class="cac-num">CAC 2A</div>
+                <div class="cac-title" style="font-size:13px;margin-bottom:4px;">Return of Allotment</div>
+                <div class="cac-desc" style="margin-bottom:0;">Report post-incorporation share allotments</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MATTERS SECTION -->
+      <div id="section-matters" style="display:none;">
+        <div class="p-card-head" style="margin-bottom:16px;">
+          <div>
+            <div class="p-section-title">My Matters</div>
+            <div class="p-section-sub">All matters the firm is handling on your behalf</div>
+          </div>
+        </div>
+        <div class="p-card" id="matters-table-wrap">
+          <div class="p-loading"><div class="p-spinner"></div></div>
+        </div>
+      </div>
+
+      <!-- MATTER DETAIL SECTION -->
+      <div id="section-matter-detail" style="display:none;">
+        <button class="p-btn p-btn-outline p-btn-sm" onclick="showSection('matters')" style="margin-bottom:18px;">
+          <i class="fa-solid fa-arrow-left"></i> Back to Matters
+        </button>
+        <div id="matter-detail-content"></div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="../app.js"></script>
+<script>
+let currentUser = null;
+
+(async () => {
+  currentUser = await requireRole(['client']);
+  if (!currentUser) return;
+
+  setUserBlock(currentUser);
+  initMobileSidebar();
+
+  const greeting = ['Good morning','Good afternoon','Good evening'][[0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,0][new Date().getHours()]];
+  document.getElementById('topbar-greeting').textContent = `${greeting}, ${currentUser.name?.split(' ')[0] || ''}`;
+
+  loadStats();
+  loadRecentMatters();
+})();
+
+function showSection(name) {
+  ['dashboard','matters','matter-detail'].forEach(s => {
+    document.getElementById(`section-${s}`).style.display = 'none';
+  });
+  document.getElementById(`section-${name}`).style.display = 'block';
+  document.getElementById('page-title').textContent =
+    name === 'dashboard' ? 'Dashboard' : name === 'matters' ? 'My Matters' : 'Matter Detail';
+
+  document.querySelectorAll('.portal-nav-link').forEach(l => l.classList.remove('active'));
+  if (name === 'dashboard') document.getElementById('nav-dashboard')?.classList.add('active');
+  if (name === 'matters') { loadMattersTable(); document.getElementById('nav-matters')?.classList.add('active'); }
+}
+
+async function loadStats() {
+  const snap = await db.collection('matters').where('clientId','==',currentUser.uid).get();
+  let active=0, pending=0, closed=0;
+  snap.forEach(d => {
+    const s = d.data().status;
+    if (s === 'closed') closed++;
+    else if (s === 'pending_client') pending++;
+    else active++;
+  });
+  document.getElementById('stat-active').textContent  = active;
+  document.getElementById('stat-pending').textContent = pending;
+  document.getElementById('stat-closed').textContent  = closed;
+
+  const fSnap = await db.collection('cac_submissions').where('clientId','==',currentUser.uid).get();
+  document.getElementById('stat-forms').textContent = fSnap.size;
+}
+
+async function loadRecentMatters() {
+  const snap = await db.collection('matters')
+    .where('clientId','==',currentUser.uid)
+    .orderBy('updatedAt','desc').limit(4).get();
+
+  const el = document.getElementById('recent-matters');
+  if (snap.empty) {
+    el.innerHTML = `<div class="p-empty"><i class="fa-solid fa-briefcase"></i><div class="p-empty-title">No matters yet</div><div class="p-empty-sub">Your active matters will appear here</div></div>`;
+    return;
+  }
+  let html = '<table class="p-table"><thead><tr><th>Matter</th><th>Type</th><th>Status</th></tr></thead><tbody>';
+  snap.forEach(d => {
+    const m = d.data();
+    html += `<tr><td><a href="#" onclick="openMatter('${d.id}');return false;">${m.title}</a><br><small style="color:var(--grey-mid);font-size:11px;">${m.reference || ''}</small></td><td>${m.type||'—'}</td><td>${statusBadge(m.status)}</td></tr>`;
+  });
+  html += '</tbody></table>';
+  el.innerHTML = html;
+}
+
+async function loadMattersTable() {
+  const el = document.getElementById('matters-table-wrap');
+  el.innerHTML = '<div class="p-loading"><div class="p-spinner"></div></div>';
+  const snap = await db.collection('matters')
+    .where('clientId','==',currentUser.uid)
+    .orderBy('createdAt','desc').get();
+
+  if (snap.empty) {
+    el.innerHTML = `<div class="p-empty"><i class="fa-solid fa-briefcase"></i><div class="p-empty-title">No matters yet</div><div class="p-empty-sub">Matters the firm opens on your behalf will appear here</div></div>`;
+    return;
+  }
+  let html = '<div class="p-table-wrap"><table class="p-table"><thead><tr><th>Reference</th><th>Matter</th><th>Type</th><th>Status</th><th>Updated</th><th></th></tr></thead><tbody>';
+  snap.forEach(d => {
+    const m = d.data();
+    html += `<tr>
+      <td style="font-size:11px;color:var(--grey-mid);">${m.reference||'—'}</td>
+      <td><strong>${m.title}</strong></td>
+      <td>${m.type||'—'}</td>
+      <td>${statusBadge(m.status)}</td>
+      <td style="font-size:11px;">${fmtDate(m.updatedAt)}</td>
+      <td><a href="#" class="p-btn p-btn-outline p-btn-sm" onclick="openMatter('${d.id}');return false;">View</a></td>
+    </tr>`;
+  });
+  html += '</tbody></table></div>';
+  el.innerHTML = html;
+}
+
+async function openMatter(id) {
+  showSection('matter-detail');
+  const el = document.getElementById('matter-detail-content');
+  el.innerHTML = '<div class="p-loading"><div class="p-spinner"></div></div>';
+
+  const snap = await db.collection('matters').doc(id).get();
+  if (!snap.exists) { el.innerHTML = '<p>Matter not found.</p>'; return; }
+  const m = snap.data();
+
+  const tl = (m.timeline || []).slice().reverse().map(e => `
+    <div class="p-tl-item">
+      <div class="p-tl-dot ${e.type === 'milestone' ? 'gold' : e.type === 'court' ? 'navy' : ''}"></div>
+      <div class="p-tl-date">${fmtDate(e.date)}</div>
+      <div class="p-tl-event">${e.event}</div>
+      ${e.note ? `<div class="p-tl-note">${e.note}</div>` : ''}
+    </div>`).join('');
+
+  el.innerHTML = `
+    <div class="matter-header">
+      <div class="matter-ref">${m.reference || 'Matter'}</div>
+      <div class="matter-title">${m.title}</div>
+      <div class="matter-meta">
+        <div class="matter-meta-item"><strong>Type:</strong> ${m.type||'—'}</div>
+        <div class="matter-meta-item"><strong>Status:</strong> ${m.status?.replace(/_/g,' ')}</div>
+        <div class="matter-meta-item"><strong>Opened:</strong> ${fmtDate(m.createdAt)}</div>
+      </div>
+    </div>
+    <div class="p-grid-2">
+      <div class="p-card">
+        <div class="p-card-head"><div class="p-card-title">Matter Progress</div>${statusBadge(m.status)}</div>
+        ${m.description ? `<p style="font-size:13px;color:var(--grey-dark);margin-bottom:20px;">${m.description}</p>` : ''}
+        <div class="p-timeline">${tl || '<p style="font-size:13px;color:var(--grey-mid);">No updates yet.</p>'}</div>
+      </div>
+      <div>
+        <div class="p-card" style="margin-bottom:14px;">
+          <div class="p-card-title" style="margin-bottom:14px;">Matter Details</div>
+          <div class="sub-field"><div class="sub-label">Reference</div><div class="sub-value">${m.reference||'—'}</div></div>
+          <div class="sub-field"><div class="sub-label">Practice Area</div><div class="sub-value">${m.type||'—'}</div></div>
+          <div class="sub-field"><div class="sub-label">Priority</div><div class="sub-value">${m.priority||'Normal'}</div></div>
+          <div class="sub-field"><div class="sub-label">Date Opened</div><div class="sub-value">${fmtDate(m.createdAt)}</div></div>
+          <div class="sub-field"><div class="sub-label">Last Updated</div><div class="sub-value">${fmtDate(m.updatedAt)}</div></div>
+        </div>
+        <div class="p-card">
+          <div class="p-card-title" style="margin-bottom:14px;">Your Team</div>
+          <p style="font-size:13px;color:var(--grey-mid);">For queries on this matter, contact <a href="mailto:info@bowyardpartners.com" style="color:var(--gold);">info@bowyardpartners.com</a> quoting reference <strong>${m.reference||''}</strong>.</p>
+        </div>
+      </div>
+    </div>`;
+}
+</script>
+</body>
+</html>
